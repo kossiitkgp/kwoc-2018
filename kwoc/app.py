@@ -16,9 +16,9 @@ sess.init_app(app)
 # Load stats.json file
 dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-1])
-stats_json = root_dir + '/gh_scraper/stats/stats.json'
-with open(stats_json, 'r') as f:
-    stats_dict = json.load(f)
+# stats_json = root_dir + '/gh_scraper/stats/stats.json'
+# with open(stats_json, 'r') as f:
+#     stats_dict = json.load(f)
 
 # Separate people with non-zero contributions
 non_zero_contributions = {}
