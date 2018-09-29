@@ -6,7 +6,7 @@ import os
 import json
 from flask import render_template, redirect, Markup
 import markdown
-from . import config
+import config
 
 sys.path.append("kwoc")
 
@@ -19,6 +19,7 @@ root_dir = '/'.join(dir_path.split('/')[:-1])
 # stats_json = root_dir + '/gh_scraper/stats/stats.json'
 # with open(stats_json, 'r') as f:
 #     stats_dict = json.load(f)
+stats_dict = {}
 
 # Separate people with non-zero contributions
 non_zero_contributions = {}
