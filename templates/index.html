@@ -1,0 +1,602 @@
+<!doctype html>
+{% import 'helper_macros.html' as helpers %}
+<html class="no-js" lang="en">
+    <head>
+        <title>KWoC | Kharagpur Winter of Code</title>
+        {{ helpers.title() }}
+    </head>
+    <body>
+      {{ helpers.snow_css() }}
+        <!-- navigation panel -->
+        {{ helpers.navigation_panel() }}
+        <!-- end navigation panel -->
+            <div id="owl-demo" class="owl-carousel owl-theme light-pagination square-pagination dark-pagination-without-next-prev-arrow main-slider">
+
+
+
+
+                <div  class="item owl-bg-img " style="background-image:url('/static/images/intro-background.jpg');">
+                    <div class="snow snow--near"></div>
+                  <div class="snow snow--near snow--alt"></div>
+                   <div class="snow snow--mid"></div>
+                  <div class="snow snow--mid snow--alt"></div>
+                  <div class="snow snow--far"></div>
+                  <div class="snow snow--far snow--alt"></div>
+                    <div class="opacity-full bg-dark-gray" style="opacity: 0.5"></div>
+                    <div class="container full-screen position-relative">
+                        <div class="slider-typography text-center">
+                            <div class="slider-text-middle-main">
+                                <div class="slider-text-middle slider-text-middle6 padding-left-right-px wow fadeInUp">
+                                    <span class="slider-title-big6 white-text  font-weight-700 letter-spacing-3">KWoC</span>
+                                    <span class="white-text slider-text-middle text-uppercase letter-spacing-10 margin-three no-margin-bottom display-block xs-letter-spacing-6">Kharagpur Winter of Code</span>
+                                    <span class="white-text slider-text-middle letter-spacing-3 text-uppercase margin-two no-margin-bottom display-block xs-letter-spacing-6">In Association with
+                                        <a target="_blank" href="http://www.ktj.in/">
+                                            <img style="height: 30px" src="/static/images/ktj.png">
+                                        </a>
+                                    </span>
+                                    <div style="display: flex; flex-direction: column;">
+                                      <div>
+                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="/summit" target="_blank">Open Source Summit</a>
+                                      </div>
+                                      <div style="display: flex; justify-content: center;">
+                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('stats') }}" target="_blank">View Statistics</a>
+                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- about section -->
+        <section class="no-padding-bottom wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-10 text-center center-col">
+                        <span class="margin-five no-margin-top display-block letter-spacing-2">SEASON II</span>
+                        <h1>ABOUT KWoC</h1>
+                        <p class="text-med width-90 center-col margin-seven no-margin-bottom"> Kharagpur Winter of Code is a 5-week long online programme for the students, who are new to open source software development. The programme not only helps students to get involved in open source, but also preps them for many open source summer programmes, Google Summer of Code being one of them.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid margin-five no-margin-bottom">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 topic-tags padding-three text-center">
+                    <a class="ui red tag label">Machine learning</a>&nbsp<a class="ui orange tag label">Android</a>&nbsp<a class="ui yellow tag label">Computer Vision</a>&nbsp<a class="ui olive tag label">Gaming</a>&nbsp<a class="ui green tag label">Backend</a><a class="ui purple tag label">Natural Language Processing</a><br><br><a class="ui teal tag label">Scrapping</a>&nbsp<a class="ui blue tag label">Cognition</a>&nbsp<a class="ui violet tag label">Front End</a>&nbsp&nbsp<a class="ui pink tag label">Deep Learning</a>&nbsp<a class="ui brown tag label">Operating System</a>&nbsp<a class="ui grey tag label">DBMS</a>&nbsp<a class="ui yellow tag label">OOP</a><br><br><a class="ui black tag label">Networking</a>&nbsp<a class="ui white tag label">Compilers</a>&nbsp<a class="ui red tag label">Security</a>&nbsp<a class="ui orange tag label">Data Mining</a>&nbsp<a class="ui olive tag label">Simulations</a>&nbsp<a class="ui green tag label">Artificial Intelligence</a>
+                        <!-- <span class="text-small text-uppercase font-weight-600 black-text letter-spacing-2">PYTHON &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JAVASCRIPT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PHP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ANDROID</span> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end about section -->
+        <!-- features section -->
+        <section id="features" class="features wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <!-- section title -->
+                    <div class="col-md-12 text-center">
+                        <h3 class="section-title">Why KWoC?</h3>
+                    </div>
+                    <!-- end section title -->
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <!-- features item -->
+                        <div class="features-section col-md-12 col-sm-6 no-padding wow fadeInUp">
+                            <div class="col-md-3 col-sm-2 col-xs-2 no-padding"><i class="icon-upload medium-icon"></i></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9 no-padding text-left f-right">
+                                <h5>Intro to Open Source</h5>
+                                <div class="separator-line bg-yellow"></div>
+                                <p>KWoC provides a great opportunity to get acquainted with Github along with Git commands and contribute to open source effeciently.</p>
+                            </div>
+                        </div>
+                        <!-- end features item -->
+                        <!-- features item -->
+                        <!-- <div class="features-section no-margin col-md-12 col-sm-6 no-padding wow fadeInUp">
+                            <div class="col-md-3 col-sm-2 col-xs-2 no-padding"><i class="icon-upload medium-icon"></i></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9 no-padding text-left f-right">
+                                <h5>True Responsiveness</h5>
+                                <div class="separator-line bg-yellow"></div>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
+                            </div>
+                        </div> -->
+                        <!-- end features item -->
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <!-- features item -->
+                        <div class="features-section col-md-12 col-sm-6 no-padding wow fadeInUp">
+                            <div class="col-md-3 col-sm-2 col-xs-2 no-padding"><i class="icon-desktop medium-icon"></i></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9 no-padding text-left f-right">
+                                <h5>Brush up your coding skills</h5>
+                                <div class="separator-line bg-yellow"></div>
+                                <p>If you love coding and want to learn about software development then KWoC helps you to get a glimpse of it and gives you a head start.</p>
+                            </div>
+                        </div>
+                        <!-- end features item -->
+                        <!-- features item -->
+                        <!-- <div class="features-section col-md-12 col-sm-6 no-padding wow fadeInUp">
+                            <div class="col-md-3 col-sm-2 col-xs-2 no-padding"><i class="icon-scissors medium-icon"></i></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9 no-padding text-left f-right">
+                                <h5>Lightbox photo Gallery</h5>
+                                <div class="separator-line bg-yellow"></div>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
+                            </div>
+                        </div> -->
+                        <!-- end features item -->
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <!-- features item -->
+                        <div class="features-section col-md-12 col-sm-6 no-padding wow fadeInUp">
+                            <div class="col-md-3 col-sm-2 col-xs-2 no-padding"><i class="icon-trophy medium-icon"></i></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9 no-padding text-left f-right">
+                                <h5>Prepare for GSoC</h5>
+                                <div class="separator-line bg-yellow"></div>
+                                <p>With KWoC, you get to know about how to select a project, interact with mentors and learn all other things that prepare you in the best way for the next GSoC.</p>
+                            </div>
+                        </div>
+                        <!-- end features item -->
+                        <!-- features item -->
+                        <!-- <div class="features-section col-md-12 col-sm-6 no-padding wow fadeInUp">
+                            <div class="col-md-3 col-sm-2 col-xs-2 no-padding"><i class="icon-tools medium-icon"></i></div>
+                            <div class="col-md-9 col-sm-9 col-xs-9 no-padding text-left f-right">
+                                <h5>Skills and Accordians</h5>
+                                <div class="separator-line bg-yellow"></div>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
+                            </div>
+                        </div> -->
+                        <!-- end features item -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end features section -->
+        <!-- Timeline Section-->
+        <a name="timeline"></a>
+        <style>
+          .cd-timeline-start {
+            background: #fff none repeat scroll 0 0;
+            border: 3px solid #e5e5e5;
+            clear: both;
+            display: block;
+            margin: 0 auto 10px;
+            padding: 15px;
+            position: relative;
+            text-align: center;
+            width: 250px;
+            z-index: 1;
+          }
+          .cd-final {
+              margin-bottom: 0;
+          }
+          .cd-timeline-start-caption, .cd-timeline-start-date {
+              font-family: Lato,Arial,Helvetica,sans-serif;
+          }
+          .cd-timeline-start-caption {
+              color: #4b4e53;
+              font-size: 20px;
+              padding-bottom: 10px;
+              padding-top: 10px;
+          }
+          .cd-timeline-start-date {
+              margin-bottom: 5px;
+          }
+          .cd-container {
+              margin: 0 auto;
+              max-width: 1170px;
+              width: 90%;
+          }
+          .cd-container::after {
+              clear: both;
+              content: "";
+              display: table;
+          }
+          #cd-timeline {
+            margin-bottom: 2em;
+            margin-top: 8em;
+            padding: 0;
+            position: relative;
+          }
+          #cd-timeline::before {
+            background: #e5e5e5 none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 18px;
+            position: absolute;
+            top: 0;
+            width: 4px;
+          }
+          .cd-timeline-block::after, .cd-timeline-content::after {
+            clear: both;
+            content: "";
+          }
+          .cd-timeline-block {
+            margin: 2em 0;
+            position: relative;
+          }
+          .cd-timeline-block::after {
+            display: table;
+          }
+          .cd-timeline-block:first-child {
+            margin-top: 0;
+          }
+          .cd-timeline-block:last-child {
+            margin-bottom: 0;
+          }
+          @media only screen and (min-width: 991px) {
+            .cd-timeline-block {
+              margin: 4em 0;
+            }
+            .cd-timeline-block:first-child {
+              margin-top: 0;
+            }
+            .cd-timeline-block:last-child {
+              margin-bottom: 0;
+            }
+            #cd-timeline {
+              margin-bottom: 3em;
+              margin-top: 8em;
+            }
+            #cd-timeline::before {
+              left: 50%;
+              margin-left: -2px;
+            }
+          }
+          .cd-timeline-content {
+            background: #f3f3f3 none repeat scroll 0 0;
+            margin-left: 60px;
+            padding: 20px;
+            position: relative;
+          }
+          .cd-timeline-content::after {
+            display: table;
+          }
+          .cd-timeline-content h2 {
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 10px;
+            margin-top: 0;
+          }
+          .cd-timeline-content .cd-date, .cd-timeline-content .cd-read-more {
+            display: inline-block;
+          }
+          .cd-timeline-content .cd-read-more {
+            background: #acb7c0 none repeat scroll 0 0;
+            border-radius: 0.25em;
+            color: #fff;
+            float: right;
+            padding: 0.8em 1em;
+          }
+          .no-touch .cd-timeline-content .cd-read-more:hover {
+            background-color: #bac4cb;
+          }
+          .cd-timeline-content .cd-date {
+            float: left;
+          }
+          .cd-date-month, .cd-date-year {
+            display: block;
+            font-family: Lato,Arial,Helvetica,sans-serif;
+            font-weight: 400;
+          }
+          .cd-date-year {
+            font-size: 20px;
+          }
+          .cd-date-month {
+            font-size: 14px;
+          }
+          .cd-timeline-content::before {
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            border-color: transparent #f3f3f3 transparent transparent;
+            border-image: none;
+            border-style: solid;
+            border-width: 7px;
+            content: "";
+            height: 0;
+            position: absolute;
+            right: 100%;
+            top: 16px;
+            width: 0;
+          }
+          h2.portfolio-timeline-title {
+            margin: 10px 0 0;
+          }
+        @media only screen and (min-width: 991px) {
+          .cd-timeline-content {
+            margin-left: 0;
+            padding: 1.6em;
+            width: 45%;
+          }
+          .cd-timeline-content::before {
+            border-color: transparent transparent transparent #f3f3f3;
+            left: 100%;
+            top: 24px;
+          }
+          .cd-timeline-content .cd-read-more {
+            float: left;
+          }
+          .cd-timeline-block:nth-child(2n) .cd-timeline-content, .cd-timeline-block:nth-child(2n) .cd-timeline-content .cd-read-more {
+            float: right;
+          }
+          .cd-timeline-content .cd-date {
+            left: 122%;
+            position: absolute;
+            top: 6px;
+            width: 100%;
+          }
+          .cd-timeline-block:nth-child(2n) .cd-timeline-content::before {
+            border-color: transparent #f3f3f3 transparent transparent;
+            left: auto;
+            right: 100%;
+            top: 24px;
+          }
+          .cd-timeline-block:nth-child(2n) .cd-timeline-content .cd-date {
+            left: auto;
+            right: 122%;
+            text-align: right;
+          }
+        }
+        .cd-timeline-img {
+            border-radius: 50%;
+            height: 40px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 40px;
+        }
+        .cd-timeline-img img {
+            display: block;
+            height: 24px;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -12px;
+            position: relative;
+            top: 50%;
+            width: 24px;
+        }
+        .cd-timeline-img.cd-picture {
+            background: #dfdfdf none repeat scroll 0 0;
+            color: #fff;
+            font-size: 24px;
+            padding-top: 16px;
+            text-align: center;
+        }
+        .cd-timeline-img.cd-movie {
+            background: #c03b44 none repeat scroll 0 0;
+        }
+        .cd-timeline-img.cd-location {
+            background: #f0ca45 none repeat scroll 0 0;
+        }
+        @media only screen and (min-width: 991px) {
+          .cd-timeline-img {
+              backface-visibility: hidden;
+              height: 60px;
+              left: 50%;
+              margin-left: -36px;
+              transform: translateZ(0px);
+              width: 60px;
+            }
+        }
+        @media (max-width: 991px) {
+          .cd-timeline-start {
+            margin: 0
+          }
+          .cd-timeline-img.cd-picture {
+              font-size: 18px;
+              padding-top: 8px;
+              left: -15px;
+          }
+          .cd-date {
+              background: #fff none repeat scroll 0 0;
+              margin-bottom: -5px;
+              margin-left: -20px;
+              margin-top: 15px;
+              padding: 15px;
+          }
+          .cd-date-month, .cd-date-year {
+              display: inline-block;
+              font-size: 14px;
+          }
+          .cd-date-year {
+              margin-bottom: 0;
+              margin-right: 10px;
+          }
+        }
+        </style>
+
+          <!-- section title -->
+          <div class="col-md-12 text-center">
+              <h3 class="timeline-title">Timeline</h3>
+          </div>
+          <!-- end section title -->
+
+        <section id="cd-timeline" class="cd-container mb-100 wow fadeIn">
+
+          <div class="container">
+            <div class="cd-timeline-start">
+              <div class="cd-timeline-start-caption">KWoC Commences</div>
+              <div class="cd-timeline-start-date">November 2017</div>
+            </div>
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-git"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>Kharagpur Winter of Code announced</h2>
+                <div>KWoC programme is announced. Mentor registration starts and they begin submitting their projects.</div>
+                <span class="cd-date"><span class="cd-date-year">11th</span><span class="cd-date-month">Nov 2017</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-desktop"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>Accepting Student applications</h2>
+                <p>Student registration opens. Accepted projects are released. Students begin to look through projects and choose one or more of their choice.</p>
+                <span class="cd-date"><span class="cd-date-year">20th</span><span class="cd-date-month">Nov 2017</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa  fa-flag-o"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>KWoC Coding period begins</h2>
+                <p>Students can now start working on the project of their choice, upon discussion with their mentors. Project and mentor registrations close.</p>
+                <span class="cd-date"><span class="cd-date-year">1st</span><span class="cd-date-month">Dec 2017</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-mail-forward"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>Contribution Chart up</h2>
+                <p>A Statistics board showing contributions of various students in KWoC is now visible to everyone. Student registration closes.</p>
+                <span class="cd-date"><span class="cd-date-year">7th</span><span class="cd-date-month">Dec 2017</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-paper-plane"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>Mid evaluations</h2>
+                <p>Students and mentors have to provide mid evaluation reports to keep track of progress. Students with no commits would be removed from the programme.</p>
+                <span class="cd-date"><span class="cd-date-year">15th</span><span class="cd-date-month">Dec 2017</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-paper-plane"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>Pens Down Date</h2>
+                <p>Students start wrapping up the project they were working on, send their last Pull Requests. No more coding after this date.</p>
+                <span class="cd-date"><span class="cd-date-year">31st</span><span class="cd-date-month">Dec 2017</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-paper-plane"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>End evaluation report</h2>
+                <p>Students provide an end evaluation report published in their blog to successfully pass the programme.</p>
+                <span class="cd-date"><span class="cd-date-year">7th</span><span class="cd-date-month">Jan 2018</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+            <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa fa-paper-plane"></span>
+              </div> <!-- cd-timeline-img -->
+
+              <div class="cd-timeline-content">
+                <h2>Open Source Summit</h2>
+                <p>Mentors and Students are invited to present Talks and multiple tracks of Workshops are conducted.<br> <a href="/summit">Read more</a></p>
+                <span class="cd-date"><span class="cd-date-year">20th-21st</span><span class="cd-date-month">Jan 2018</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+
+            <div class="cd-timeline-start cd-final">
+              <div class="cd-timeline-start-caption">KWoC Ends</div>
+            </div>
+          </section>
+          <!-- counter section -->
+          <section id="counter" class="fix-background" >
+              <div class="opacity-full bg-dark-gray" ></div>
+              <div class="container position-relative">
+                  <div class="row">
+                      <!-- counter item -->
+                      <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="300ms">
+                          <i class="icon-profile-male medium-icon"></i>
+                          <span id="anim-number-pizza" class="counter-number white-text main-font font-weight-600"></span>
+                          <span class="counter-title light-gray-text">Participants</span>
+                      </div>
+                      <!-- end counter item -->
+                      <!-- counter item -->
+                      <div class="col-md-3 col-sm-6 bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten" data-wow-duration="600ms">
+                          <i class="icon-documents medium-icon"></i>
+                          <span id="anim-number-client" class="counter-number white-text main-font font-weight-600"></span>
+                          <span class="counter-title light-gray-text">Projects</span>
+                      </div>
+                      <!-- end counter item -->
+                      <!-- counter item -->
+                      <div class="col-md-3 col-sm-6 bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten" data-wow-duration="900ms">
+                          <i class="icon-anchor medium-icon"></i>
+                          <span id="anim-number-projects" class="counter-number white-text main-font font-weight-600"></span>
+                          <span class="counter-title light-gray-text">Mentors</span>
+                      </div>
+                       <div class="col-md-3 col-sm-3 sm-display-none col-xs-12 wow fadeIn">
+                          <h3 style="color: white;">Statistics: KWoC 2016</h3>
+                          <div class="separator-line bg-yellow no-margin-lr" ></div>
+                          <p style="color: white;">KWoC 2016 was a huge success, benefitting both students, to get started with open-source software development and mentors, to help newbies work on their projects.</p>
+                      </div>
+                      <!-- end counter item -->
+
+                  </div>
+              </div>
+            </div>
+        </section>
+        <!-- end counter section -->
+        <!-- work process section -->
+        <section id="work-process" class="work-process wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 sm-display-none col-xs-12 wow fadeIn">
+                        <h5>Steps</h5>
+                        <div class="separator-line bg-yellow no-margin-lr"></div>
+                        <ol><li>Apply on the student registration page and wait for an email from us (Please check Promotions and Spam as well).</li><li> Choose project(s) that you want to contribute to, contact the assigned mentor(s) and work through December to be an open-source developer.</li></ol>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-4 text-center wow fadeIn" data-wow-duration="600ms"><i class="icon-documents extra-large-icon"></i><span class="display-block margin-ten work-process-title">1. Apply</span></div>
+                    <div class="col-md-3 col-sm-4 col-xs-4 text-center wow fadeIn" data-wow-duration="900ms"><i class="icon-edit extra-large-icon"></i><span class="display-block margin-ten work-process-title">2. Code</span></div>
+                    <div class="col-md-3 col-sm-4 col-xs-4 text-center wow fadeIn" data-wow-duration="1200ms"><i class="icon-upload extra-large-icon"></i><span class="display-block margin-ten work-process-title">3. Push</span></div>
+                </div>
+            </div>
+        </section>
+        <!-- end work process section -->
+
+        <!-- new project section -->
+        <section id="new-project" class="new-project wow fadeIn">
+            <div class="container">
+                <div class="row center-col text-center">
+                    <h5 class="wow fadeInDown">Registrations have now been closed. See you next year!</h5>
+                </div>
+            </div>
+        </section>
+        <!-- end new project section -->
+
+
+        <!-- footer -->
+        <footer>
+            {{ helpers.pre_footer() }}
+            <!-- footer_final -->
+            {{ helpers.end_footer() }}
+            <!-- end footer -->
+            <!-- scroll to top -->
+            <a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+            <!-- scroll to top End... -->
+        </footer>
+        <!-- end footer -->
+        <!-- javascript libraries -->
+        {{ helpers.js_libraries() }}
+    </body>
+</html>
