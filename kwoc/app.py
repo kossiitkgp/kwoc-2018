@@ -6,7 +6,7 @@ import os
 import json
 from flask import render_template, redirect, Markup
 import markdown
-import config
+from kwoc import config
 
 sys.path.append("kwoc")
 

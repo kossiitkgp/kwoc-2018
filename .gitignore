@@ -109,3 +109,4 @@ gh_scraper/stats/*
 
 secrets/*
 
+.vscode
