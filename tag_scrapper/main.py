@@ -54,7 +54,7 @@ def read_links(path_to_csv, index):
 
     :param path_to_csv: path to the csv file
     :param index: index to keep data from
-    :return: list of list of parsed data
+    :return: list of parsed data
     """
     link_list = []
     skip = True  # to skip the column headings
@@ -64,7 +64,7 @@ def read_links(path_to_csv, index):
             if skip:
                 skip = False
                 continue
-            link_list.append([row[index]])
+            link_list.append(row[index])
     return link_list
 
 
@@ -72,8 +72,11 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
     """
     driving function for scraping topics off a github repository and producing a json of the same
 
-    The data structure link_list (the final list of links and topics) is a list of the following type
-    [[LINK1, [TOPIC11, TOPIC12]],[LINK2, [TOPIC21, TOPIC22]]]
+    The data structure topics_data (the final list of links and topics) is a dictionary of the following type
+    {
+        "link1": [LIST OF TOPICS],
+        "link2": [LIST OF TOPICS]
+    }
 
     :param path_to_csv: path to the csv file containing the project details
     :param index: index of the github url in the csv
@@ -81,21 +84,22 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
         True if successful for all, False otherwise
     """
     link_list = read_links(path_to_csv, index)
+    topics_data = {}
     to_return = True
     for link in link_list:
         try:
-            # print(link[0])
-            page = get_page(link[0])
+            page = get_page(link)
             anchor_tag_content = get_anchors(page)
             topic_list = get_topics(anchor_tag_content)
             # print(topic_list)
-            link.append(topic_list)
-            print(f'done for {link[0]}')
+            topics_data[link] = topic_list
+            print(f'done for {link}')
         except Exception as err:
-            print(f'failed for {link[0]}')
+            print(f'failed for {link}')
             to_return = False
             print(err)
-    print(link_list)
+
+    print(topics_data)
     return to_return
 
 
