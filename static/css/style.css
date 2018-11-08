@@ -439,6 +439,8 @@ nav .container{ display: table-cell; vertical-align: middle; height: 75px; posit
 .shrink-nav .cart-content { top: 42px; }
 .nav li.simple-dropdown { position: relative}
 .dropdown.simple-dropdown .dropdown-menu { left: -10px; transform: translateX(0px); padding-top: 30px; top: 53px !important }
+.nav li { margin: 0 20px;}
+.nav li a { padding: 17px 0; line-height: 23px;}
 
 /*  simple dropdown menu    */
 .simple-dropdown-menu ul { padding: 0 !important; }
