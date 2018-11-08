@@ -110,3 +110,4 @@ gh_scraper/stats/*
 secrets/*
 
 .vscode
+tag_scrapper/.idea/
