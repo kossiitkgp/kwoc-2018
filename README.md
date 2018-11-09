@@ -9,11 +9,18 @@ Used the following tutorial to set up the server - https://www.digitalocean.com/
 ## Development Workflow
 
 To launch the server locally, follow the below steps:
+### Run inside a virtual environment:
 
 ```
-pip install pipenv
-cd /path/to/project
-pipenv shell --three
-pipenv install --dev
-gunicorn kwoc.app:app
+$ pip install pipenv
+$ cd /path/to/project
+$ pipenv shell --three
+$ pipenv install --dev
+$ gunicorn kwoc.app:app
+```
+
+### Run inside a Docker container
+```
+$ sudo docker build -t kwoc-app .
+$ sudo docker run -p 8000:8000 kwoc-app
 ```
