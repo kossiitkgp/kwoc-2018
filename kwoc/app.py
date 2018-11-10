@@ -6,7 +6,7 @@ import os
 import json
 from flask import render_template, redirect, Markup, request
 import markdown
-from kwoc import config, oauth
+import config, oauth
 
 sys.path.append("kwoc")
 
@@ -217,6 +217,9 @@ def auth(githubHandle):
 def token():
     code=request.args.get('code')
     access_token = oauth.ret_token(code)
+    if access_token == -1:
+        # Add Error Handling
+        return redirect("/")
     # user = githubhandle, accesstoken = access_token
     return redirect("/")
 
