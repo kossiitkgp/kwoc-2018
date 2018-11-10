@@ -4,9 +4,9 @@ import csv
 import sys
 import os
 import json
-from flask import render_template, redirect, Markup
+from flask import render_template, redirect, Markup, request
 import markdown
-from kwoc import config
+from kwoc import config, oauth
 
 sys.path.append("kwoc")
 
@@ -204,6 +204,21 @@ def summit_talkid(talk_id):
                                talk=talks[talk_id])
     else:
         return redirect('/summit', code=302)
+
+
+@app.route("/auth/<githubHandle>")
+def auth(githubHandle):
+    global user 
+    user = githubHandle
+    return redirect(oauth.ret_auth_url())
+
+
+@app.route("/token")
+def token():
+    code=request.args.get('code')
+    access_token = oauth.ret_token(code)
+    # user = githubhandle, accesstoken = access_token
+    return redirect("/")
 
 # # Lines below should not be needed for Python 3
 # from imp import reload
