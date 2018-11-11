@@ -11,9 +11,15 @@ Used the following tutorial to set up the server - https://www.digitalocean.com/
 To launch the server locally, follow the below steps:
 
 ```
+# Run these commands in the root folder of the project
 pip install pipenv
-cd /path/to/project
 pipenv shell --three
 pipenv install --dev
 gunicorn kwoc.app:app
+```
+
+If you want the server to update to code changes without restarting the server, use a `--reload` parameter.
+
+```
+gunicorn kwoc.app:app --reload
 ```
