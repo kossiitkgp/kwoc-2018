@@ -1,51 +1,110 @@
 import os
 import csv
 import requests
-from bs4 import BeautifulSoup
+import json
 
 PATH_TO_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "gh_scraper/projects.csv")
+SAVE_TO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "topic_dict.json")
 GITHUB_LINK_INDEX = 4  # 0 based indexing
-LINK_INDEX = 0  # index of url in the final list
-TOPICS_INDEX = 1  # index of topics list in the final list
+GITHUB_GRAPHQL_ENDPOINT = "https://api.github.com/graphql"
 
 
-def get_topics(anchor_tag_list):
+def save_as_json(topic_dict):
     """
-    scrapes the topics off the given anchor tags
-    :param anchor_tag_list: list of anchor tags and their enclosing contents
-    :return: list of topics in the tags
+    takes in a dictionary of repo_url as keys and topics list as data and saves to file
+
+    :param topic_dict: dictionary of schema {"url": [topic_list]}
+    :return: True if successful, False otherwise
     """
-    topic_list = []
-    for tag in anchor_tag_list:
-        topic_list.append("".join(tag.text.split()))
+    try:
+        with open(SAVE_TO, "w") as outf:
+            json.dump(topic_dict, outf)
+        print("Successfully saved topic dictionary to {path}".format(path=SAVE_TO))
+        return True
+    except Exception as err:
+        print("Failed to save file!")
+        print(err)
+        return False
 
-    return topic_list
 
-
-def get_anchors(page):
+def flatten(json_response):
     """
-    beautifies HTML page and separates the concerned portion(s) of the
-    :param page: html page parsed from requests
-    :return: list of portions of beautified html page
+    flattens the json response received from graphQL, and returns the list of topics
+    :param json_response: response of the format mentioned in graph_query
+    :return: list of topics
     """
-    beautified = BeautifulSoup(page, "html.parser")
-    anchor_list = []
-    for line in beautified.find_all('a', attrs={"class": "topic-tag topic-tag-link"}):
-        anchor_list.append(line)
-    return anchor_list
+    topics = []
+    if json_response.get("data", None) is not None:
+        topic_nodes = json_response["data"]["repository"]["repositoryTopics"]["nodes"]
+        for node in topic_nodes:
+            topics.append(node["topic"]["name"])
+
+    return topics
 
 
-def get_page(url):
+def graph_query(author, name):
     """
-    fetches html page for the given URL
+    posts a query to the github graphQL endpoint and fetches the response
 
-    :param url: link to the page
-    :return: parsed HTML content for the url
+    :param author: name of the owner of the repository
+    :param name: name of the repository
+    :return: response of the following form:
+
+        {
+          "data": {
+            "repository": {
+              "repositoryTopics": {
+                "nodes": [
+                  {
+                    "topic": {
+                      "name": "topic1"
+                    }
+                  },
+                  {
+                    "topic": {
+                      "name": "topic2"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+
     """
-    resp = requests.get(url)
-    if resp.status_code != 200:
-        raise Exception
-    return resp.content
+    query = """
+    {
+      repository(owner: "%s", name: "%s") {
+        repositoryTopics(first: 20) {
+          nodes {
+            topic {
+              name
+            }
+          }
+        }
+      }
+    }
+    """ % (author, name)
+
+    headers = {
+        "Authorization": "token " + os.getenv("GITHUB_TOKEN")
+    }
+
+    resp = requests.post(GITHUB_GRAPHQL_ENDPOINT, data=json.dumps({"query": query}), headers=headers)
+    # print(resp.json())
+    return resp.json()
+
+
+def split(url):
+    """
+    splits the given github url into author and name
+
+    :param url: URL of the github repository
+    :return: author (string), name (string)
+    """
+    url = url.split('.com/')
+    url = url[1].split('/')
+    return url[0], url[1].replace(".git", "")
 
 
 def read_links(path_to_csv, index):
@@ -88,18 +147,20 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
     to_return = True
     for link in link_list:
         try:
-            page = get_page(link)
-            anchor_tag_content = get_anchors(page)
-            topic_list = get_topics(anchor_tag_content)
+            author, name = split(link)
+            query_response = graph_query(author, name)
+            topic_list = flatten(query_response)
             # print(topic_list)
             topics_data[link] = topic_list
             print(f'done for {link}')
         except Exception as err:
             print(f'failed for {link}')
+            topics_data[link] = []
             to_return = False
             print(err)
 
     print(topics_data)
+    save_as_json(topics_data)
     return to_return
 
 
