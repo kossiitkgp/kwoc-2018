@@ -25,4 +25,4 @@ def submit():
 	
 	return render_template('thank.html')
 
-app.run(port=5002)
+app.run(port=5000)
