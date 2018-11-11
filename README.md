@@ -21,5 +21,5 @@ gunicorn kwoc.app:app
 If you want the server to update to code changes without restarting the server, use a `--reload` parameter.
 
 ```
-gunicorn kwoc.app:app --reload
+gunicorn kwoc.app:app --reload  // live code changes
 ```
