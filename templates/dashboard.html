@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <!-- responsive -->
     <link rel="stylesheet" href="/static/css/responsive.css" />
-    <link rel="stylesheet" href="/static/css/profile.css" />
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--[if IE]>
             <link rel="stylesheet" href="/static/css/style-ie.css" />
@@ -139,12 +139,19 @@
         <section class="section1 clearfix">
             <div>
                 <div class="row grid clearfix">
-                    <div class="col2 first">
-                        <img src="{{ avatar_url }}" alt="">
+                    <div class="col-sm-4 first profile-intro">
+                        <img src="{{ avatar_url }}" style="height: 128px; width: auto; border-radius: 25%;" alt="">
                         <h1>{{ name }}</h1>
                         <p>{{ affiliation }}</p>
                     </div>
-                    <div class="col2 first">
+                    <div class="co-sm-8 first tag-div">
+                        <ul style="text-align: center;" class="tags custom main-links">
+                            <li style="background:rgb(95, 159, 255)">
+                                <div onclick="window.open('/mid-term');" style="cursor:pointer;"
+                                    class="tag">Mid Term Eval</div>
+                            </li>
+                        </ul>
+                        <br style="margin-bottom: 1rem;">
                         <h3>Project(s) worked on:</h3>
                         <ul style="text-align: center;" class="tags custom">
                             {% for project in projects %}
@@ -154,8 +161,7 @@
                             </li>
                             {% endfor %}
                         </ul>
-                    </div>
-                    <div class="col2 first">
+                        <br style="margin-bottom: 1rem;">
                         <h3>Language(s) Involved :</h3>
                         <ul class="tags custom">
                             {% for lan in languages %}
@@ -193,11 +199,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col2 first" style="margin: 10% 0 10% 0">
-                        <h3>Commits Summary</h3>
+                    <div class="col2 first" style="margin: 10% 0 10% 0;">
+                        <h1>Commits Summary</h1>
                     </div>
                     <br>
-                    <ul style="margin-left: 20%">
+                    <ul style="margin: 0 20% 0 20%;">
                         {% for commit in commits %}
                         <li style="width: 100%">
                             <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;">{{
