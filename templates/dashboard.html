@@ -145,27 +145,37 @@
                         <p>{{ affiliation }}</p>
                     </div>
                     <div class="co-sm-8 first tag-div">
-                        <ul style="text-align: center;" class="tags custom main-links">
-                            <li style="background:rgb(95, 159, 255)">
-                                <div onclick="window.open('/mid-term');" style="cursor:pointer;"
-                                    class="tag">Mid Term Eval</div>
+                        <ul class="main-links">
+                            <li>
+                                <div onclick="window.open('/mid-term');" style="cursor:pointer;" class="main-link">Apply for a Project</div>
                             </li>
+                            <!-- <li>
+                                <div onclick="window.open('/mid-term');" style="cursor:pointer;" class="main-link">Mid Term Evaluation</div>
+                            </li>
+                            <li>
+                                <div onclick="window.open('/mid-term');" style="cursor:pointer;" class="main-link">End Term Evaluation</div>
+                            </li>
+                            <li>
+                                <div onclick="window.open('/mid-term');" style="cursor:pointer;" class="main-link">Apply for Open Source Summit</div>
+                            </li> -->
                         </ul>
-                        <br style="margin-bottom: 1rem;">
+                        <!-- <br>
+                        <br>
+                        <br> -->
                         <h3>Project(s) worked on:</h3>
-                        <ul style="text-align: center;" class="tags custom">
+                        <ul style="text-align: center;" class="custom">
                             {% for project in projects %}
-                            <li style="background:rgb(95, 159, 255)">
+                            <li>
                                 <div onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;"
-                                    class="tag">{{ project }}</div>
+                                    class="project-tag">{{ project }}</div>
                             </li>
                             {% endfor %}
                         </ul>
-                        <br style="margin-bottom: 1rem;">
+                        <br style="margin-bottom: 0rem;">
                         <h3>Language(s) Involved :</h3>
                         <ul class="tags custom">
                             {% for lan in languages %}
-                            <li style="background:rgb(95, 159, 255)">
+                            <li>
                                 <div class="tag">{{ lan }}</div>
                             </li>
                             {% endfor %}

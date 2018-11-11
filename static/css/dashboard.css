@@ -116,6 +116,31 @@
   	margin-bottom: 2em;
 }
 
+.main-links {
+	list-style: none;
+}
+
+.main-links li {
+	background: none;
+	/* margin-bottom: 1.5rem; */
+	float: none;
+	width: auto;
+}
+
+.main-link {
+	font-size: 1rem;
+	padding: 1rem;
+	text-decoration: none;
+	border-radius: 5px;
+	background-color: rgb(53, 107, 255);
+	color: white;
+}
+
+.main-link:hover {
+	background-color: rgb(0, 64, 121);
+}
+
+
 .tag-div ul {
 	margin-bottom: 2rem;
 	/* padding-left: 20%; */
@@ -123,6 +148,20 @@
 	/* left: 2rem; */
 }
 
+.tag-div h3 {
+	margin: 0.5rem;
+}
+
+.tag-div .project-tag {
+	font-size: 16px;
+	padding: 0.5rem;
+	border-radius: 5px;
+}
+
+.project-tag:hover {
+	background-color: #6AAFEA;
+	color: white;
+}
 .tag-div {
 	margin-left: 40%;
 }
