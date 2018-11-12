@@ -6,6 +6,16 @@ Assigned to:  Bach Le
 Primary use:  
 -------------------------------------------------------------------*/
 
+/* Fix for making it unscrollable */
+#back_image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    overflow: hidden;
+}
 
 
 /*//////////////////////////////////////////////////////////////////

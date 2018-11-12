@@ -2,7 +2,7 @@
 {% import 'helper_macros.html' as helpers %}
 <html lang="en">
 <head>
-	<title>KWOC 2018</title>
+	<title>KWoC 2018</title>
 	{{ helpers.title() }}
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +24,6 @@
 <body>
 	<!--section for snow effect-->
 	{{ helpers.snow_css() }}
-	<div class="snow"
 	<div class="snow snow--near"></div>
                   <div class="snow snow--near snow--alt"></div>
                    <div class="snow snow--mid"></div>
@@ -34,8 +33,9 @@
                     <div class="opacity-full bg-dark-gray" style="opacity: 0.5"></div>
 	</div>
 	<!-- end of section of snow effect -->
-	<div class="simpleslide100">
-		<div class="simpleslide100-item bg-img1" style="background-image: url('../static/images/intro-background.jpg');"></div>
+	<div >
+		<img id="back_image" src="../static/images/intro-background.jpg">
+		
 
 	<div class="size1 overlay1">
 		<!--  -->
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 
-			<form id="test-form" action={{url_for('submit')}} method='POST' class="w-full flex-w flex-c-m validate-form">
+			<form id="form" onsubmit="event.preventDefault(); send(form);" class="w-full flex-w flex-c-m">
 
 				<div class="wrap-input100 validate-input where1">
 					<input class="input100 placeholder0 s2-txt2" type="text" name="name" placeholder="Enter Your Name">
@@ -79,7 +79,7 @@
 				</div>		
 
 				<div class="wrap-input100 validate-input where1" data-validate = "Valid email is required: ex@abc.xyz">
-					<input class="input100 placeholder0 s2-txt2" type="text" name="email-id" placeholder="Enter Email Address">
+					<input class="input100 placeholder0 s2-txt2" type="email" name="email" placeholder="Enter Email Address">
 					<span class="focus-input100"></span>
 				</div>
 			
@@ -90,6 +90,10 @@
 		</div>
 	</div>
 	
+<!--===============================================================================================-->	
+	<script src="../static/js/form-submit.js"></script>
+<!--===============================================================================================-->
+
 
 <!--===============================================================================================-->	
 	<script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>

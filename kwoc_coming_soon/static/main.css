@@ -6,7 +6,10 @@ Assigned to:  Bach Le
 Primary use:  
 -------------------------------------------------------------------*/
 
-
+/* Fix for making it unscrollable */
+body{  
+    overflow: hidden;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
