@@ -24,3 +24,15 @@ $ gunicorn kwoc.app:app
 $ sudo docker build -t kwoc-app .
 $ sudo docker run -p 8000:8000 kwoc-app
 ```
+# Run these commands in the root folder of the project
+pip install pipenv
+pipenv shell --three
+pipenv install --dev
+gunicorn kwoc.app:app
+```
+
+If you want the server to update to code changes without restarting the server, use a `--reload` parameter.
+
+```
+gunicorn kwoc.app:app --reload  // live code changes
+```
