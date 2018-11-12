@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% import 'helper_macros.html' as helpers %}
 <html lang="en">
 <head>
 	<title>Coming Soon 2</title>
@@ -25,8 +26,20 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	<!--section for snow effect-->
+	{{ helpers.snow_css() }}
+	<div class="snow"
+	<div class="snow snow--near"></div>
+                  <div class="snow snow--near snow--alt"></div>
+                   <div class="snow snow--mid"></div>
+                  <div class="snow snow--mid snow--alt"></div>
+                  <div class="snow snow--far"></div>
+                  <div class="snow snow--far snow--alt"></div>
+                    <div class="opacity-full bg-dark-gray" style="opacity: 0.5"></div>
+	</div>
+	<!-- end of section of snow effect -->
 	
-	<!--  -->
+	
 	<div class="simpleslide100">
 		<div class="simpleslide100-item bg-img1" style="background-image: url('../static/images/bg01.jpg');"></div>
 		<div class="simpleslide100-item bg-img1" style="background-image: url('../static/images/bg02.jpg');"></div>
