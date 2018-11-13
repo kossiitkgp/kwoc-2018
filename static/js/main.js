@@ -1466,7 +1466,7 @@ function animatecounters(){
 /*==============================================================*/
     //Counter Number - START CODE
     /*==============================================================*/
-    jQuery({ ValuerHbcO: 0 }).delay(0).animate({ ValuerHbcO: 930 },
+    jQuery({ ValuerHbcO: 0 }).delay(0).animate({ ValuerHbcO: 1850 },
     {
         duration: 2000,
         easing: "swing",
@@ -1475,7 +1475,7 @@ function animatecounters(){
             $("#anim-number-pizza").text(Math.ceil(this.ValuerHbcO)+"+");
         }
     });
-    jQuery({ ValuerHbcO: 0 }).delay(0).animate({ ValuerHbcO: 55 },
+    jQuery({ ValuerHbcO: 0 }).delay(0).animate({ ValuerHbcO: 105 },
     {
         duration: 2000,
         easing: "swing",
@@ -1483,7 +1483,7 @@ function animatecounters(){
             $("#anim-number-client").text(Math.ceil(this.ValuerHbcO)+"+");
         }
     });
-    jQuery({ ValuerHbcO: 0 }).delay(0).animate({ ValuerHbcO: 20 },
+    jQuery({ ValuerHbcO: 0 }).delay(0).animate({ ValuerHbcO: 70 },
     {
         duration: 2000,
         easing: "swing",
