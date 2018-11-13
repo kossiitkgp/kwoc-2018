@@ -1,49 +1,53 @@
 /*------------------------------------------------------------------
 Project:  ComingSoon
-Version:  
-Last change:  
+Version:
+Last change:
 Assigned to:  Bach Le
-Primary use:  
+Primary use:
 -------------------------------------------------------------------*/
-
-/* Fix for making it unscrollable */
-#back_image{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-body{
+body {
     overflow: hidden;
+    background: url('../images/intro-background.jpg') !important;
+    background-size: cover;
 }
 
+@media only screen and (max-width: 600px) {
+    body {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+}
+
+.snow-container {
+  max-height: 100%;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/Poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/Poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/Poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
   font-family: Lato-Regular;
-  src: url('../fonts/Lato/Lato-Regular.ttf'); 
+  src: url('../fonts/Lato/Lato-Regular.ttf');
 }
 
 @font-face {
   font-family: Lato-Light;
-  src: url('../fonts/Lato/Lato-Light.ttf'); 
+  src: url('../fonts/Lato/Lato-Light.ttf');
 }
 
 @font-face {
   font-family: Lato-Bold;
-  src: url('../fonts/Lato/Lato-Bold.ttf'); 
+  src: url('../fonts/Lato/Lato-Bold.ttf');
 }
 
 
@@ -69,10 +73,11 @@ body{
 .input100 {
   display: block;
   width: 100%;
-  background: #fff;
-  height: 70px;
+  background: transparent;
+  height: 60px;
   border-radius: 35px;
   padding: 0 40px;
+  border: 1px solid;
 }
 
 .focus-input100 {
@@ -293,7 +298,7 @@ body{
 
 .size3 {
   min-width: 160px;
-  height: 70px;
+  height: 60px;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -330,7 +335,7 @@ body{
 
 
 /*==================================================================
-   WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE  
+   WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE WHERE
 ==================================================================*/
 .where1 {
   margin: 0 5px 20px 5px;
@@ -339,7 +344,7 @@ body{
 
 
 /*==================================================================
- HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW 
+ HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW HOW
 ==================================================================*/
 .placeholder0::-webkit-input-placeholder { color: #999999;}
 .placeholder0:-moz-placeholder { color: #999999;}
@@ -360,7 +365,7 @@ body{
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.5);
 }
 
 /*---------------------------------------------*/
@@ -505,7 +510,7 @@ body{
   .w-full-sm {width: 100%;}
   /*---------------------------------------------*/
 
-  
+
 }
 
 
