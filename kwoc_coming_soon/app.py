@@ -12,13 +12,13 @@ def main():
 
 @app.route('/submit', methods=['GET', 'POST'])
 def submit():
-    if request.method == 'POST':
-        name = request.form['name']
-        emailid = request.form['email-id']
-        fieldnames = [name, emailid]
-        with open('list.csv', 'a+') as inFile:
-            writer = csv.writer(inFile)
-            writer.writerow(fieldnames)
+    # if request.method == 'POST':
+    #     name = request.form['name']
+    #     emailid = request.form['email-id']
+    #     fieldnames = [name, emailid]
+    #     with open('list.csv', 'a+') as inFile:
+    #         writer = csv.writer(inFile)
+    #         writer.writerow(fieldnames)
 
     return render_template('thank.html')
 
