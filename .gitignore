@@ -110,3 +110,5 @@ gh_scraper/stats/*
 secrets/*
 
 .vscode
+tag_scrapper/.idea/
+tag_scrapper/topic_dict.json
