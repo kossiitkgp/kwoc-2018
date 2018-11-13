@@ -13,6 +13,7 @@ with open('list.csv','w') as csvFile:
 	writer = csv.writer(csvFile)
 	writer.writerow(row)
 
+
 @app.route('/submit', methods = ['GET','POST'])
 def submit():
 	if request.method =='POST':

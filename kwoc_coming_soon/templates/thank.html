@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+{% import 'helper_macros.html' as helpers %}
 <html lang="en">
 <head>
-	<title>Coming Soon 2</title>
+	<title>KWOC 2018</title>
 	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="5; url=./">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/css/loading-bar.css"/>
+	<script type="text/javascript" src="../static/js/loading-bar.js"></script>
+<!--===============================================================================================-->
+
 	<link rel="icon" type="image/png" href="../static/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
@@ -20,12 +26,22 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	<!--section for snow effect-->
+	{{ helpers.snow_css() }}
+	<div class="snow"
+	<div class="snow snow--near"></div>
+                  <div class="snow snow--near snow--alt"></div>
+                   <div class="snow snow--mid"></div>
+                  <div class="snow snow--mid snow--alt"></div>
+                  <div class="snow snow--far"></div>
+                  <div class="snow snow--far snow--alt"></div>
+                    <div class="opacity-full bg-dark-gray" style="opacity: 0.5"></div>
+	</div>
+	<!-- end of section of snow effect -->
 	
-	<!--  -->
-	<div class="simpleslide100">
-		<div class="simpleslide100-item bg-img1" style="background-image: url('../static/images/bg01.jpg');"></div>
-		<div class="simpleslide100-item bg-img1" style="background-image: url('../static/images/bg02.jpg');"></div>
-		<div class="simpleslide100-item bg-img1" style="background-image: url('../static/images/bg03.jpg');"></div>
+	
+	<div >
+		<img id="back_image" src="../static/images/intro-background.jpg">
 	</div>
 
 	<div class="size1 overlay1">
@@ -36,7 +52,11 @@
 			</h3>
 
 			<p class="m2-txt1 txt-center p-b-48">
-				We will get back to you as soon as the event is released.
+				Thank you for subscribing for the updates of KWOC 2018. We will inform you about the mentor and student registrations.
+			</p>
+			<br>
+			<p>
+				<img src="../static/images/loader.gif" style="width:200px;height:200px;">
 			</p>
 
 <!--===============================================================================================-->
