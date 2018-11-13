@@ -526,3 +526,8 @@ body{
   /*---------------------------------------------*/
 
 }
+
+.button-clicked, .button-clicked:hover, .button-clicked:focus, .button-clicked:active {
+  background-color: #969696;
+  color: #4b4b4b;
+}
