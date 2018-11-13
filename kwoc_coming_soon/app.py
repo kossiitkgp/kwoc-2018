@@ -18,7 +18,7 @@ def submit():
         fieldnames = [name, emailid]
         with open('list.csv', 'a+') as inFile:
             writer = csv.writer(inFile)
-        writer.writerow(fieldnames)
+            writer.writerow(fieldnames)
 
     return render_template('thank.html')
 
