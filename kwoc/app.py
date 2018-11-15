@@ -81,8 +81,8 @@ def testimonials():
 
 @app.route("/mentor_form")
 def mentor_form():
-    return "Registrations have now been closed. See you next year !"
-    # return render_template('mentor_form.html')
+    # return "Registrations have now been closed. See you next year !"
+    return render_template('mentor_form.html')
 
 
 @app.route("/student_form")
