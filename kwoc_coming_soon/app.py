@@ -23,5 +23,11 @@ def submit():
     return render_template('thank.html')
 
 
+@app.route("/mentor_form")
+def mentor_form():
+    # return "Registrations have now been closed. See you next year !"
+    return render_template('mentor_form.html')
+
+
 if __name__ == '__main__' and "RUNNING_PROD" not in os.environ:
     app.run(host='0.0.0.0', port="5000")

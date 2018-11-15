@@ -249,18 +249,18 @@ form {
     </head>
     <body>
       <div class="form-wrapper">
-  <h1>Register your Project</h1>
+  <h1>Register Your Project</h1>
   <div class="form-footer">
-    <p>Please read <a href="/static/files/KWoCMentorManual.pdf">Mentor Manual</a> before registering!</p>
+    <p>Please read <a href="/static/files/KWoCMentorManual.pdf">KWoC's Mentor's Manual</a> before registering!</p>
   </div>
   <form id="form" onsubmit="event.preventDefault(); send(form);">
     <div class="form-item">
       <label for="name"></label>
-      <input type="text" name="name" required="required" placeholder="Name" autocomplete="off"></input>
+      <input type="text" name="name" required="required" placeholder="Name" autocomplete="on"></input>
     </div>
     <div class="form-item">
       <label for="email"></label>
-      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="off"></input>
+      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="on"></input>
     </div>
     <div id="project_details">
     <div class="form-item">
@@ -277,7 +277,7 @@ form {
     </div>
     <div class="form-item">
       <label for="communication"></label>
-      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="off"></input>
+      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="on"></input>
     </div>
 <div class="form-item">
     <label for="tag-typer">
@@ -293,8 +293,8 @@ form {
     </div>
     </div>
     <div class="button-panel">
-      <input class="btn btn-info" type="button" value="Add Project" title="Add Project" id="add_project"></input>
-      <input class="btn btn-info" type="submit" value="Register Now" title="Register Now"></input>
+      <input class="btn btn-info" type="button" value="Add Another Project" title="Add Another Project" id="add_project"></input>
+      <input class="btn btn-info" type="submit" value="Submit Project(s)" title="Submit Project(s)"></input>
     </div>
   </form>
 </div>
@@ -306,13 +306,13 @@ form {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="reg_title"></h4>
+          <h4 class="modal-title" id="reg_title" align="center"></h4>
         </div>
-        <div class="modal-body">
-          <p style="font-size:15px;" id="reg_msg"></p>
+        <div class="modal-body" align="center">
+          <p style="font-size:15px;" id="reg_msg" align="center"></p>
           <br><br>
-          <img id="redir-anim" class="mx-auto" src="/static/images/load.svg" width="300px" height="300px"> </img>
-          <p style="font-size:15px;" id="redir-msg"></p>
+          <img id="redir-anim" class="mx-auto" src="/static/images/load.svg" align="center">
+          <p style="font-size:15px;" id="redir-msg" align="center"></p>
         </div>
         <div class="modal-footer">
     <button type="button" class="btn btn-default" onclick="location.href='/';">Go to Home Page</button>
@@ -372,7 +372,7 @@ $(document).ready( function() {
     </div>\
     <div class="form-item">\
       <label for="communication"></label>\
-      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="off"></input>\
+      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="on"></input>\
     </div>\
 <div class="form-item">\
     <label for="tag-typer">\
@@ -401,8 +401,8 @@ function send(form){
       console.log(request.content);
       if (request.readyState === 4) {
             if (request.status === 200) {
-                $(".modal-title").html("Registration Successful");
-                $("#reg_msg").html("Thank you, you have been successfully registered as a mentor.");
+                $(".modal-title").html("CARPE DIEM!");
+                $("#reg_msg").html("Thank you for registering as a mentor for KWoC 2018");
                 $("#redir-msg").html("You are being redirected to the home page...");
                 $('#myModal').modal('show');
                 $("#redir-anim").show();
@@ -413,8 +413,8 @@ function send(form){
 
                 } else {
                 $(".modal-footer").show();
-                $(".modal-title").html("Registration Failed");
-                $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
+                $(".modal-title").html("Absit Omen!");
+                $("#reg_msg").html("Registration failed! Please contact us at kwoc@kossiitkgp.in to keep things going smooth.");
                 $('#myModal').modal('show');
                 }
             }
@@ -422,9 +422,9 @@ function send(form){
       request.open("POST", url , true);
       request.send(data);
       $(".modal-title").html("Processing");
-      $("#reg_msg").html('<img src="/static/images/loader.gif"> </img>');
+      $("#reg_msg").html("<img src='/static/images/loader.gif' width='300px' height='300px' align='center'>");
       $('#myModal').modal('toggle');
-      form.reset()
+      form.reset();
       return true;
 }
 </script>
