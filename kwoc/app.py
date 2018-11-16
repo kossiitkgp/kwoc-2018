@@ -16,10 +16,10 @@ sess.init_app(app)
 # Load stats.json file
 dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-1])
-# stats_json = root_dir + '/gh_scraper/stats/stats.json'
-# with open(stats_json, 'r') as f:
-#     stats_dict = json.load(f)
-stats_dict = {}
+stats_json = root_dir + '/gh_scraper/stats/stats.json'
+with open(stats_json, 'r') as f:
+    stats_dict = json.load(f)
+# stats_dict = {}
 
 # Separate people with non-zero contributions
 non_zero_contributions = {}
@@ -52,6 +52,8 @@ def main():
 
 @app.route("/stats")
 def stats():
+    # for key, value in stats_dict.items(): 
+    #     print(key, value)
     return render_template('stats.html', stats=stats_dict)
 
 
@@ -112,10 +114,10 @@ with open(midterm_hashes_json, 'r') as f:
 
 @app.route("/mid-term")
 def mid_term():
-    return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
-    # return render_template('mid-term-student.html',
-    #                        list_of_mentors=list_of_mentors,
-    #                        hashes=midterm_hashes)
+    # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
+    return render_template('mid-term-student.html',
+                           list_of_mentors=list_of_mentors,
+                           hashes=midterm_hashes)
 
 
 mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
@@ -204,6 +206,16 @@ def summit_talkid(talk_id):
                                talk=talks[talk_id])
     else:
         return redirect('/summit', code=302)
+
+@app.route("/dashboard")
+def dashboard():
+    # print('HI')
+    git_handle = "arulthileeban"
+    if git_handle in stats_dict:
+        return render_template('dashboard.html', **stats_dict[git_handle])
+    else:
+        return redirect('/stats', code=302)
+    return render_template('stats.html')
 
 # # Lines below should not be needed for Python 3
 # from imp import reload

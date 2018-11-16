@@ -441,7 +441,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 75px; posit
 .dropdown.simple-dropdown .dropdown-menu { left: -10px; transform: translateX(0px); padding-top: 30px; top: 53px !important }
 .nav li { margin: 0 20px;}
 .nav li a { padding: 17px 0; line-height: 23px;}
-
+.nav > li > a > img {max-width: 16px; border-radius: 50%;}
 /*  simple dropdown menu    */
 .simple-dropdown-menu ul { padding: 0 !important; }
 .simple-dropdown-menu ul li { }
