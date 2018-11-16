@@ -1,4 +1,4 @@
-from flask import request, render_template, Flask
+from flask import request, render_template, Flask, redirect
 import csv
 import os
 
@@ -30,8 +30,8 @@ def mentor_form():
 
 
 @app.route('/mentor')
-def redirect():
-    return redirect('/mentor', 304)
+def mentor():
+    return redirect('/mentor_form', 302)
 
 
 if __name__ == '__main__' and "RUNNING_PROD" not in os.environ:
