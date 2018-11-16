@@ -243,6 +243,8 @@ form {
     display: none;
   }
   }
+
+
       </style>
     </head>
     <body>
@@ -260,6 +262,7 @@ form {
       <label for="email"></label>
       <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="off"></input>
     </div>
+    <div id="project_details">
     <div class="form-item">
       <label for="project"></label>
       <input type="text" name="project" required="required" placeholder="Project Name" autocomplete="off"></input>
@@ -288,8 +291,10 @@ form {
   </div>
   </label>
     </div>
+    </div>
     <div class="button-panel">
-      <input class="button btn btn-info btn-lg" type="submit" value="Register" title="Register"></input>
+      <input class="btn btn-info" type="button" value="Add Project" title="Add Project" id="add_project"></input>
+      <input class="btn btn-info" type="submit" value="Register Now" title="Register Now"></input>
     </div>
   </form>
 </div>
@@ -305,10 +310,12 @@ form {
         </div>
         <div class="modal-body">
           <p style="font-size:15px;" id="reg_msg"></p>
+          <br><br>
+          <img id="redir-anim" class="mx-auto" src="/static/images/load.svg" width="300px" height="300px"> </img>
+          <p style="font-size:15px;" id="redir-msg"></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Register another project</button>
-	  <button type="button" class="btn btn-default" onclick="location.href='/';">Go to Home Page</button>
+    <button type="button" class="btn btn-default" onclick="location.href='/';">Go to Home Page</button>
         </div>
       </div>
 
@@ -321,6 +328,9 @@ var taglist = ['Python','Scraping'];
 var temp_tag_close = null;
 
 $(document).ready( function() {
+
+  $("#redir-anim").hide();
+  $(".modal-footer").hide();
 
   $("#tag-typer").keypress( function(event) {
     var key = event.which;
@@ -337,15 +347,46 @@ $(document).ready( function() {
 
 
   $("#tags").on("click", ".close", function() {
-  	temp_tag_close = $(this).parent("span");
-  	var tag = temp_tag_close.text().slice(1,-1);
-  	var i = taglist.indexOf(tag);
-  	if(i > -1 ){
-  		taglist.splice(i,1);
-  	}
+    temp_tag_close = $(this).parent("span");
+    var tag = temp_tag_close.text().slice(1,-1);
+    var i = taglist.indexOf(tag);
+    if(i > -1 ){
+      taglist.splice(i,1);
+    }
     $(this).parent("span").fadeOut(100);
 
   });
+
+  $("#add_project").on("click", function() {
+    $("#project_details").append('    <div class="form-item"> \
+      <label for="project"></label> \
+      <input type="text" name="project" required="required" placeholder="Project Name" autocomplete="off"></input>\
+    </div>\
+    <div class="form-item">\
+      <label for="desc"></label>\
+      <input type="text" name="desc" required="required" placeholder="Project Description" autocomplete="off"></input>\
+    </div>\
+    <div class="form-item">\
+      <label for="gitlink"></label>\
+      <input type="text" name="gitlink" required="required" placeholder="Github Project Link" autocomplete="off"></input>\
+    </div>\
+    <div class="form-item">\
+      <label for="communication"></label>\
+      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="off"></input>\
+    </div>\
+<div class="form-item">\
+    <label for="tag-typer">\
+  <div id="tags">\
+    <!--<span class="tag"><span class="close">&times;</span>such tage</span>\
+    <span class="tag"><span class="close">&times;</span>so color</span>\
+    <span class="tag"><span class="close">&times;</span>many type</span>-->\
+    <span class="tag"><span class="close">&times;</span>Python </span>\
+    <span class="tag"><span class="close">&times;</span>Scraping </span>\
+    <input id="tag-typer" type="text" placeholder="Add tags ..."/>\
+  </div>\
+  </label>\
+    </div>');
+  })
 
 });
 
@@ -360,14 +401,21 @@ function send(form){
       console.log(request.content);
       if (request.readyState === 4) {
             if (request.status === 200) {
-            		$(".modal-title").html("Registration Successful");
-            		$("#reg_msg").html("You have been successfully registered as a mentor.");
-            		$('#myModal').modal('show');
+                $(".modal-title").html("Registration Successful");
+                $("#reg_msg").html("Thank you, you have been successfully registered as a mentor.");
+                $("#redir-msg").html("You are being redirected to the home page...");
+                $('#myModal').modal('show');
+                $("#redir-anim").show();
+
+                window.setTimeout(function() {
+                  window.location.href = "/";
+                }, 5000);
 
                 } else {
-                	$(".modal-title").html("Registration Failed");
-            		$("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
-            		$('#myModal').modal('show');
+                $(".modal-footer").show();
+                $(".modal-title").html("Registration Failed");
+                $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
+                $('#myModal').modal('show');
                 }
             }
         };

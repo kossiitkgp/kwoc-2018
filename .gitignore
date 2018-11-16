@@ -111,3 +111,5 @@ secrets/*
 
 .vscode
 .swp
+tag_scrapper/.idea/
+tag_scrapper/topic_dict.json
