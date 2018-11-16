@@ -29,5 +29,10 @@ def mentor_form():
     return render_template('mentor_form.html')
 
 
+@app.route('/mentor')
+def redirect():
+    return redirect('/mentor', 304)
+
+
 if __name__ == '__main__' and "RUNNING_PROD" not in os.environ:
     app.run(host='0.0.0.0', port="5000")
