@@ -1,7 +1,9 @@
+import os
 import requests as rq
 
-CLIENT_ID = "CLIENT ID"
-CLIENT_SECRET = "CLIENT SECRET"
+
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 # Call back URL = 127.0.0.1:5000/token
 
 def ret_auth_url():
