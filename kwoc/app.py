@@ -4,14 +4,17 @@ import csv
 import sys
 import os
 import json
-from flask import render_template, redirect, Markup
+import requests
+import ast
+from flask import render_template, redirect, Markup, request, session
 import markdown
-from kwoc import config
+from kwoc import config, oauth
 
 sys.path.append("kwoc")
 
 app, sess = config.create_app()
 sess.init_app(app)
+
 
 # Load stats.json file
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -47,6 +50,7 @@ stats_dict = non_zero_contributions
 # Define routes
 @app.route("/")
 def main():
+    
     return render_template('index.html')
 
 
@@ -207,6 +211,7 @@ def summit_talkid(talk_id):
     else:
         return redirect('/summit', code=302)
 
+
 @app.route("/dashboard")
 def dashboard():
     # print('HI')
@@ -216,6 +221,53 @@ def dashboard():
     else:
         return redirect('/stats', code=302)
     return render_template('stats.html')
+
+
+@app.route("/auth/")
+def auth():
+    
+    return redirect(oauth.ret_auth_url())
+
+stud_json = root_dir + '/gh_login/gh_login_student.json'
+studcsv = root_dir + '/gh_login/student.csv'
+
+
+@app.route("/token")
+def token():
+    code=request.args.get('code')
+    access_token = oauth.ret_token(code)
+    if access_token == -1:
+        # Add Error Handling
+        return redirect("/")
+    session['access_token'] = access_token
+    session['code'] = code
+    print(access_token)
+    data = requests.get("https://api.github.com/user?access_token={}".format(access_token))
+    dict_data = data.json()
+    session['data'] = dict_data
+    session['user'] = dict_data['login']
+
+    dict_val = dict()
+    dict_val['id'] = dict_data['login']
+    dict_val['ava_id'] = dict_data['avatar_url']
+
+    with open(studcsv, 'r') as file_csv:
+    	raw_header = csv.reader(file_csv)
+    	
+    	for row in raw_header:
+    		if dict_val['id'] == row[2]:
+
+    			dict_val['college'] = row[3]
+    with open(stud_json,'a') as stdjs:
+
+    	
+    	json.dump(dict_val, stdjs)
+
+
+    	
+
+    # user = githubhandle, accesstoken = access_token
+    return redirect("/")
 
 # # Lines below should not be needed for Python 3
 # from imp import reload
@@ -228,4 +280,6 @@ def dashboard():
 
 
 if __name__ == '__main__' and "RUNNING_PROD" not in os.environ:
-    app.run(host='0.0.0.0')
+	
+	app.run(host='0.0.0.0')
+
