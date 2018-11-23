@@ -265,6 +265,14 @@ body {
 
 /*//////////////////////////////////////////////////////////////////
 [ L-Text >= 26 ]*/
+/*---------------------------------------------*/
+.l0-txt1 {
+  font-family: Lato-Bold;
+  font-size: 50px;
+  line-height: 1;
+  color: #fff;
+}
+
 .l1-txt1 {
   font-family: Poppins-Bold;
   font-size: 50px;
@@ -281,6 +289,14 @@ body {
   color: #fff;
 }
 
+/*---------------------------------------------*/
+.l3-txt1 {
+  font-family: Lato-Bold;
+  font-size: 30px;
+  line-height: 1;
+  color: #fff;
+}
+
 
 /*==================================================================
    SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE
@@ -293,8 +309,8 @@ body {
 }
 
 .size2 {
-  width: 155px;
-  height: 155px;
+  width: 122px;
+  height: 122px;
 }
 
 .size3 {
