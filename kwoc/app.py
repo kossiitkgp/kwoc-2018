@@ -6,7 +6,7 @@ import os
 import json
 import requests
 import ast
-from flask import render_template, redirect, Markup, request, session
+from flask import render_template, redirect, Markup, request, session,g
 import markdown
 from kwoc import config, oauth
 
@@ -51,6 +51,11 @@ stats_dict = non_zero_contributions
 @app.route("/")
 def main():
     
+    if session.get('user'):
+        g.ghname = session['user']
+
+    else:
+        g.ghname = "Login"
     return render_template('index.html')
 
 
@@ -58,7 +63,11 @@ def main():
 def stats():
     # for key, value in stats_dict.items(): 
     #     print(key, value)
-    return render_template('stats.html', stats=stats_dict)
+    if session.get('user'):
+        ghname = session['user']
+    else:
+        ghname = "Login"
+    return render_template('stats.html', stats=stats_dict, ghname=ghname)
 
 
 @app.route('/stats/<git_handle>')
@@ -82,7 +91,13 @@ def faq():
 
 @app.route("/testimonials")
 def testimonials():
-    return render_template('testimonials.html')
+
+    if session.get('user'):
+        ghname = session['user']
+    else:
+        ghname = "Login"
+
+    return render_template('testimonials.html',ghname=ghname)
 
 
 @app.route("/mentor_form")
@@ -99,7 +114,11 @@ def student_form():
 
 @app.route("/projects")
 def projects():
-    return render_template('projects.html')
+    if session.get('user'):
+        ghname = session['user']
+    else:
+        ghname = "Login"
+    return render_template('projects.html',ghname=ghname)
 
 
 @app.route("/profile")
@@ -241,7 +260,7 @@ def token():
         return redirect("/")
     session['access_token'] = access_token
     session['code'] = code
-    print(access_token)
+    
     data = requests.get("https://api.github.com/user?access_token={}".format(access_token))
     dict_data = data.json()
     session['data'] = dict_data
