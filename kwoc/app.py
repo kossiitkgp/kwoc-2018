@@ -286,7 +286,7 @@ def token():
     	
 
     # user = githubhandle, accesstoken = access_token
-    return redirect("/")
+    return redirect("/dashboard")
 
 # # Lines below should not be needed for Python 3
 # from imp import reload
