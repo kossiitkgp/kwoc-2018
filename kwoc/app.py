@@ -50,10 +50,10 @@ stats_dict = non_zero_contributions
 # Define routes
 @app.route("/")
 def main():
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     return render_template('index.html')
 
 
@@ -61,19 +61,19 @@ def main():
 def stats():
     # for key, value in stats_dict.items(): 
     #     print(key, value)
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
 
 
 @app.route('/stats/<git_handle>')
 def user_stats(git_handle):
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
 
     git_handle = git_handle.lower()
     if git_handle in stats_dict:
@@ -89,19 +89,19 @@ def manuals():
 
 @app.route("/faq")
 def faq():
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     return render_template('faq.html')
 
 
 @app.route("/testimonials")
 def testimonials():
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     return render_template('testimonials.html',ghname=g.ghname)
 
 
@@ -119,19 +119,19 @@ def student_form():
 
 @app.route("/projects")
 def projects():
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     return render_template('projects.html',ghname=g.ghname)
 
 
 @app.route("/profile")
 def profile():
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     return render_template('profile.html')
 
 
@@ -242,12 +242,12 @@ def summit_talkid(talk_id):
 
 @app.route("/dashboard")
 def dashboard():
-    if session['user'] is None:
+    if session.get('user') is None:
         g.ghname = "Login"
     else:
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     # print('HI')
-    git_handle = session['user']
+    git_handle = session.get('user')
     if git_handle is not None and git_handle in stats_dict:
         return render_template('dashboard.html', **stats_dict[git_handle])
     else:
@@ -281,7 +281,7 @@ def token():
     session['data'] = dict_data
     session['user'] = dict_data['login']
     if session.get('user'):
-        g.ghname = session['user']
+        g.ghname = session.get('user')
     else:
         g.ghname = "Login"
 
