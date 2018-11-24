@@ -65,6 +65,7 @@ def stats():
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
+
     return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
 
 
@@ -89,6 +90,7 @@ def manuals():
 
 @app.route("/faq")
 def faq():
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
@@ -98,10 +100,12 @@ def faq():
 
 @app.route("/testimonials")
 def testimonials():
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
+
     return render_template('testimonials.html',ghname=g.ghname)
 
 
@@ -119,15 +123,18 @@ def student_form():
 
 @app.route("/projects")
 def projects():
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
+
     return render_template('projects.html',ghname=g.ghname)
 
 
 @app.route("/profile")
 def profile():
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
@@ -242,6 +249,7 @@ def summit_talkid(talk_id):
 
 @app.route("/dashboard")
 def dashboard():
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
@@ -317,6 +325,7 @@ def token():
 def logout():
     session['user'] = None
     g.ghname = "Login"
+
     return redirect(request.referrer)
 
 # # Lines below should not be needed for Python 3
