@@ -288,19 +288,26 @@ def token():
     dict_val = dict()
     dict_val['id'] = dict_data['login']
     dict_val['ava_id'] = dict_data['avatar_url']
+    dict_val['token'] = access_token
 
     with open(studcsv, 'r') as file_csv:
-    	raw_header = csv.reader(file_csv)
-    	
-    	for row in raw_header:
-    		if dict_val['id'] == row[2]:
+        raw_header = csv.reader(file_csv)
+        for row in raw_header:
+            if dict_val['id'] == row[2]:
+                dict_val['college'] = row[3]
+    # with open(stud_json,'w+') as stdjs:
+    # 	json
+    # 	json.dump(dict_val, stdjs)
+    try:
+        with open(stud_json, "r") as stud_file:
+            stud_dict = json.load(stud_file)
+    except (FileNotFoundError, FileExistsError) as err:
+        # print(err)
+        stud_dict = dict()
 
-    			dict_val['college'] = row[3]
-    with open(stud_json,'a') as stdjs:
-    	json.dump(dict_val, stdjs)
-
-
-    	
+    stud_dict[dict_val['id']] = dict_val
+    with open(stud_json, "w") as stud_file:
+        json.dump(stud_dict, stud_file)
 
     # user = githubhandle, accesstoken = access_token
     return redirect("/dashboard")
