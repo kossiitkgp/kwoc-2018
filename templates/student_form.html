@@ -150,7 +150,7 @@ form {
   <div style="display: flex; justify-content: center;">
     <h4>Please also register on <a href="http://ktj.in/">Kshitij website</a> otherwise you wouldn't be eligible for a certificate.</h4>
   </div>
-  <form id="form" onsubmit="event.preventDefault(); send(form);">
+  <form  action="{{url_for('reg')}}" method="post">
     <div class="form-item">
       <label for="name"></label>
       <input type="text" name="name" required="required" placeholder="Name" autocomplete="off"></input>
