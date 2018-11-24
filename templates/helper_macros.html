@@ -162,23 +162,24 @@
                                     <a href="#" target="_blank">Projects</a>
                                 </li> -->
                                 <!-- end menu item -->
-                                <!-- menu item -->
+
+				<!-- menu item -->
                                 <li class="dropdown panel">
-                                    <a href="{{ url_for('stats') }}" target="_blank">Statistics</a>
+                                    <a href="/#timeline">Timeline</a>
                                 </li>
                                 <!-- end menu item -->
 
 				<!-- menu item -->
                                 <li class="dropdown panel">
-                                    <a href="#timeline">Timeline</a>
+                                    <a href="/#resources">Resources</a>
                                 </li>
                                 <!-- end menu item -->
 
-				<!-- menu item -->
-                                <li class="dropdown panel">
-                                    <a href="#resources">Resources</a>
-                                </li>
-                                <!-- end menu item -->
+{#                                <!-- menu item -->#}
+{#                                <li class="dropdown panel">#}
+{#                                    <a href="{{ url_for('stats') }}" target="_blank">Statistics</a>#}
+{#                                </li>#}
+{#                                <!-- end menu item -->#}
 
                                 <!-- menu item -->
                                 <!-- end menu item -->
@@ -190,15 +191,27 @@
                                     <a href="{{ url_for('projects') }}">Projects</a>
                                 </li>
 
-                                <li class="dropdown panel">
-                                    <a href="/summit">Summit</a>
-                                </li>
-
-                                <li class="dropdown panel">
-                                    <a href="/auth/">
-                                        <span class="fa fa-github"></span> {{g.ghname}}
+{#                                <li class="dropdown panel">#}
+{#                                    <a href="/summit">Summit</a>#}
+{#                                </li>#}
+                                {% if g.ghname != "Login" %}
+                                    <li class="dropdown panel">
+                                    <a href="/dashboard">
+                                        <span></span> Dashboard
                                     </a>
-                                </li>  
+                                    </li>
+                                    <li class="dropdown panel">
+                                    <a href="/logout">
+                                        <span class="fa fa-github"></span> Logout
+                                    </a>
+                                    </li>
+                                {% else %}
+                                    <li class="dropdown panel">
+                                    <a href="/auth/">
+                                        <span class="fa fa-github"></span> Login
+                                    </a>
+                                    </li>
+                                {% endif %}
 
                             </ul>
                         </div>
