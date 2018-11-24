@@ -309,7 +309,7 @@ def token():
     try:
         with open(stud_json, "r") as stud_file:
             stud_dict = json.load(stud_file)
-    except (FileNotFoundError, FileExistsError) as err:
+    except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
         # print(err)
         stud_dict = dict()
 
