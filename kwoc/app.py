@@ -22,6 +22,7 @@ sess.init_app(app)
 dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
+colleges_json = root_dir + '/gh_scraper/colleges.json'
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
@@ -120,7 +121,11 @@ def mentor_form():
 @app.route("/student_form")
 def student_form():
     # return "Registrations have now been closed. See you next year !"
-    return render_template('student_form.html')
+    with open(colleges_json, 'r') as f:
+        data = json.load(f)
+        colleges = list(data.values())
+
+    return render_template('student_form.html', colleges=colleges)
 
 
 @app.route("/projects")
