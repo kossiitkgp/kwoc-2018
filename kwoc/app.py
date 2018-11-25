@@ -250,6 +250,9 @@ def summit_talkid(talk_id):
 @app.route("/dashboard")
 def dashboard():
 
+    if request.referrer == None:
+        return redirect("/")
+    
     if session.get('user') is None:
         g.ghname = "Login"
     else:
@@ -264,6 +267,10 @@ def dashboard():
 
 @app.route("/auth/")
 def auth():
+
+    if request.referrer == None:
+        return redirect("/")
+
     if session.get('user') is None:
         return redirect(oauth.ret_auth_url())
     else:
@@ -276,6 +283,10 @@ studcsv = root_dir + '/gh_login/student.csv'
 
 @app.route("/token")
 def token():
+
+    if request.referrer == None:
+        return redirect("/")
+
     code=request.args.get('code')
     access_token = oauth.ret_token(code)
     if access_token == -1:
@@ -323,6 +334,10 @@ def token():
 
 @app.route('/logout')
 def logout():
+
+    if request.referrer == None:
+        return redirect("/")
+
     session['user'] = None
     g.ghname = "Login"
 
