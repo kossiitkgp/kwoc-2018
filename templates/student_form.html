@@ -153,15 +153,15 @@ form {
   <form  action="{{url_for('reg')}}" method="post">
     <div class="form-item">
       <label for="name"></label>
-      <input type="text" name="name" required="required" placeholder="Name" autocomplete="off"></input>
+      <input type="text" name="name" required="required" placeholder="Name" autocomplete="off" value="{{data.name}}"></input>
     </div>
     <div class="form-item">
       <label for="email"></label>
-      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="off"></input>
+      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="off" value="{{data.email}}"></input>
     </div>
     <div class="form-item">
       <label for="github"></label>
-      <input type="text" name="gitlink" required="required" placeholder="Github username" autocomplete="off"></input>
+      <input type="text" name="gitlink" required="required" placeholder="Github username" autocomplete="off" value="{{data.id}}"></input>
     </div>
     <div class="form-item">
       <label for="college"></label>

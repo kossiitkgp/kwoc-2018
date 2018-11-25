@@ -278,6 +278,9 @@ studcsv = root_dir + '/gh_login/student.csv'
 @app.route('/student_registration', methods=['POST','GET'])
 def reg():
 
+    dict_val = session['dict_val']
+    stud_dict = session['stud_dict']
+
     if request.method == 'POST':
         dict_stud_csv = dict()
         dict_stud_csv['name'] = request.form['name']
@@ -295,8 +298,7 @@ def reg():
             writer = csv.DictWriter(file_csv, fieldnames=fields)
             writer.writerows(dict_stud_csv_lst)
 
-        dict_val = session['dict_val']
-        stud_dict = session['stud_dict']
+        
 
         with open(studcsv, 'r') as file_csv:
             raw_header = csv.reader(file_csv)
@@ -313,7 +315,7 @@ def reg():
 
 
     elif request.method == 'GET':
-        return redirect('student_form')
+        return render_template('student_form.html', data=dict_val)
 
 @app.route("/token")
 def token():
@@ -345,6 +347,8 @@ def token():
     dict_val['id'] = dict_data['login']
     dict_val['ava_id'] = dict_data['avatar_url']
     dict_val['token'] = access_token
+    dict_val['name'] = dict_data['name']
+    dict_val['email'] = dict_data['email']
     session['dict_val'] = dict_val
 
     # Check if the id is registered or not
