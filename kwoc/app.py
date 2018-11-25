@@ -6,6 +6,8 @@ import os
 import json
 import requests
 import ast
+import datetime
+import time
 from flask import render_template, redirect, Markup, request, session,g
 import markdown
 from kwoc import config, oauth
@@ -277,6 +279,47 @@ def auth():
 stud_json = root_dir + '/gh_login/gh_login_student.json'
 studcsv = root_dir + '/gh_login/student.csv'
 
+@app.route('/student_registration', methods=['POST','GET'])
+def reg():
+
+    dict_val = session['dict_val']
+    stud_dict = session['stud_dict']
+
+    if request.method == 'POST':
+        dict_stud_csv = dict()
+        dict_stud_csv['name'] = request.form['name']
+        dict_stud_csv['email'] = request.form['email']
+        dict_stud_csv['gitlink'] = request.form['gitlink']
+        dict_stud_csv['college'] = request.form['college']
+        dict_stud_csv['year'] = request.form['year']
+        dict_stud_csv['how'] = request.form['how']
+        ts = time.time()
+        dict_stud_csv['Timestamp'] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        dict_stud_csv_lst = [dict_stud_csv]
+        
+        with open(studcsv, 'a+') as file_csv:
+            fields = ['name','email','gitlink','college','year','how','Timestamp']
+            writer = csv.DictWriter(file_csv, fieldnames=fields)
+            writer.writerows(dict_stud_csv_lst)
+
+        
+
+        with open(studcsv, 'r') as file_csv:
+            raw_header = csv.reader(file_csv)
+            for row in raw_header:
+                #Please make sure that the csv file contains the header atleast
+                if dict_val['id'] == row[2]:
+                    dict_val['college'] = row[3]
+
+        stud_dict[dict_val['id']] = dict_val
+        with open(stud_json, "w+") as stud_file:
+            json.dump(stud_dict, stud_file)
+
+        return(redirect('/dashboard'))
+
+
+    elif request.method == 'GET':
+        return render_template('student_form.html', data=dict_val)
 
 @app.route("/token")
 def token():
@@ -284,11 +327,17 @@ def token():
     if request.referrer == None:
         return redirect("/")
 
+
+	# Part getting the access_token and filling the data in the session object
+	#-------------------------------------------------------------------------
+
     code=request.args.get('code')
     access_token = oauth.ret_token(code)
+    
     if access_token == -1:
         # Add Error Handling
         return redirect("/")
+
     session['access_token'] = access_token
     session['code'] = code
     
@@ -296,37 +345,56 @@ def token():
     dict_data = data.json()
     session['data'] = dict_data
     session['user'] = dict_data['login']
+
     if session.get('user'):
         g.ghname = session.get('user')
     else:
         g.ghname = "Login"
 
+    # We set the values in the dictionary 
     dict_val = dict()
     dict_val['id'] = dict_data['login']
     dict_val['ava_id'] = dict_data['avatar_url']
     dict_val['token'] = access_token
+    dict_val['name'] = dict_data['name']
+    dict_val['email'] = dict_data['email']
+    session['dict_val'] = dict_val
 
-    with open(studcsv, 'r') as file_csv:
-        raw_header = csv.reader(file_csv)
-        for row in raw_header:
-            if dict_val['id'] == row[2]:
-                dict_val['college'] = row[3]
-    # with open(stud_json,'w+') as stdjs:
-    # 	json
-    # 	json.dump(dict_val, stdjs)
+    # Check if the id is registered or not
+    #-------------------------------------
     try:
         with open(stud_json, "r") as stud_file:
             stud_dict = json.load(stud_file)
     except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
         # print(err)
         stud_dict = dict()
+    present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+    for val in stud_dict:
+    	if dict_val['id'] in val:
+    		present_flag=True
 
-    stud_dict[dict_val['id']] = dict_val
-    with open(stud_json, "w") as stud_file:
-        json.dump(stud_dict, stud_file)
+    
+    session['stud_dict'] = stud_dict
+    # If the user is not registered
+    # -----------------------------
+    if present_flag is False:
+
+    	return redirect("/student_registration")
+    	
+    # If the user is registered
+    # -------------------------
+    else:
+        return redirect("/dashboard")
+    
+
+    # First we get the user data from github oauth
+    # Then we check if the user id is present in stud_json, containing the list of registered students
+    # If present, then we skip the addition and redirect them to dashboard
+    # If not present, then we ask them to fill the details in registered form
+    	# We also update the stats and add them in the stud_json and stud_csv, which co	
 
     # user = githubhandle, accesstoken = access_token
-    return redirect("/dashboard")
+    
 
 
 @app.route('/logout')
