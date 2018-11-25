@@ -233,25 +233,25 @@ with open(talks_csv, 'r') as csv_file:
         }
 
 
-@app.route("/summit")
-def summit():
-    return render_template('summit.html',
-                           schedule=schedule,
-                           talks=talks)
+# @app.route("/summit")
+# def summit():
+#     return render_template('summit.html',
+#                            schedule=schedule,
+#                            talks=talks)
 
 
-@app.route("/summit/register")
-def summit_register():
-    return render_template('summit_register_form.html')
+# @app.route("/summit/register")
+# def summit_register():
+#     return render_template('summit_register_form.html')
 
 
-@app.route("/summit/<talk_id>")
-def summit_talkid(talk_id):
-    if talk_id in talks:
-        return render_template('summit_talkid.html',
-                               talk=talks[talk_id])
-    else:
-        return redirect('/summit', code=302)
+# @app.route("/summit/<talk_id>")
+# def summit_talkid(talk_id):
+#     if talk_id in talks:
+#         return render_template('summit_talkid.html',
+#                                talk=talks[talk_id])
+#     else:
+#         return redirect('/summit', code=302)
 
 
 @app.route("/dashboard")
@@ -271,6 +271,10 @@ def dashboard():
 
 @app.route("/auth/")
 def auth():
+
+    if request.referrer == None:
+        return redirect("/")
+
     if session.get('user') is None:
         return redirect(oauth.ret_auth_url())
     else:
@@ -282,6 +286,9 @@ studcsv = root_dir + '/gh_login/student.csv'
 
 @app.route('/student_registration', methods=['POST','GET'])
 def reg():
+
+    dict_val = session['dict_val']
+    stud_dict = session['stud_dict']
 
     if request.method == 'POST':
         dict_stud_csv = dict()
@@ -300,8 +307,7 @@ def reg():
             writer = csv.DictWriter(file_csv, fieldnames=fields)
             writer.writerows(dict_stud_csv_lst)
 
-        dict_val = session['dict_val']
-        stud_dict = session['stud_dict']
+        
 
         with open(studcsv, 'r') as file_csv:
             raw_header = csv.reader(file_csv)
@@ -318,13 +324,18 @@ def reg():
 
 
     elif request.method == 'GET':
-        return redirect('student_form')
+        return render_template('student_form.html', data=dict_val)
 
 @app.route("/token")
 def token():
 
+    if request.referrer == None:
+        return redirect("/")
+
+
 	# Part getting the access_token and filling the data in the session object
 	#-------------------------------------------------------------------------
+
     code=request.args.get('code')
     access_token = oauth.ret_token(code)
     
@@ -350,6 +361,8 @@ def token():
     dict_val['id'] = dict_data['login']
     dict_val['ava_id'] = dict_data['avatar_url']
     dict_val['token'] = access_token
+    dict_val['name'] = dict_data['name']
+    dict_val['email'] = dict_data['email']
     session['dict_val'] = dict_val
 
     # Check if the id is registered or not
@@ -391,6 +404,10 @@ def token():
 
 @app.route('/logout')
 def logout():
+
+    if request.referrer == None:
+        return redirect("/")
+
     session['user'] = None
     g.ghname = "Login"
 
