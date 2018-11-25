@@ -98,7 +98,7 @@ ENV/
 # PyCharm
 .idea/*
 
-**/..DS_Store
+**/.DS_Store
 
 # Ignore everything inside stats except few files
 gh_scraper/stats/*
