@@ -165,7 +165,12 @@ form {
     </div>
     <div class="form-item">
       <label for="college"></label>
-      <input type="text" name="college" required="required" placeholder="College" autocomplete="off"></input>
+      <input list="college" name="college" required="required" placeholder="College">
+      <datalist id="college">
+      {% for college in colleges %}
+        <option value="{{ college }}">
+      {% endfor %}
+      </datalist>
     </div>
     <div class="form-item">
       <label for="year"></label>
