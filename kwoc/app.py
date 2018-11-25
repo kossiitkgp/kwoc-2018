@@ -228,25 +228,25 @@ with open(talks_csv, 'r') as csv_file:
         }
 
 
-@app.route("/summit")
-def summit():
-    return render_template('summit.html',
-                           schedule=schedule,
-                           talks=talks)
+# @app.route("/summit")
+# def summit():
+#     return render_template('summit.html',
+#                            schedule=schedule,
+#                            talks=talks)
 
 
-@app.route("/summit/register")
-def summit_register():
-    return render_template('summit_register_form.html')
+# @app.route("/summit/register")
+# def summit_register():
+#     return render_template('summit_register_form.html')
 
 
-@app.route("/summit/<talk_id>")
-def summit_talkid(talk_id):
-    if talk_id in talks:
-        return render_template('summit_talkid.html',
-                               talk=talks[talk_id])
-    else:
-        return redirect('/summit', code=302)
+# @app.route("/summit/<talk_id>")
+# def summit_talkid(talk_id):
+#     if talk_id in talks:
+#         return render_template('summit_talkid.html',
+#                                talk=talks[talk_id])
+#     else:
+#         return redirect('/summit', code=302)
 
 
 @app.route("/dashboard")
@@ -266,6 +266,10 @@ def dashboard():
 
 @app.route("/auth/")
 def auth():
+
+    if request.referrer == None:
+        return redirect("/")
+
     if session.get('user') is None:
         return redirect(oauth.ret_auth_url())
     else:
@@ -320,8 +324,13 @@ def reg():
 @app.route("/token")
 def token():
 
+    if request.referrer == None:
+        return redirect("/")
+
+
 	# Part getting the access_token and filling the data in the session object
 	#-------------------------------------------------------------------------
+
     code=request.args.get('code')
     access_token = oauth.ret_token(code)
     
@@ -390,6 +399,10 @@ def token():
 
 @app.route('/logout')
 def logout():
+
+    if request.referrer == None:
+        return redirect("/")
+
     session['user'] = None
     g.ghname = "Login"
 
