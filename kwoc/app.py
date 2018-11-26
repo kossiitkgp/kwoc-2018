@@ -124,14 +124,14 @@ def mentor_form():
     return render_template('mentor_form.html')
 
 
-# @app.route("/student_form")
-# def student_form():
-#     # return "Registrations have now been closed. See you next year !"
-#     with open(colleges_json, 'r') as f:
-#         data = json.load(f)
-#         colleges = list(data.values())
-#     print(colleges)
-#     return render_template('student_form.html', colleges=colleges)
+@app.route("/student_form")
+def student_form():
+    # return "Registrations have now been closed. See you next year !"
+    with open(colleges_json, 'r') as f:
+        data = json.load(f)
+        colleges = list(data.values())
+    #print(colleges)
+    return render_template('student_form.html', colleges=colleges)
 
 
 @app.route("/projects")
@@ -350,7 +350,7 @@ def reg():
         with open(colleges_json, 'r') as f:
             data = json.load(f)
             colleges = list(data.values())
-        print(colleges)
+        #print(colleges)
         return render_template('student_form.html', data=dict_val, colleges=colleges)
 
 @app.route("/token")
@@ -362,6 +362,7 @@ def token():
 
 	# Part getting the access_token and filling the data in the session object
 	#-------------------------------------------------------------------------
+    #print("asyfghfijsdfkshdjkthsdkfjgfdkjhgkjhfkjgkjghdfkjh")
 
     code=request.args.get('code')
     access_token = oauth.ret_token(code)
