@@ -452,7 +452,7 @@ def logout():
     session['user'] = None
     g.ghname = "Login"
 
-    return redirect(request.referrer)
+    return redirect('/', code=302)
 
 # # Lines below should not be needed for Python 3
 # from imp import reload
