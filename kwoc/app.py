@@ -72,18 +72,20 @@ def stats():
     return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
 
 
-@app.route('/stats/<git_handle>')
-def user_stats(git_handle):
-    if session.get('user') is None:
-        g.ghname = "Login"
-    else:
-        g.ghname = session.get('user')
+# TODO: Activate when coding period begins
 
-    git_handle = git_handle.lower()
-    if git_handle in stats_dict:
-        return render_template('profile.html', **stats_dict[git_handle])
-    else:
-        return redirect('/stats', code=302)
+# @app.route('/stats/<git_handle>')
+# def user_stats(git_handle):
+#     if session.get('user') is None:
+#         g.ghname = "Login"
+#     else:
+#         g.ghname = session.get('user')
+#
+#     git_handle = git_dashboardhandle.lower()
+#     if git_handle in stats_dict:
+#         return render_template('profile.html', **stats_dict[git_handle])
+#     else:
+#         return redirect('/stats', code=302)
 
 
 @app.route("/manuals")
@@ -263,8 +265,12 @@ def dashboard():
         g.ghname = session.get('user')
     # print('HI')
     git_handle = session.get('user')
-    if git_handle is not None and git_handle in stats_dict:
-        return render_template('dashboard.html', **stats_dict[git_handle])
+    # if git_handle is not None and git_handle in stats_dict:
+    #     return render_template('dashboard.html', **stats_dict[git_handle])
+    with open(stud_json, 'r') as f:
+        stud_dict = json.load(f)
+    if git_handle is not None and git_handle in stud_dict:
+        return render_template('dashboard.html', **stud_dict[git_handle])
     else:
         return redirect('/stats', code=302)
 
