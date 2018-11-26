@@ -41,12 +41,17 @@
                                       </div>
                                       <div style="display: flex; justify-content: center;">
 {#                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('stats') }}" target="_blank">View Statistics</a>#}
+<<<<<<< HEAD
                                             {% if g.ghname != "Login" %}                                          
                                             <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('student_form') }}" target="_blank">Register</a>  <!-- TODO: Add link for registration -->
                                             {% else %}
                                             <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="/authAndRegister/" target="_blank">Login with <span class="fa fa-github"></span> GitHub to Register</a>  <!-- TODO: Add link for registration -->
                                             {% endif %}
                                            {# <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>#}
+=======
+                                          <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Register</a>  <!-- TODO: Add link for registration -->
+                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>
+>>>>>>> 0ad9ffd5a3e5ab84758ad46465d4ffb611f0df03
                                       </div>
                                     </div>
                                 </div>
