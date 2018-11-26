@@ -150,18 +150,18 @@ form {
   <div style="display: flex; justify-content: center;">
     <h4>To be eligible to get a certificate you'll have to register for <a href="http://ktj.in/">Kshitij</a>; keep checking your inbox for a prompt from us once the registrations open.</h4>
   </div>
-  <form  action="{{url_for('reg')}}" method="post">
+  <form id="form" onsubmit="alert('submitted'); event.preventDefault(); send();">
     <div class="form-item">
       <label for="name"></label>
-      <input type="text" name="name" required="required" placeholder="Name" autocomplete="off" value="{{data.name}}"></input>
+      <input type="text" name="name" required="required" placeholder="Name" autocomplete="off" value="{{data.name}}">
     </div>
     <div class="form-item">
       <label for="email"></label>
-      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="off" value="{{data.email}}"></input>
+      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="off" value="{{data.email}}">
     </div>
     <div class="form-item">
       <label for="github"></label>
-      <input type="text" name="gitlink" required="required" placeholder="Github username" autocomplete="off" value="{{data.id}}"></input>
+      <input type="text" name="gitlink" required="required" placeholder="Github username" autocomplete="off" value="{{data.id}}">
     </div>
     <div class="form-item">
       <label for="college"></label>
@@ -185,10 +185,10 @@ form {
     </div>
     <div class="form-item">
       <label for="info"></label>
-      <input type="text" name="how" required="required" placeholder="How did you come to know about KWoC ?" autocomplete="off"></input>
+      <input type="text" name="how" required="required" placeholder="How did you come to know about KWoC?" autocomplete="off">
     </div>
     <div class="button-panel">
-      <input class="button btn btn-info btn-lg" type="submit" value="Apply" title="Apply"></input>
+      <input class="button btn btn-info btn-lg" type="submit" value="Apply" title="Apply">
     </div>
     <div style="display: flex; justify-content: center;">
       <h4>Can't find your college? No worries. <a href="mailto:contact@kossiitkgp.in">Mail us</a> and we'll add it.</h4>
@@ -217,8 +217,9 @@ form {
     </div>
   </div>
     </body>
-    <script type="text/javascript">
+    <script>
       function send(form){
+          alert("Here");
       var request = new XMLHttpRequest();
       var data = new FormData(form);
       var url = "https://test-mail-dpd.herokuapp.com/update_student_sheet";
@@ -231,7 +232,7 @@ form {
                 $(".modal-title").html("Registration Successful");
                 $("#reg_msg").html("You have been successfully registered as a student.");
                 $('#myModal').modal('show');
-
+                $.post({{url_for('reg')}}, $("form").serialize())
                 } else {
                   $(".modal-title").html("Registration Failed");
                 $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
@@ -244,7 +245,7 @@ form {
       $(".modal-title").html("Processing");
       $("#reg_msg").html('<img src="/static/images/loader.gif"> </img>');
       $('#myModal').modal('toggle');
-      form.reset()
+      form.reset();
       return true;
 }
     </script>
