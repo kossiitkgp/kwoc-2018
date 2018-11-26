@@ -328,7 +328,7 @@ def reg():
         with open(colleges_json, 'r') as f:
             data = json.load(f)
             colleges = list(data.values())
-        print(colleges)
+        # print(colleges)
         return render_template('student_form.html', data=dict_val, colleges=colleges)
 
 @app.route("/token")
