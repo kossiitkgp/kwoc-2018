@@ -118,14 +118,14 @@ def mentor_form():
     return render_template('mentor_form.html')
 
 
-@app.route("/student_form")
-def student_form():
-    # return "Registrations have now been closed. See you next year !"
-    with open(colleges_json, 'r') as f:
-        data = json.load(f)
-        colleges = list(data.values())
-
-    return render_template('student_form.html', colleges=colleges)
+# @app.route("/student_form")
+# def student_form():
+#     # return "Registrations have now been closed. See you next year !"
+#     with open(colleges_json, 'r') as f:
+#         data = json.load(f)
+#         colleges = list(data.values())
+#     print(colleges)
+#     return render_template('student_form.html', colleges=colleges)
 
 
 @app.route("/projects")
@@ -284,6 +284,7 @@ def auth():
 stud_json = root_dir + '/gh_login/gh_login_student.json'
 studcsv = root_dir + '/gh_login/student.csv'
 
+
 @app.route('/student_registration', methods=['POST','GET'])
 def reg():
 
@@ -324,13 +325,17 @@ def reg():
 
 
     elif request.method == 'GET':
-        return render_template('student_form.html', data=dict_val)
+        with open(colleges_json, 'r') as f:
+            data = json.load(f)
+            colleges = list(data.values())
+        print(colleges)
+        return render_template('student_form.html', data=dict_val, colleges=colleges)
 
 @app.route("/token")
 def token():
 
-    if request.referrer == None:
-        return redirect("/")
+    # if request.referrer == None:
+    #     return redirect("/")
 
 
 	# Part getting the access_token and filling the data in the session object
