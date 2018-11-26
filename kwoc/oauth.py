@@ -14,7 +14,7 @@ def ret_auth_url():
     if len(SCOPES) > 1:
         for scope in SCOPES[1:]:
             url += '+' + scope
-    
+
     url += '&access_type=offline&response_type=code'
     return url
 

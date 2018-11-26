@@ -53,6 +53,12 @@ stats_dict = non_zero_contributions
 # Define routes
 @app.route("/")
 def main():
+    try: 
+        if is_registering == True :
+            is_registering = False
+            return render_template('student_form.html')
+    except:
+        is_registering = False
     if session.get('user') is None:
         g.ghname = "Login"
     else:
@@ -269,6 +275,22 @@ def dashboard():
         return redirect('/stats', code=302)
 
 
+
+@app.route("/authAndRegister/")
+def authAndRegister():
+    is_registering = True
+
+    if request.referrer == None:
+        return redirect("/")
+
+    if session.get('user') is None:
+        return redirect(oauth.ret_auth_url())
+    else:
+        is_registering = False
+        return redirect('/dashboard', code=302)
+
+
+
 @app.route("/auth/")
 def auth():
 
@@ -424,6 +446,6 @@ def logout():
 
 
 if __name__ == '__main__' and "RUNNING_PROD" not in os.environ:
-	
+
 	app.run(host='0.0.0.0')
 

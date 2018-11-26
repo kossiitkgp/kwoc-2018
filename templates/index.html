@@ -41,8 +41,12 @@
                                       </div>
                                       <div style="display: flex; justify-content: center;">
 {#                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('stats') }}" target="_blank">View Statistics</a>#}
-                                          <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('stats') }}" target="_blank">Register</a>  <!-- TODO: Add link for registration -->
-                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>
+                                            {% if g.ghname != "Login" %}                                          
+                                            <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('student_form') }}" target="_blank">Register</a>  <!-- TODO: Add link for registration -->
+                                            {% else %}
+                                            <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="/authAndRegister/" target="_blank">Login with <span class="fa fa-github"></span> GitHub to Register</a>  <!-- TODO: Add link for registration -->
+                                            {% endif %}
+                                           {# <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>#}
                                       </div>
                                     </div>
                                 </div>
@@ -440,10 +444,24 @@
 
               <div class="cd-timeline-content">
                 <h2>Accepting Student Applications</h2>
-                <p>Student's register and begin to look through selected projects to see what excites them!</p>
+                <p>Student's registration Begins!</p>
                 <span class="cd-date"><span class="cd-date-year">26th</span><span class="cd-date-month">Nov 2018</span></span>
               </div> <!-- cd-timeline-content -->
             </div> <!-- cd-timeline-block -->
+
+
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-img cd-picture">
+                  <span aria-hidden="true" class="fa fa-desktop"></span>
+                </div> <!-- cd-timeline-img -->
+  
+                <div class="cd-timeline-content">
+                    <h2>Projects Released</h2>
+                  <p>Projects Released! Students can go through what excites them and start bonding with mentors</p>
+                  <span class="cd-date"><span class="cd-date-year">1st</span><span class="cd-date-month">Dec 2018</span></span>
+                </div> <!-- cd-timeline-content -->
+              </div> <!-- cd-timeline-block -->
+  
 
             <div class="cd-timeline-block">
               <div class="cd-timeline-img cd-picture">
@@ -581,7 +599,13 @@
         <section id="new-project" class="new-project wow fadeIn">
             <div class="container">
                 <div class="row center-col text-center">
-                    <h5 class="wow fadeInDown">Registrations will begin soon, we are brewing stuff!</h5>
+                    <div style="display: flex; justify-content: center; ">
+                        {% if g.ghname != "Login" %}                                          
+                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom " style = "background-color: #4b4e53" href="{{ url_for('student_form') }}" target="_blank">Register</a>  <!-- TODO: Add link for registration -->
+                        {% else %}
+                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom " style = "background-color: #4b4e53" href="/authAndRegister/" target="_blank">Login with <span class="fa fa-github"></span> GitHub to register</a>  <!-- TODO: Add link for registration -->
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </section>
