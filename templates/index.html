@@ -41,7 +41,7 @@
                                       </div>
                                       <div style="display: flex; justify-content: center;">
 {#                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('stats') }}" target="_blank">View Statistics</a>#}
-                                          <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Register</a>  <!-- TODO: Add link for registration -->
+                                          <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Register</a>
                                         <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>
                                       </div>
                                     </div>
@@ -440,7 +440,7 @@
 
               <div class="cd-timeline-content">
                 <h2>Accepting Student Applications</h2>
-                <p>Student's register and begin to look through selected projects to see what excites them!</p>
+                <p>Student's register and gear up for the program.</p>
                 <span class="cd-date"><span class="cd-date-year">26th</span><span class="cd-date-month">Nov 2018</span></span>
               </div> <!-- cd-timeline-content -->
             </div> <!-- cd-timeline-block -->
@@ -449,6 +449,20 @@
               <div class="cd-timeline-img cd-picture">
                 <span aria-hidden="true" class="fa  fa-flag-o"></span>
               </div> <!-- cd-timeline-img -->
+
+
+                 <div class="cd-timeline-content">
+                <h2>Selected Projects Released</h2>
+                <p>List of selected projects is released and students can start bonding with mentors.</p>
+                <span class="cd-date"><span class="cd-date-year">1st</span><span class="cd-date-month">Dec 2018</span></span>
+              </div> <!-- cd-timeline-content -->
+            </div> <!-- cd-timeline-block -->
+
+                          <div class="cd-timeline-block">
+              <div class="cd-timeline-img cd-picture">
+                <span aria-hidden="true" class="fa  fa-flag-o"></span>
+              </div> <!-- cd-timeline-img -->
+
 
               <div class="cd-timeline-content">
                 <h2>KWoC Coding Period Begins</h2>
@@ -581,7 +595,8 @@
         <section id="new-project" class="new-project wow fadeIn">
             <div class="container">
                 <div class="row center-col text-center">
-                    <h5 class="wow fadeInDown">Registrations will begin soon, we are brewing stuff!</h5>
+                    <h5 class="wow fadeInDown">Registrations have begun; sign in with your Github accounts now!</h5>
+                    <a style="background-color: grey" class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Register</a>
                 </div>
             </div>
         </section>
