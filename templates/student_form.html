@@ -150,7 +150,7 @@ form {
   <div style="display: flex; justify-content: center;">
     <h4>To be eligible to get a certificate you'll have to register for <a href="http://ktj.in/">Kshitij</a>; keep checking your inbox for a prompt from us once the registrations open.</h4>
   </div>
-  <form id="form" onsubmit="alert('submitted'); event.preventDefault(); send();">
+  <form id="form" onsubmit="event.preventDefault(); send(form);">
     <div class="form-item">
       <label for="name"></label>
       <input type="text" name="name" required="required" placeholder="Name" autocomplete="off" value="{{data.name}}">
@@ -200,17 +200,17 @@ form {
     <div class="modal-dialog">
 
       <!-- Modal content-->
-      <div class="modal-content">
+      <div class="modal-content" align="center">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="reg_title"></h4>
+          <h4 class="modal-title" align="center" id="reg_title"></h4>
         </div>
         <div class="modal-body">
-          <p style="font-size:15px;" id="reg_msg"></p>
+          <p style="font-size:15px;" align="center" id="reg_msg"></p>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" align="center">
           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">You are successfully registered as a student.</button> -->
-	  <button type="button" class="btn btn-default" onclick="location.href='/projects';">See Projects</button>
+	  <button type="button" class="btn btn-default" style="alignment: center" onclick="location.href='/projects';">See Projects</button>
         </div>
       </div>
 
@@ -219,7 +219,7 @@ form {
     </body>
     <script>
       function send(form){
-          alert("Here");
+          {#alert("Here");#}
       var request = new XMLHttpRequest();
       var data = new FormData(form);
       var url = "https://test-mail-dpd.herokuapp.com/update_student_sheet";
@@ -229,10 +229,13 @@ form {
       console.log(request.content);
       if (request.readyState === 4) {
             if (request.status === 200) {
-                $(".modal-title").html("Registration Successful");
-                $("#reg_msg").html("You have been successfully registered as a student.");
+                $(".modal-title").html("Hurray!");
+                $("#reg_msg").html("You have been successfully registered as a student. <br/><br/>You'll be redirected to the dashboard now...");
                 $('#myModal').modal('show');
-                $.post({{url_for('reg')}}, $("form").serialize())
+                $.post("{{url_for('reg')}}", $("form").serialize());
+                window.setTimeout(function () {
+                    window.location.href = "/dashboard";
+                }, 5000);
                 } else {
                   $(".modal-title").html("Registration Failed");
                 $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
@@ -245,7 +248,7 @@ form {
       $(".modal-title").html("Processing");
       $("#reg_msg").html('<img src="/static/images/loader.gif"> </img>');
       $('#myModal').modal('toggle');
-      form.reset();
+      {#form.reset();#}
       return true;
 }
     </script>
