@@ -277,9 +277,32 @@ def auth():
 
     if session.get('user') is None:
         return redirect(oauth.ret_auth_url())
+   
     else:
-        return redirect('/dashboard', code=302)
 
+        # Check if the id is registered or not
+        #-------------------------------------
+        
+        try:
+            with open(stud_json, "r") as stud_file:
+                stud_dict = json.load(stud_file)
+        except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
+            # print(err)
+            stud_dict = dict()
+        present_flag = False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+        for val in stud_dict:
+            if session["dict_val"]['id'] in val:
+                present_flag=True
+
+        # If the user is not registered
+        # -----------------------------
+        if present_flag is False:
+            return redirect("/student_registration")
+            
+        # If the user is registered
+        # -------------------------
+        else:
+            return redirect("/dashboard")
 
 stud_json = root_dir + '/gh_login/gh_login_student.json'
 studcsv = root_dir + '/gh_login/student.csv'
@@ -329,7 +352,11 @@ def reg():
             data = json.load(f)
             colleges = list(data.values())
         # print(colleges)
-        return render_template('student_form.html', data=dict_val, colleges=colleges)
+        
+        temp_dict_val = dict_val
+        if temp_dict_val["email"] == None:
+            temp_dict_val["email"] = "Email ID"
+        return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
 
 @app.route("/token")
 def token():
