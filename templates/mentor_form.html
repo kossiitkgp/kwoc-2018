@@ -340,7 +340,7 @@ $(document).ready( function() {
      taglist.push(tag);
       if(tag.length > 0){
         $("<span class='tag' style='display:none'><span class='close'>&times;</span>"+tag+" </span>").insertBefore(this).fadeIn(100);
-        $(this).val("");
+       event.preventDefault() $(this).val("");
       }
     }
   });

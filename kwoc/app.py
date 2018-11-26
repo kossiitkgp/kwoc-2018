@@ -352,6 +352,7 @@ def reg():
             data = json.load(f)
             colleges = list(data.values())
         # print(colleges)
+        
         temp_dict_val = dict_val
         if temp_dict_val["email"] == None:
             temp_dict_val["email"] = "Email ID"
