@@ -41,8 +41,8 @@
                                       </div>
                                       <div style="display: flex; justify-content: center;">
                                         {% if g.ghname != "Login" %}
-                                        <h5 class="wow fadeInDown"></h5>
-                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View projects</a>
+                                        
+                                        <span><a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('dashboard') }}" target="_blank" >Welcome {{g.ghname}}</a></span>
                                         {% else %}
                                         <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Register as a Student</a>
                                         <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('mentor_form') }}" target="_blank">Register as a Mentor</a>
