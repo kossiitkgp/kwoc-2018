@@ -9,7 +9,7 @@ CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 
 def ret_auth_url():
     auth_url = "https://github.com/login/oauth/authorize"
-    SCOPES = ["user"]
+    SCOPES = ["read:user user:email"]
 
     url = auth_url + '?' + "client_id=" + CLIENT_ID + '&' + 'scope=' + SCOPES[0]
     if len(SCOPES) > 1:
