@@ -238,6 +238,29 @@
     margin-top: 3rem;
   }
 
+.tut-links li {
+	width: 100%;
+	/* display: inline-block; */
+}
+.tut-links a {
+	text-align: center;
+	display: inline-block;
+	padding: 10px 20px;
+	color: #fff;
+	font-weight: normal;
+	text-decoration: none;
+	font-size: 15px;
+	background: #26325c;
+	margin: 4px 4px;
+	border-radius: 5px;
+	text-transform: none;
+	width: 100%;
+}
+.tut-links a:hover{
+	background-color: #7D92C1;
+	color: #fff;
+}
+
 @media only screen and (max-width: 450px) {
 	.section1 .col2.last .col3 span {
 		font-size: 10px;
