@@ -327,8 +327,8 @@ studcsv = root_dir + '/gh_login/student.csv'
 @app.route('/student_registration', methods=['POST','GET'])
 def reg():
 
-    dict_val = session['dict_val']
-    stud_dict = session['stud_dict']
+    dict_val = session.get('dict_val')
+    stud_dict = session.get('stud_dict')
 
     if request.method == 'POST':
         dict_stud_csv = dict()
