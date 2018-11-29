@@ -370,8 +370,12 @@ def reg():
         # print(colleges)
         
         temp_dict_val = dict_val
-        if temp_dict_val["email"] == None:
-            temp_dict_val["email"] = "Email ID"
+        if not temp_dict_val["email"]:
+            temp_dict_val["email"] = ""
+
+        if not temp_dict_val["name"]:
+            temp_dict_val["name"] = ""
+
         return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
 
 @app.route("/token")
