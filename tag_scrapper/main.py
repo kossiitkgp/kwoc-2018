@@ -179,7 +179,7 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
             author, name = split(link)
             query_response = graph_query(author, name)
             topic_list = remove_dupes( flatten(query_response) )
-            print(topic_list)
+            # print(topic_list)
             topics_data[link] = topic_list
             print(f'done for {link}')
         except Exception as err:
