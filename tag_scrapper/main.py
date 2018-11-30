@@ -145,6 +145,16 @@ def read_links(path_to_csv, index):
             link_list.append(row[index])
     return link_list
 
+def remove_dupes(tags):
+  """
+  Remove case insensitive duplicates from a list
+  """
+	final_list = []
+	for tag in tags:
+		if not tag.lower() in [t.lower() for t in final_list]:
+			final_list.append(tag)
+	return final_list
+
 
 def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
     """
@@ -168,8 +178,8 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
         try:
             author, name = split(link)
             query_response = graph_query(author, name)
-            topic_list = flatten(query_response)
-            # print(topic_list)
+            topic_list = remove_dupes( flatten(query_response) )
+            print(topic_list)
             topics_data[link] = topic_list
             print(f'done for {link}')
         except Exception as err:
