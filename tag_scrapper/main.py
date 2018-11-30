@@ -146,9 +146,9 @@ def read_links(path_to_csv, index):
     return link_list
 
 def remove_dupes(tags):
-  """
-  Remove case insensitive duplicates from a list
-  """
+	"""
+	Remove case insensitive duplicates from a list
+	"""
 	final_list = []
 	for tag in tags:
 		if not tag.lower() in [t.lower() for t in final_list]:
@@ -157,20 +157,20 @@ def remove_dupes(tags):
 
 
 def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
-    """
-    driving function for scraping topics off a github repository and producing a json of the same
+	"""
+	driving function for scraping topics off a github repository and producing a json of the same
 
-    The data structure topics_data (the final list of links and topics) is a dictionary of the following type
-    {
-        "link1": [LIST OF TOPICS],
-        "link2": [LIST OF TOPICS]
-    }
+	The data structure topics_data (the final list of links and topics) is a dictionary of the following type
+	{
+		"link1": [LIST OF TOPICS],
+		"link2": [LIST OF TOPICS]
+	}
 
-    :param path_to_csv: path to the csv file containing the project details
-    :param index: index of the github url in the csv
-    :return:
-        True if successful for all, False otherwise
-    """
+	:param path_to_csv: path to the csv file containing the project details
+	:param index: index of the github url in the csv
+	:return:
+		True if successful for all, False otherwise
+	"""
     link_list = read_links(path_to_csv, index)
     topics_data = {}
     to_return = True
