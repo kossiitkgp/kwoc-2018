@@ -79,7 +79,7 @@ def graph_query(author, name):
     query = """
     {
       repository(owner: "%s", name: "%s") {
-        languages(first: 5) {
+        languages(first: 10) {
           nodes {
             name
           }
