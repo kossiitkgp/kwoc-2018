@@ -57,6 +57,16 @@ def graph_query(author, name):
         {
           "data": {
             "repository": {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "language1"
+                  },
+                  {
+                    "name": "language2"
+                  }
+                ]
+              }
               "repositoryTopics": {
                 "nodes": [
                   {
