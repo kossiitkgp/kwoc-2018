@@ -7,7 +7,7 @@ import requests
 dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-2])
 
-projects = open('repos.txt', 'r').read().split('\n')
+projects = open('/media/shreyas/DATA/kwoc/gh_scraper/stats/repos.txt', 'r').read().split('\n')
 projects.pop()
 
 token = open(root_dir + '/secrets/token.txt', 'r').read().split('\n')[0]
@@ -16,7 +16,7 @@ headers = {
     'Authorization': 'token ' + token
 }
 
-languages_json = json.load(open("languages.json", 'r'))
+languages_json = json.load(open("/media/shreyas/DATA/kwoc/gh_scraper/stats/languages.json", 'r'))
 
 stats = {}
 """
