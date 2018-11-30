@@ -4,7 +4,7 @@ import requests
 import json
 
 PATH_TO_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "gh_scraper/projects.csv")
-SAVE_TO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "topic_dict.json")
+SAVE_TO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "gh_scraper/topic_dict.json")
 GITHUB_LINK_INDEX = 4  # 0 based indexing
 GITHUB_GRAPHQL_ENDPOINT = "https://api.github.com/graphql"
 
@@ -178,7 +178,7 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
             to_return = False
             print(err)
 
-    print(topics_data)
+    # print(topics_data)
     save_as_json(topics_data)
     return to_return
 
