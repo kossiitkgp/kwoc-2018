@@ -171,26 +171,26 @@ def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
 	:return:
 		True if successful for all, False otherwise
 	"""
-    link_list = read_links(path_to_csv, index)
-    topics_data = {}
-    to_return = True
-    for link in link_list:
-        try:
-            author, name = split(link)
-            query_response = graph_query(author, name)
-            topic_list = remove_dupes( flatten(query_response) )
-            # print(topic_list)
-            topics_data[link] = topic_list
-            print(f'done for {link}')
-        except Exception as err:
-            print(f'failed for {link}')
-            topics_data[link] = []
-            to_return = False
-            print(err)
+	link_list = read_links(path_to_csv, index)
+	topics_data = {}
+	to_return = True
+	for link in link_list:
+		try:
+			author, name = split(link)
+			query_response = graph_query(author, name)
+			topic_list = remove_dupes( flatten(query_response) )
+			# print(topic_list)
+			topics_data[link] = topic_list
+			print(f'done for {link}')
+		except Exception as err:
+			print(f'failed for {link}')
+			topics_data[link] = []
+			to_return = False
+			print(err)
 
-    # print(topics_data)
-    save_as_json(topics_data)
-    return to_return
+	# print(topics_data)
+	save_as_json(topics_data)
+	return to_return
 
 
 if __name__ == "__main__":
