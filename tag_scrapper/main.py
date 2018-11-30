@@ -35,6 +35,10 @@ def flatten(json_response):
     """
     topics = []
     if json_response.get("data", None) is not None:
+        language_nodes = json_response["data"]["repository"]["languages"]["nodes"]
+        for node in language_nodes:
+            topics.append(node["name"])
+
         topic_nodes = json_response["data"]["repository"]["repositoryTopics"]["nodes"]
         for node in topic_nodes:
             topics.append(node["topic"]["name"])
@@ -53,6 +57,16 @@ def graph_query(author, name):
         {
           "data": {
             "repository": {
+              "languages": {
+                "nodes": [
+                  {
+                    "name": "language1"
+                  },
+                  {
+                    "name": "language2"
+                  }
+                ]
+              }
               "repositoryTopics": {
                 "nodes": [
                   {
@@ -75,6 +89,11 @@ def graph_query(author, name):
     query = """
     {
       repository(owner: "%s", name: "%s") {
+        languages(first: 10) {
+          nodes {
+            name
+          }
+        }
         repositoryTopics(first: 20) {
           nodes {
             topic {

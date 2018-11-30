@@ -269,6 +269,13 @@ def dashboard():
 
     # if git_handle is not None and git_handle in stats_dict:
     #     return render_template('dashboard.html', **stats_dict[git_handle])
+
+    # NOTE: To run on local server, uncomment the lines below and comment everything after it. 
+
+    # string = """{"Penguinogeek": {"college": "Bangalore Institute of Technology", "id": "Penguinogeek", "token": "a36fa2dadd55afa0b1356fd5e4479fe69d616fd2", "ava_id": "https://avatars0.githubusercontent.com/u/8960796?v=4", "name": null, "email": "Email ID"}}"""
+    # stud = json.loads(string)
+    # return render_template('dashboard.html', **stud['Penguinogeek'])
+
     with open(stud_json, 'r') as f:
         stud_dict = json.load(f)
 
@@ -320,8 +327,8 @@ studcsv = root_dir + '/gh_login/student.csv'
 @app.route('/student_registration', methods=['POST','GET'])
 def reg():
 
-    dict_val = session['dict_val']
-    stud_dict = session['stud_dict']
+    dict_val = session.get('dict_val')
+    stud_dict = session.get('stud_dict')
 
     if request.method == 'POST':
         dict_stud_csv = dict()
@@ -363,8 +370,12 @@ def reg():
         # print(colleges)
         
         temp_dict_val = dict_val
-        if temp_dict_val["email"] == None:
-            temp_dict_val["email"] = "Email ID"
+        if not temp_dict_val["email"]:
+            temp_dict_val["email"] = ""
+
+        if not temp_dict_val["name"]:
+            temp_dict_val["name"] = ""
+
         return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
 
 @app.route("/token")
