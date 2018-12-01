@@ -52,7 +52,10 @@ with open('projects.csv', 'r') as csvfile:
         proj_desc = row[3]
         link = row[4]
         comm = row[5]
-        tags = row[6].split(",")
+        try:
+            tags = row[6].split(",")
+        except IndexError as err:
+            tags = []
         new_tags=[]
         
         proj_desc_small=copy(proj_desc)
@@ -68,8 +71,8 @@ with open('projects.csv', 'r') as csvfile:
             for tag in github_tags[link]:
                 if tag not in tags:
                     new_tags.append(tag)        
-        except:
-            pass
+        except KeyError as err:
+            print("no tags for {project} in github".format(project=name))
 
         # print (link.split('/'))
         img = "https://github.com/"+link.split('/')[3]+".png?size=50"
