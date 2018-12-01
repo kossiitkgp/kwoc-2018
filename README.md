@@ -38,3 +38,14 @@ To add cronjob :
 crontab -e          # A file will open, type the following
 */60 * * * * python3 /path/to/kwoc/gh_scrapper/stats/generate_statistics.py
 ```
+
+
+## Workflow for updating the projects list
+
+* Add the projects details to `/path/to/kwoc/gh_scrapper/projects.csv`. Make sure that you dont remove the column headings in the first line.
+
+* Add the GITHUB_TOKEN for authenticating API to your environment.
+
+* Go to `/path/to/kwoc/tag_scrapper/` and run the command `python3 main.py` to generate tags
+
+* Go to `/path/to/kwoc/gh_scrapper/` and run the command `python3 project_gen.py` to generate the desired template
