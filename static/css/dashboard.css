@@ -263,6 +263,22 @@
 	color: #fff;
 }
 
+.prjt-rel {
+	text-align: center;
+	display: inline-block;
+	padding: 16px 20px;
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 20px;
+	background: #4CAF50;
+	margin: 8px;
+	border-radius: 5px;
+	text-transform: none;
+	letter-spacing: 0;
+	width: 100%;
+}
+
 @media only screen and (max-width: 450px) {
 	.section1 .col2.last .col3 span {
 		font-size: 10px;
