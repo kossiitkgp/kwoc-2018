@@ -42,8 +42,17 @@ pipenv shell
 gunicorn kwoc.app:app # --reload for live code changes
 ```
 
+### To generate projects for website:
+```
+# download the csv file
+# RUN tag_scrapper (see it's readme for more information)
+cd /path/to/kwoc/gh_scraper
+python3 project_gen.py
+```
+Open the projects webpage and check :)
 
-To add cronjob :
+
+### To add cronjob :
 ```
 crontab -e          # A file will open, type the following
 */60 * * * * python3 /path/to/kwoc/gh_scrapper/stats/generate_statistics.py
