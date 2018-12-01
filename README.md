@@ -27,5 +27,5 @@ gunicorn kwoc.app:app --reload  // live code changes
 To add cronjob :
 ```
 crontab -e          # A file will open, type the following
-*/60 * * * * python3 ~/kwoc/gh_scrapper/stats/generate_statistics.py
+*/60 * * * * python3 /path/to/kwoc/gh_scrapper/stats/generate_statistics.py
 ```
