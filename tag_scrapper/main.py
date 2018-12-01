@@ -38,11 +38,14 @@ def flatten(json_response):
         language_nodes = json_response["data"]["repository"]["languages"]["nodes"]
         for node in language_nodes:
             topics.append(node["name"].capitalize())
-
+            if(len(topics) > 4):
+                break     
         topic_nodes = json_response["data"]["repository"]["repositoryTopics"]["nodes"]
         for node in topic_nodes:
             topics.append(node["topic"]["name"].capitalize())
-
+            if(len(topics) > 15):
+                break
+    print(len(topics))
     return topics
 
 
