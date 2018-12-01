@@ -7,7 +7,7 @@ import requests
 dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-2])
 
-projects = open('repos.txt', 'r').read().split('\n')
+projects = open(dir_path + '/repos.txt', 'r').read().split('\n')
 projects.pop()
 
 token = open(root_dir + '/secrets/token.txt', 'r').read().split('\n')[0]
@@ -16,7 +16,7 @@ headers = {
     'Authorization': 'token ' + token
 }
 
-languages_json = json.load(open("languages.json", 'r'))
+languages_json = json.load(open(dir_path + "/languages.json", 'r'))
 
 stats = {}
 """
@@ -233,6 +233,6 @@ for project in projects:
         copy_stats[user]['projects'] = list(copy_stats[user]['projects'])
         copy_stats[user]['languages'] = list(copy_stats[user]['languages'])
 
-    with open('stats.json', 'w') as f:
+    with open(dir_path + '/stats.json', 'w') as f:
         f.write(json.dumps(copy_stats))
     print("Done.")
