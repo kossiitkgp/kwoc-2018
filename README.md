@@ -16,6 +16,18 @@ If you have access to the secrets repository, clone appending the `--recursive` 
 
 Used the following tutorial to set up the server - https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04
 
+## Deployment
+The server resides on the KWoC DO server and below are the instructions to update the website. 
+
+NOTE: NEVER merge upstream master directly on server; server has multiple files which are not on git but are very very crucial (such as users data).
+
+```
+cd kwoc
+./update.sh
+```
+
+`update.sh` is a shell script (made by @thealphadollar) that shrinks the entire process to single event.
+
 ## Development Workflow
 
 To launch the server locally, follow the below steps:
