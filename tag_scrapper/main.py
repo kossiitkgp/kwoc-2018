@@ -4,7 +4,7 @@ import requests
 import json
 
 PATH_TO_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "gh_scraper/projects.csv")
-SAVE_TO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "topic_dict.json")
+SAVE_TO = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "gh_scraper/topic_dict.json")
 GITHUB_LINK_INDEX = 4  # 0 based indexing
 GITHUB_GRAPHQL_ENDPOINT = "https://api.github.com/graphql"
 
@@ -37,12 +37,16 @@ def flatten(json_response):
     if json_response.get("data", None) is not None:
         language_nodes = json_response["data"]["repository"]["languages"]["nodes"]
         for node in language_nodes:
+            node["name"][0] = node["name"][0].capitalize()
             topics.append(node["name"])
-
+            if(len(topics) > 4):
+                break     
         topic_nodes = json_response["data"]["repository"]["repositoryTopics"]["nodes"]
         for node in topic_nodes:
-            topics.append(node["topic"]["name"])
-
+            topics.append(node["topic"]["name"].capitalize())
+            if(len(topics) > 15):
+                break
+    print(len(topics))
     return topics
 
 
@@ -145,42 +149,52 @@ def read_links(path_to_csv, index):
             link_list.append(row[index])
     return link_list
 
+def remove_dupes(tags):
+	"""
+	Remove case insensitive duplicates from a list
+	"""
+	final_list = []
+	for tag in tags:
+		if not tag.lower() in [t.lower() for t in final_list]:
+			final_list.append(tag)
+	return final_list
+
 
 def main(path_to_csv=PATH_TO_CSV, index=GITHUB_LINK_INDEX):
-    """
-    driving function for scraping topics off a github repository and producing a json of the same
+	"""
+	driving function for scraping topics off a github repository and producing a json of the same
 
-    The data structure topics_data (the final list of links and topics) is a dictionary of the following type
-    {
-        "link1": [LIST OF TOPICS],
-        "link2": [LIST OF TOPICS]
-    }
+	The data structure topics_data (the final list of links and topics) is a dictionary of the following type
+	{
+		"link1": [LIST OF TOPICS],
+		"link2": [LIST OF TOPICS]
+	}
 
-    :param path_to_csv: path to the csv file containing the project details
-    :param index: index of the github url in the csv
-    :return:
-        True if successful for all, False otherwise
-    """
-    link_list = read_links(path_to_csv, index)
-    topics_data = {}
-    to_return = True
-    for link in link_list:
-        try:
-            author, name = split(link)
-            query_response = graph_query(author, name)
-            topic_list = flatten(query_response)
-            # print(topic_list)
-            topics_data[link] = topic_list
-            print(f'done for {link}')
-        except Exception as err:
-            print(f'failed for {link}')
-            topics_data[link] = []
-            to_return = False
-            print(err)
+	:param path_to_csv: path to the csv file containing the project details
+	:param index: index of the github url in the csv
+	:return:
+		True if successful for all, False otherwise
+	"""
+	link_list = read_links(path_to_csv, index)
+	topics_data = {}
+	to_return = True
+	for link in link_list:
+		try:
+			author, name = split(link)
+			query_response = graph_query(author, name)
+			topic_list = remove_dupes( flatten(query_response) )
+			# print(topic_list)
+			topics_data[link] = topic_list
+			print(f'done for {link}')
+		except Exception as err:
+			print(f'failed for {link}')
+			topics_data[link] = []
+			to_return = False
+			print(err)
 
-    print(topics_data)
-    save_as_json(topics_data)
-    return to_return
+	# print(topics_data)
+	save_as_json(topics_data)
+	return to_return
 
 
 if __name__ == "__main__":
