@@ -1,4 +1,4 @@
-# KWoC 2017
+# KWoC 2018
 
 [![KWoC 2018](https://img.shields.io/badge/KWoC-2018-green.svg?longCache=true)](https://kwoc.kossiitkgp.org/) - [![KWoC 2018](https://img.shields.io/badge/KWoC-2018-0078D6.svg?longCache=true)](https://kwoc.kossiitkgp.org/) - [![KWoC 2018](https://img.shields.io/badge/KWoC-2018-0078D6.svg?logo=github&longCache=true&logoColor=white)](https://kwoc.kossiitkgp.org/)
 
@@ -9,7 +9,7 @@
 
 [![KWoC 2018](https://img.shields.io/badge/KWoC-2018-0078D6.svg?style=for-the-badge)](https://kwoc.kossiitkgp.org/) - [![KWoC 2018](https://img.shields.io/badge/KWoC-2018-green.svg?style=for-the-badge)](https://kwoc.kossiitkgp.org/) - [![KWoC 2018](https://img.shields.io/badge/KWoC-2018-0078D6.svg?style=for-the-badge&logo=github&longCache=true&logoColor=white)](https://kwoc.kossiitkgp.org/)
 
-This repo contains the server code for Kharagpur Winter of Code 2017.
+This repo contains the server code for Kharagpur Winter of Code 2018.
 
 If you have access to the secrets repository, clone appending the `--recursive` option.
 
