@@ -16,7 +16,9 @@ headers = {
     'Authorization': 'token ' + token
 }
 
+
 languages_json = json.load(open(dir_path + "/languages.json", 'r'))
+
 
 stats = {}
 """
