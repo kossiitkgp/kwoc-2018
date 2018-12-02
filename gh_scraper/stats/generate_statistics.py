@@ -16,11 +16,9 @@ headers = {
     'Authorization': 'token ' + token
 }
 
-<<<<<<< HEAD
-languages_json = json.load(open("gh_scraper/stats/languages.json", 'r'))
-=======
+
 languages_json = json.load(open(dir_path + "/languages.json", 'r'))
->>>>>>> 2aa249f9dd54c1817ccfd6360f3cbbaaa5dbc363
+
 
 stats = {}
 """
