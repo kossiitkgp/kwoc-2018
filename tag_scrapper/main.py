@@ -37,7 +37,8 @@ def flatten(json_response):
     if json_response.get("data", None) is not None:
         language_nodes = json_response["data"]["repository"]["languages"]["nodes"]
         for node in language_nodes:
-            topics.append(node["name"].capitalize())
+            node["name"][0] = node["name"][0].capitalize()
+            topics.append(node["name"])
             if(len(topics) > 4):
                 break     
         topic_nodes = json_response["data"]["repository"]["repositoryTopics"]["nodes"]
