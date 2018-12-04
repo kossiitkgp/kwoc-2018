@@ -16,6 +16,18 @@ If you have access to the secrets repository, clone appending the `--recursive` 
 
 Used the following tutorial to set up the server - https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04
 
+## Deployment
+The server resides on the KWoC DO server and below are the instructions to update the website. 
+
+NOTE: NEVER merge upstream master directly on server; server has multiple files which are not on git but are very very crucial (such as users data).
+
+```
+cd kwoc
+./update.sh
+```
+
+`update.sh` is a shell script (made by @thealphadollar) that shrinks the entire process to single event.
+
 ## Development Workflow
 
 To launch the server locally, follow the below steps:
@@ -42,8 +54,17 @@ pipenv shell
 gunicorn kwoc.app:app # --reload for live code changes
 ```
 
+### To generate projects for website:
+```
+# download the csv file
+# RUN tag_scrapper (see it's readme for more information)
+cd /path/to/kwoc/gh_scraper
+python3 project_gen.py
+```
+Open the projects webpage and check :)
 
-To add cronjob :
+
+### To add cronjob :
 ```
 crontab -e          # A file will open, type the following
 */60 * * * * python3 /path/to/kwoc/gh_scrapper/stats/generate_statistics.py
