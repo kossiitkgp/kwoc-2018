@@ -69,7 +69,8 @@ def stats():
     else:
         g.ghname = session.get('user')
 
-    return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
+    #return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
+    return render_template('coming_soon.html', ghname=g.ghname)
 
 
 # TODO: Activate when coding period begins
