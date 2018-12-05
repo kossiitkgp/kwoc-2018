@@ -251,77 +251,78 @@ form {
     </head>
     <body>
       <div class="form-wrapper">
-  <h1>Register Your Project</h1>
-  <div class="form-footer">
-    <p>Please read <a href="/static/files/KWoCMentorManual.pdf" target="_blank">KWoC's Mentor's Manual</a> before registering!</p>
-  </div>
-  <form id="form" onsubmit="event.preventDefault(); send(form);">
-    <div class="form-item">
-      <label for="name"></label>
-      <input type="text" name="name" required="required" placeholder="Name" autocomplete="on"></input>
-    </div>
-    <div class="form-item">
-      <label for="email"></label>
-      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="on"></input>
-    </div>
-    <div id="project_details">
-    <div class="form-item">
-      <label for="project"></label>
-      <input type="text" name="project" required="required" placeholder="Project Name" autocomplete="off"></input>
-    </div>
-    <div class="form-item">
-      <label for="desc"></label>
-      <input type="text" name="desc" required="required" placeholder="Project Description" autocomplete="off"></input>
-    </div>
-    <div class="form-item">
-      <label for="gitlink"></label>
-      <input type="text" name="gitlink" required="required" placeholder="Github Project Link" autocomplete="off"></input>
-    </div>
-    <div class="form-item">
-      <label for="communication"></label>
-      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="on"></input>
-    </div>
-<div class="form-item">
-    <label for="tag-typer">
-  <div id="tags">
-    <!--<span class="tag"><span class="close">&times;</span>such tage</span>
-    <span class="tag"><span class="close">&times;</span>so color</span>
-    <span class="tag"><span class="close">&times;</span>many type</span>-->
-    <span class="tag"><span class="close">&times;</span>Python </span>
-    <span class="tag"><span class="close">&times;</span>Scraping </span>
-    <input id="tag-typer" type="text" placeholder="Add tags ..."/>
-  </div>
-  </label>
-    </div>
-    </div>
-    <div class="button-panel">
+          <h1>Project Registrations Are Over For KWoC 2019!</h1>
+{#  <h1>Register Your Project</h1>#}
+{#  <div class="form-footer">#}
+{#    <p>Please read <a href="/static/files/KWoCMentorManual.pdf" target="_blank">KWoC's Mentor's Manual</a> before registering!</p>#}
+{#  </div>#}
+{#  <form id="form" onsubmit="event.preventDefault(); send(form);">#}
+{#    <div class="form-item">#}
+{#      <label for="name"></label>#}
+{#      <input type="text" name="name" required="required" placeholder="Name" autocomplete="on"></input>#}
+{#    </div>#}
+{#    <div class="form-item">#}
+{#      <label for="email"></label>#}
+{#      <input type="email" name="email" required="required" placeholder="Email Address" autocomplete="on"></input>#}
+{#    </div>#}
+{#    <div id="project_details">#}
+{#    <div class="form-item">#}
+{#      <label for="project"></label>#}
+{#      <input type="text" name="project" required="required" placeholder="Project Name" autocomplete="off"></input>#}
+{#    </div>#}
+{#    <div class="form-item">#}
+{#      <label for="desc"></label>#}
+{#      <input type="text" name="desc" required="required" placeholder="Project Description" autocomplete="off"></input>#}
+{#    </div>#}
+{#    <div class="form-item">#}
+{#      <label for="gitlink"></label>#}
+{#      <input type="text" name="gitlink" required="required" placeholder="Github Project Link" autocomplete="off"></input>#}
+{#    </div>#}
+{#    <div class="form-item">#}
+{#      <label for="communication"></label>#}
+{#      <input type="text" name="communication" required="required" placeholder="Communication Channel Link (e.g. Google group, Facebook group, gitter)" autocomplete="on"></input>#}
+{#    </div>#}
+{#<div class="form-item">#}
+{#    <label for="tag-typer">#}
+{#  <div id="tags">#}
+{#    <!--<span class="tag"><span class="close">&times;</span>such tage</span>#}
+{#    <span class="tag"><span class="close">&times;</span>so color</span>#}
+{#    <span class="tag"><span class="close">&times;</span>many type</span>-->#}
+{#    <span class="tag"><span class="close">&times;</span>Python </span>#}
+{#    <span class="tag"><span class="close">&times;</span>Scraping </span>#}
+{#    <input id="tag-typer" type="text" placeholder="Add tags ..."/>#}
+{#  </div>#}
+{#  </label>#}
+{#    </div>#}
+{#    </div>#}
+{#    <div class="button-panel">#}
 {#      <input class="btn btn-info" type="button" value="Add Another Project" title="Add Another Project" id="add_project"></input>#}
-      <input class="btn btn-info" type="submit" value="Submit Project" title="Submit Project"></input>
-    </div>
-  </form>
-</div>
-
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="reg_title" align="center"></h4>
-        </div>
-        <div class="modal-body" align="center">
-          <p style="font-size:15px;" id="reg_msg" align="center"></p>
-          <br>
-          <img id="redir-anim" class="mx-auto" src="/static/images/load.svg" align="center">
-          <p style="font-size:15px;" id="redir-msg" align="center"></p>
-        </div>
-        <div class="modal-footer">
-    <button type="button" class="btn btn-default" onclick="location.href='/';">Go to Home Page</button>
-        </div>
-      </div>
-
-    </div>
+{#      <input class="btn btn-info" type="submit" value="Submit Project" title="Submit Project"></input>#}
+{#    </div>#}
+{#  </form>#}
+{#</div>#}
+{##}
+{#<div class="modal fade" id="myModal" role="dialog">#}
+{#    <div class="modal-dialog">#}
+{##}
+{#      <!-- Modal content-->#}
+{#      <div class="modal-content">#}
+{#        <div class="modal-header">#}
+{#          <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+{#          <h4 class="modal-title" id="reg_title" align="center"></h4>#}
+{#        </div>#}
+{#        <div class="modal-body" align="center">#}
+{#          <p style="font-size:15px;" id="reg_msg" align="center"></p>#}
+{#          <br>#}
+{#          <img id="redir-anim" class="mx-auto" src="/static/images/load.svg" align="center">#}
+{#          <p style="font-size:15px;" id="redir-msg" align="center"></p>#}
+{#        </div>#}
+{#        <div class="modal-footer">#}
+{#    <button type="button" class="btn btn-default" onclick="location.href='/';">Go to Home Page</button>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{#    </div>#}
   </div>
     </body>
 <script>
