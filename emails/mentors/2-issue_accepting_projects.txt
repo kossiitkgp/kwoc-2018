@@ -20,10 +20,10 @@ Types of common problems(what to fill in <issues>):
 		 Please add more issues so that the mentees have a better idea of getting to know your project and work 		 with it effectively.
 		 
 	if(Invalid <Communication Link/Project Link/Any other link>):
-		Invalid <Communication Link/Project Link/Any other link>--- <Given <Communication Link/ProjectLink/Any 			other link>>
-        Please provide a valid comminication link
+		Invalid <Communication Link/Project Link/Any other link>--- <Given <Communication Link/ProjectLink/Any 			        other link>>
+                Please provide a valid comminication link
     
-    if(Absence of <Tags/Description/both> on the issues of the project):
-    	Presence of <Tags/Description/both> of the project detailing certain things for the mentees will be     		helpful for them to apply for specific issues
+        if(Absence of <Tags/Description/both> on the issues of the project):
+    	     Presence of <Tags/Description/both> of the project detailing certain things for the mentees will be     		 	      helpful for them to apply for specific issues
     
     
