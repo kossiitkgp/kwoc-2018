@@ -77,29 +77,29 @@
                         <p>{{ college }}</p>
                         <br><br><br>
                         <p class="panel-heading"><a class="btn btn-success prjt-rel" href="{{ url_for('projects') }}">Projects Released!</a><br>Go through the details and start contacting respective mentors.<br><br><span class="alert-success">We've updated the projects. Go check 'em out.</span></p>
-                        <p>Overwhelmed by jargons ? Think you are not good enough for the program? Check out these:</p>
+{#                        <p>Overwhelmed by jargons ? Think you are not good enough for the program? Check out these:</p>#}
                     </div>
-                    <div class="tut-links col-sm-4 center-block center-col">
-                        <ul>
-                            <li>
-                                <a class="btn btn-default" href="https://medium.com/kharagpur-open-source-society/an-informal-introduction-to-kwoc-62fc5e686f79" target="_blank">Everything you need to ace KWoC</a>
-                            </li>
-                            <li>
-                                <a class="btn btn-default" href="https://telegra.ph/How-to-choose-a-Project-for-KWoC-12-01" target="_blank">How to choose a Project for KWoC</a>
-                            </li>
-                            <li>
-                                <a class="btn btn-default" href="https://www.codecademy.com/learn/learn-git">Codeacademy: Learn Git</a>
-                            </li>
-                            <li>
-                                <a class="btn btn-default" href="https://github.com/k88hudson/git-flight-rules">Git Flight Rules</a>
-                            </li>
-                            <li>
-                                <a class="btn btn-default" href="https://guides.github.com/activities/hello-world/">GitHub: Hello World Tutorial</a>
-                            </li>
-                        </ul>
-                    </div>
+{#                    <div class="tut-links col-sm-4 center-block center-col">#}
+{#                        <ul>#}
+{#                            <li>#}
+{#                                <a class="btn btn-default" href="https://medium.com/kharagpur-open-source-society/an-informal-introduction-to-kwoc-62fc5e686f79" target="_blank">Everything you need to ace KWoC</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a class="btn btn-default" href="https://telegra.ph/How-to-choose-a-Project-for-KWoC-12-01" target="_blank">How to choose a Project for KWoC</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a class="btn btn-default" href="https://www.codecademy.com/learn/learn-git">Codeacademy: Learn Git</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a class="btn btn-default" href="https://github.com/k88hudson/git-flight-rules">Git Flight Rules</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a class="btn btn-default" href="https://guides.github.com/activities/hello-world/">GitHub: Hello World Tutorial</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
 
-{#                    <div class="co-sm-8 first tag-div">#}
+                    <div class="co-sm-8 first tag-div">
 {#                        <ul class="main-links">#}
 {#                            <li>#}
 {#                                <div onclick="window.open('/mid-term');" style="cursor:pointer;" class="main-link">Apply for a Project</div>#}
@@ -117,67 +117,67 @@
 {#                        <!-- <br>#}
 {#                        <br>#}
 {#                        <br> -->#}
-{#                        <h3>Project(s) worked on:</h3>#}
-{#                        <ul style="text-align: center;" class="custom">#}
-{#                            {% for project in projects %}#}
-{#                            <li>#}
-{#                                <div onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;"#}
-{#                                    class="project-tag">{{ project }}</div>#}
-{#                            </li>#}
-{#                            {% endfor %}#}
-{#                        </ul>#}
-{#                        <br style="margin-bottom: 0rem;">#}
-{#                        <h3>Language(s) Involved :</h3>#}
-{#                        <ul class="tags custom">#}
-{#                            {% for lan in languages %}#}
-{#                            <li>#}
-{#                                <div class="tag">{{ lan }}</div>#}
-{#                            </li>#}
-{#                            {% endfor %}#}
-{#                        </ul>#}
-{#                    </div>#}
-{#                    <div class="col2 last">#}
-{#                        <div class="grid clearfix">#}
-{#                            <div class="col3 first">#}
-{#                                <h1>{{ no_of_commits }}</h1>#}
-{#                                <span>No of Commits</span>#}
-{#                            </div>#}
-{#                            <div class="col3">#}
-{#                                <h1>{{ pr_open }}</h1>#}
-{#                                <span>Pull Requests open</span>#}
-{#                            </div>#}
-{#                            <div class="col3 last">#}
-{#                                <h1>{{ pr_closed }}</h1>#}
-{#                                <span>Pull Requests closed</span>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col2 last" style="transform:translate(16%);">#}
-{#                        <div class="grid clearfix">#}
-{#                            <div class="col3 first">#}
-{#                                <h1>{{ lines_added }}</h1>#}
-{#                                <span>Lines Added</span>#}
-{#                            </div>#}
-{#                            <div class="col3" style="border-right:none;">#}
-{#                                <h1>{{ lines_removed }}</h1>#}
-{#                                <span>Lines Removed</span>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col2 first" style="margin: 10% 0 10% 0;">#}
-{#                        <h1>Commits Summary</h1>#}
-{#                    </div>#}
-{#                    <br>#}
-{#                    <ul style="margin: 0 20% 0 20%;">#}
-{#                        {% for commit in commits %}#}
-{#                        <li style="width: 100%">#}
-{#                            <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;">{{#}
-{#                                commit.project }} &nbsp;&nbsp;&nbsp; {{ commit.message }}#}
-{#                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +{{ commit.lines_added }} -{{ commit.lines_removed#}
-{#                                }}</p>#}
-{#                        </li>#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
+                        <h3>Project(s) worked on:</h3>
+                        <ul style="text-align: center;" class="custom">
+                            {% for project in projects %}
+                            <li>
+                                <div onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;"
+                                    class="project-tag">{{ project }}</div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <br style="margin-bottom: 0rem;">
+                        <h3>Language(s) Involved :</h3>
+                        <ul class="tags custom">
+                            {% for lan in languages %}
+                            <li>
+                                <div class="tag">{{ lan }}</div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col2 last">
+                        <div class="grid clearfix">
+                            <div class="col3 first">
+                                <h1>{{ no_of_commits }}</h1>
+                                <span>No of Commits</span>
+                            </div>
+                            <div class="col3">
+                                <h1>{{ pr_open }}</h1>
+                                <span>Pull Requests open</span>
+                            </div>
+                            <div class="col3 last">
+                                <h1>{{ pr_closed }}</h1>
+                                <span>Pull Requests closed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col2 last" style="transform:translate(16%);">
+                        <div class="grid clearfix">
+                            <div class="col3 first">
+                                <h1>{{ lines_added }}</h1>
+                                <span>Lines Added</span>
+                            </div>
+                            <div class="col3" style="border-right:none;">
+                                <h1>{{ lines_removed }}</h1>
+                                <span>Lines Removed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col2 first" style="margin: 10% 0 10% 0;">
+                        <h1>Commits Summary</h1>
+                    </div>
+                    <br>
+                    <ul style="margin: 0 20% 0 20%;">
+                        {% for commit in commits %}
+                        <li style="width: 100%">
+                            <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;">{{
+                                commit.project }} &nbsp;&nbsp;&nbsp; {{ commit.message }}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +{{ commit.lines_added }} -{{ commit.lines_removed
+                                }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </section>

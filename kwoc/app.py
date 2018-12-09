@@ -40,14 +40,16 @@ for user, userdata in stats_dict.items():
     else:
         non_zero_contributions[user] = userdata
 
-non_zero_contributions = collections.OrderedDict(
-    sorted(non_zero_contributions.items(), key=lambda t: t[1]['name']))
-zero_contributions = collections.OrderedDict(
-    sorted(zero_contributions.items(), key=lambda t: t[1]['name']))
-non_zero_contributions.update(zero_contributions)
 
-# Final data
-stats_dict = non_zero_contributions
+# uncomment after mid-term evals
+# non_zero_contributions = collections.OrderedDict(
+#     sorted(non_zero_contributions.items(), key=lambda t: t[1]['name']))
+# zero_contributions = collections.OrderedDict(
+#     sorted(zero_contributions.items(), key=lambda t: t[1]['name']))
+# non_zero_contributions.update(zero_contributions)
+#
+# # Final data
+# stats_dict = non_zero_contributions
 
 
 # Define routes
@@ -69,24 +71,23 @@ def stats():
     else:
         g.ghname = session.get('user')
 
-    #return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
-    return render_template('coming_soon.html', ghname=g.ghname)
+    return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
+    # return render_template('coming_soon.html', ghname=g.ghname)
 
 
-# TODO: Activate when coding period begins
 
-# @app.route('/stats/<git_handle>')
-# def user_stats(git_handle):
-#     if session.get('user') is None:
-#         g.ghname = "Login"
-#     else:
-#         g.ghname = session.get('user')
-#
-#     git_handle = git_dashboardhandle.lower()
-#     if git_handle in stats_dict:
-#         return render_template('profile.html', **stats_dict[git_handle])
-#     else:
-#         return redirect('/stats', code=302)
+@app.route('/stats/<git_handle>')
+def user_stats(git_handle):
+    if session.get('user') is None:
+        g.ghname = "Login"
+    else:
+        g.ghname = session.get('user')
+
+    git_handle = git_handle.lower()
+    if git_handle in stats_dict:
+        return render_template('profile.html', **stats_dict[git_handle])
+    else:
+        return redirect('/stats', code=302)
 
 
 @app.route("/manuals")
