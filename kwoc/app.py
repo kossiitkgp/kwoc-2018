@@ -329,56 +329,66 @@ studcsv = root_dir + '/gh_login/student.csv'
 @app.route('/student_registration', methods=['POST','GET'])
 def reg():
 
-    dict_val = session.get('dict_val')
-    stud_dict = session.get('stud_dict')
+    stud_reg_open = False
 
-    if request.method == 'POST':
-        dict_stud_csv = dict()
-        dict_stud_csv['name'] = request.form['name']
-        dict_stud_csv['email'] = request.form['email']
-        dict_stud_csv['gitlink'] = request.form['gitlink']
-        dict_stud_csv['college'] = request.form['college']
-        dict_stud_csv['year'] = request.form['year']
-        dict_stud_csv['how'] = request.form['how']
-        ts = time.time()
-        dict_stud_csv['Timestamp'] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-        dict_stud_csv_lst = [dict_stud_csv]
-        
-        with open(studcsv, 'a+') as file_csv:
-            fields = ['name','email','gitlink','college','year','how','Timestamp']
-            writer = csv.DictWriter(file_csv, fieldnames=fields)
-            writer.writerows(dict_stud_csv_lst)
+    if stud_reg_open:
+        dict_val = session.get('dict_val')
+        stud_dict = session.get('stud_dict')
 
-        
+        if request.method == 'POST':
+            dict_stud_csv = dict()
+            dict_stud_csv['name'] = request.form['name']
+            dict_stud_csv['email'] = request.form['email']
+            dict_stud_csv['gitlink'] = request.form['gitlink']
+            dict_stud_csv['college'] = request.form['college']
+            dict_stud_csv['year'] = request.form['year']
+            dict_stud_csv['how'] = request.form['how']
+            ts = time.time()
+            dict_stud_csv['Timestamp'] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+            dict_stud_csv_lst = [dict_stud_csv]
 
-        with open(studcsv, 'r') as file_csv:
-            raw_header = csv.reader(file_csv)
-            for row in raw_header:
-                #Please make sure that the csv file contains the header atleast
-                if dict_val['id'] == row[2]:
-                    dict_val['college'] = row[3]
-
-        stud_dict[dict_val['id']] = dict_val
-        with open(stud_json, "w+") as stud_file:
-            json.dump(stud_dict, stud_file)
-
-        return(redirect('/dashboard'))
+            with open(studcsv, 'a+') as file_csv:
+                fields = ['name','email','gitlink','college','year','how','Timestamp']
+                writer = csv.DictWriter(file_csv, fieldnames=fields)
+                writer.writerows(dict_stud_csv_lst)
 
 
-    elif request.method == 'GET':
-        with open(colleges_json, 'r') as f:
-            data = json.load(f)
-            colleges = list(data.values())
-        # print(colleges)
-        
-        temp_dict_val = dict_val
-        if not temp_dict_val["email"]:
-            temp_dict_val["email"] = ""
 
-        if not temp_dict_val["name"]:
-            temp_dict_val["name"] = ""
+            with open(studcsv, 'r') as file_csv:
+                raw_header = csv.reader(file_csv)
+                for row in raw_header:
+                    #Please make sure that the csv file contains the header atleast
+                    if dict_val['id'] == row[2]:
+                        dict_val['college'] = row[3]
 
-        return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
+            stud_dict[dict_val['id']] = dict_val
+            with open(stud_json, "w+") as stud_file:
+                json.dump(stud_dict, stud_file)
+
+            return(redirect('/dashboard'))
+
+
+        elif request.method == 'GET':
+            with open(colleges_json, 'r') as f:
+                data = json.load(f)
+                colleges = list(data.values())
+            # print(colleges)
+
+            temp_dict_val = dict_val
+            if not temp_dict_val["email"]:
+                temp_dict_val["email"] = ""
+
+            if not temp_dict_val["name"]:
+                temp_dict_val["name"] = ""
+
+            return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
+    else:
+        if session.get('user') is None:
+            g.ghname = "Login"
+        else:
+            g.ghname = session.get('user')
+        return render_template('reg_over.html')
+
 
 @app.route("/token")
 def token():

@@ -1,0 +1,108 @@
+<!doctype html>
+{% import 'helper_macros.html' as helpers %}
+<html class="no-js" lang="en">
+    <head>
+        <title>KWoC | Kharagpur Winter of Code</title>
+        {{ helpers.title() }}
+    </head>
+    <body>
+      {{ helpers.snow_css() }}
+        <!-- navigation panel -->
+        {{ helpers.navigation_panel() }}
+        <!-- end navigation panel -->
+
+            <div id="owl-demo" class="owl-carousel owl-theme light-pagination square-pagination dark-pagination-without-next-prev-arrow main-slider">
+
+
+
+
+                <div  class="item owl-bg-img " style="background-image:url('/static/images/intro-background.jpg');">
+                    <div class="snow snow--near"></div>
+                  <div class="snow snow--near snow--alt"></div>
+                   <div class="snow snow--mid"></div>
+                  <div class="snow snow--mid snow--alt"></div>
+                  <div class="snow snow--far"></div>
+                  <div class="snow snow--far snow--alt"></div>
+                    <div class="opacity-full bg-dark-gray" style="opacity: 0.5"></div>
+                    <div class="container full-screen position-relative">
+                        <div class="slider-typography text-center">
+                            <div class="slider-text-middle-main">
+                                <div class="slider-text-middle slider-text-middle6 padding-left-right-px wow fadeInUp">
+                                    <span class="slider-title-big6 white-text  font-weight-700 letter-spacing-3">KWoC</span>
+                                    <span class="white-text slider-text-middle text-uppercase letter-spacing-10 margin-three no-margin-bottom display-block xs-letter-spacing-6">Kharagpur Winter of Code</span>
+                                    <span class="white-text slider-text-middle letter-spacing-3 text-uppercase margin-two no-margin-bottom display-block xs-letter-spacing-6">In Association with
+                                        <a target="_blank" href="http://www.ktj.in/">
+                                            <img style="height: 30px" src="/static/images/ktj.png">
+                                        </a>
+                                    </span>
+                                    <div style="display: flex; flex-direction: column;">
+                                      <div>
+{#                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="/summit" target="_blank">Open Source Summit</a>#}
+                                          <br><br><br>
+                                      </div>
+                                      <div style="display: flex; justify-content: center;">
+                                        {% if g.ghname != "Login" %}
+
+                                        <span><a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('dashboard') }}">Welcome {{g.ghname}}</a></span>
+
+                                        {% endif %}
+                                        <div class="content">
+                                          <h2 class="deep-red-text">Registrations Are Over!<br>
+                                          </h2>
+                                            {% if g.ghname != "Login" %}
+
+                                        <h3 style="color: green">Phew! You Are Already Part Of KWoC 2018</h3>
+                                        {% else %}
+                                                <h3 style="color: green">Do Come Next Year :)</h3>
+                                        {% endif %}
+
+                                          </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <style>
+        .container {
+                    position: relative;
+                    max-width: 800px; /* Maximum width */
+                    margin: 0 auto; /* Center it */
+                    color: #ffffff;
+                  }
+
+        .container .content {
+                    position: relative; /* Position the background text */
+                    top: 0; /* At the bottom. Use top:0 to append it to the top */
+                    background: rgb(0, 0, 0); /* Fallback color */
+                    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+                    text-transform: uppercase;
+                    color: #ffffff; /* Grey text */
+                    width: 100%; /* Full width */
+                    padding: 20px; /* Some padding */
+                  }
+        </style>
+
+        <!-- footer -->
+        <footer>
+            {{ helpers.pre_footer() }}
+            <!-- footer_final -->
+            {{ helpers.end_footer() }}
+            <!-- end footer -->
+            <!-- scroll to top -->
+            <a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+            <!-- scroll to top End... -->
+        </footer>
+        <!-- end footer -->
+        <!-- javascript libraries -->
+        {{ helpers.js_libraries() }}
+    </body>
+</html>
+
+
+
