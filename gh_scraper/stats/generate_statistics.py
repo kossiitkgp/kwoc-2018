@@ -13,7 +13,7 @@ GITLINK_INDEX = 4
 Taking in repo urls from ../projects.csv
 """
 projects = []
-with open(PROJECT_CSV, 'r') as project_file:
+with open(PROJECT_CSV, 'r', encoding='utf-8') as project_file:
     raw_header = csv.reader(project_file)
     header = next(raw_header, None)
     for row in raw_header:
