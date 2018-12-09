@@ -6,9 +6,22 @@ import requests
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-2])
+PROJECT_CSV = os.path.join(root_dir,"gh_scraper/projects.csv")
+GITLINK_INDEX = 4
 
-projects = open(dir_path + '/repos.txt', 'r').read().split('\n')
-projects.pop()
+"""
+Taking in repo urls from ../projects.csv
+"""
+projects = []
+with open(PROJECT_CSV, 'r') as project_file:
+    raw_header = csv.reader(project_file)
+    header = next(raw_header, None)
+    for row in raw_header:
+        repo_name = row[GITLINK_INDEX].replace("https://github.com/", "").replace("/issues", "")
+        projects.append(repo_name)
+        # print (repo_name)
+    # print(projects[0])
+
 
 token = open(root_dir + '/secrets/token.txt', 'r').read().split('\n')[0]
 
@@ -74,7 +87,7 @@ value : dict
 
 # Generate empty statistics
 usernames = set()
-with open(root_dir + '/secrets/students.csv', "r") as csv_file:  # This csv is generated from the sanitized sheet
+with open(root_dir + '/gh_login/student.csv', "r") as csv_file:  # This csv is generated from the sanitized sheet
     raw_reader = csv.reader(csv_file)
     header = next(raw_reader, None)
     for row in raw_reader:
@@ -144,8 +157,8 @@ def fetch_all_pull_requests(query, since=None, headers=None):
 for project in projects:
     print("Working on project : ", project)
     query = "https://api.github.com/repos/{}/commits".format(project)
-    since = '2017-11-21T00:00:00Z'
-    until = '2018-01-01T00:00:00Z'
+    since = '2018-11-05T00:00:00Z'
+    until = '2019-01-09T00:00:00Z'
     params = {
         'since': since,
         'until': until

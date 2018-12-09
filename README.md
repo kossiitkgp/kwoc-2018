@@ -54,7 +54,7 @@ pipenv shell
 gunicorn kwoc.app:app # --reload for live code changes
 ```
 
-### To generate projects for website:
+### To generate projects for website
 ```
 # download the csv file
 # RUN tag_scrapper (see it's readme for more information)
@@ -63,6 +63,14 @@ python3 project_gen.py
 ```
 Open the projects webpage and check :)
 
+## Generating statistics for students
+
+```sh
+# keep updated gh_scraper/projects.csv and gh_login/student.csv
+cd gh_scraper/stats
+# change since (line 160) and until (line 161)
+python3 generate_statistics.py
+```
 
 ### To add cronjob :
 ```
