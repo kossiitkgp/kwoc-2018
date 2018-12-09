@@ -18,8 +18,10 @@ with open(PROJECT_CSV, 'r', encoding='utf-8') as project_file:
     header = next(raw_header, None)
     for row in raw_header:
         repo_name = row[GITLINK_INDEX].replace("https://github.com/", "").replace("/issues", "")
+        if repo_name[len(repo_name)-1] == "/":
+            repo_name = repo_name[:len(repo_name)-1]
         projects.append(repo_name)
-        # print (repo_name)
+        print(repo_name)
     # print(projects[0])
 
 
