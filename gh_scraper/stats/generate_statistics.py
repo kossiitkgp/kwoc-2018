@@ -87,7 +87,7 @@ value : dict
 
 # Generate empty statistics
 usernames = set()
-with open(root_dir + '/gh_login/student.csv', "r") as csv_file:  # This csv is generated from the sanitized sheet
+with open(root_dir + '/gh_login/student.csv', "r", encoding='utf-8') as csv_file:  # This csv is generated from the sanitized sheet
     raw_reader = csv.reader(csv_file)
     header = next(raw_reader, None)
     for row in raw_reader:
