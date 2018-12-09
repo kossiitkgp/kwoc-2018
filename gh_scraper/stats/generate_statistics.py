@@ -24,7 +24,6 @@ with open(PROJECT_CSV, 'r', encoding='utf-8') as project_file:
         print(repo_name)
     # print(projects[0])
 
-
 token = open(root_dir + '/secrets/token.txt', 'r').read().split('\n')[0]
 
 headers = {
@@ -118,6 +117,7 @@ def fetch_all_pages(query, params=None, headers=None):
     this function recursively fetchs all the results, concatenate and return.
     """
     r = requests.get(query, params=params, headers=headers)
+    # print(r)
     if not r.ok:
         raise(Exception("Error in fetch_all_pages", "query : ", query, "r.json() ", r.json()))
     link = r.headers.get('link', None)
@@ -157,97 +157,101 @@ def fetch_all_pull_requests(query, since=None, headers=None):
 
 
 for project in projects:
-    print("Working on project : ", project)
-    query = "https://api.github.com/repos/{}/commits".format(project)
-    since = '2018-11-05T00:00:00Z'
-    until = '2019-01-09T00:00:00Z'
-    params = {
-        'since': since,
-        'until': until
-    }
+    try:
+        print("Working on project : ", project)
+        query = "https://api.github.com/repos/{}/commits".format(project)
+        since = '2018-11-05T00:00:00Z'
+        until = '2019-01-09T00:00:00Z'
+        params = {
+            'since': since,
+            'until': until
+        }
 
-    commits = fetch_all_pages(query, params=params, headers=headers)
+        commits = fetch_all_pages(query, params=params, headers=headers)
 
-    for commit in commits:
-        if commit['author'] is None:
-            continue
-        author = commit['author']['login'].lower()
-        avatar_url = commit['author']['avatar_url']
-        if author in usernames:
-            print(author, " working on ", project)
-            html_url = commit['html_url']
-            message = commit['commit']['message']
+        for commit in commits:
+            if commit['author'] is None:
+                continue
+            author = commit['author']['login'].lower()
+            avatar_url = commit['author']['avatar_url']
+            if author in usernames:
+                print(author, " working on ", project)
+                html_url = commit['html_url']
+                message = commit['commit']['message']
 
-            _api_url_commit = commit['url']
-            r = requests.get(_api_url_commit, headers=headers)
-            if not r.ok:
-                raise(Exception("Error in fetching commit info", "query : ", _api_url_commit, "r.json() ", r.json()))
-            _commit_info = r.json()
+                _api_url_commit = commit['url']
+                r = requests.get(_api_url_commit, headers=headers)
+                if not r.ok:
+                    raise(Exception("Error in fetching commit info", "query : ", _api_url_commit, "r.json() ", r.json()))
+                _commit_info = r.json()
 
-            try:
-                lines_added = _commit_info['stats']['additions']
-                lines_removed = _commit_info['stats']['deletions']
-            except KeyError:
-                lines_added = lines_removed = 0
+                try:
+                    lines_added = _commit_info['stats']['additions']
+                    lines_removed = _commit_info['stats']['deletions']
+                except KeyError:
+                    lines_added = lines_removed = 0
 
-            languages_used = set()
-            files = _commit_info.get('files', None)
-            _files_modified = set()
-            if files is not None:
-                for f in _commit_info['files']:
-                    _files_modified.add(f['filename'])
+                languages_used = set()
+                files = _commit_info.get('files', None)
+                _files_modified = set()
+                if files is not None:
+                    for f in _commit_info['files']:
+                        _files_modified.add(f['filename'])
 
-            for f in _files_modified:
-                file_ext = '.' + f.split('/')[-1].split('.')[-1]
-                lang = languages_json.get(file_ext, None)
-                if lang is not None:
-                    languages_used.add(lang)
+                for f in _files_modified:
+                    file_ext = '.' + f.split('/')[-1].split('.')[-1]
+                    lang = languages_json.get(file_ext, None)
+                    if lang is not None:
+                        languages_used.add(lang)
 
-            commit_record = {
-                'html_url': html_url,
-                'message': message,
-                'project': project,
-                'lines_added': lines_added,
-                'lines_removed': lines_removed,
-            }
+                commit_record = {
+                    'html_url': html_url,
+                    'message': message,
+                    'project': project,
+                    'lines_added': lines_added,
+                    'lines_removed': lines_removed,
+                }
 
-            stats[author]['commits'].append(commit_record)
-            stats[author]['projects'].add(project)
-            stats[author]['no_of_commits'] += 1
-            stats[author]['languages'] = stats[author]['languages'].union(languages_used)
-            stats[author]['lines_added'] += lines_added
-            stats[author]['lines_removed'] += lines_removed
-            if stats[author]['avatar_url'] == '':
-                stats[author]['avatar_url'] = avatar_url
+                stats[author]['commits'].append(commit_record)
+                stats[author]['projects'].add(project)
+                stats[author]['no_of_commits'] += 1
+                stats[author]['languages'] = stats[author]['languages'].union(languages_used)
+                stats[author]['lines_added'] += lines_added
+                stats[author]['lines_removed'] += lines_removed
+                if stats[author]['avatar_url'] == '':
+                    stats[author]['avatar_url'] = avatar_url
 
-    # Students' data based on Pull Requests
-    query = "https://api.github.com/repos/{}/pulls?state=all".format(project)
-    prs = fetch_all_pull_requests(query, since=since, headers=headers)
+        # Students' data based on Pull Requests
+        query = "https://api.github.com/repos/{}/pulls?state=all".format(project)
+        prs = fetch_all_pull_requests(query, since=since, headers=headers)
 
-    # Trim out of date pull requests
-    while(True):
-        if len(prs) == 0:
-            break
-        if prs[-1]['created_at'] < since:
-            prs.pop()
-        else:
-            break
+        # Trim out of date pull requests
+        while(True):
+            if len(prs) == 0:
+                break
+            if prs[-1]['created_at'] < since:
+                prs.pop()
+            else:
+                break
 
-    for pr in prs:
-        author = pr['user']['login'].lower()
-        if author in usernames:
-            if pr['state'] == 'open':
-                stats[author]['pr_open'] += 1
-            elif pr['state'] == 'closed':
-                stats[author]['pr_closed'] += 1
+        for pr in prs:
+            author = pr['user']['login'].lower()
+            if author in usernames:
+                if pr['state'] == 'open':
+                    stats[author]['pr_open'] += 1
+                elif pr['state'] == 'closed':
+                    stats[author]['pr_closed'] += 1
 
-    # Update stats.json
-    copy_stats = copy.deepcopy(stats)
-    # set is not JSON serializable
-    for user in copy_stats:
-        copy_stats[user]['projects'] = list(copy_stats[user]['projects'])
-        copy_stats[user]['languages'] = list(copy_stats[user]['languages'])
+        # Update stats.json
+        copy_stats = copy.deepcopy(stats)
+        # set is not JSON serializable
+        for user in copy_stats:
+            copy_stats[user]['projects'] = list(copy_stats[user]['projects'])
+            copy_stats[user]['languages'] = list(copy_stats[user]['languages'])
 
-    with open(dir_path + '/stats.json', 'w') as f:
-        f.write(json.dumps(copy_stats))
-    print("Done.")
+        with open(dir_path + '/stats.json', 'w') as f:
+            f.write(json.dumps(copy_stats))
+        print("Done.")
+    except Exception as e:
+        print("failed for "+project)
+        print(e)
