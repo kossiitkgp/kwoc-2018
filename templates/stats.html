@@ -252,6 +252,53 @@
               }
             }
             sortTable(0);
+
+			// Perform an AJAX request to fetch stats from statNum to statNum + statIncrement - 1
+			function loadStatsAjax(statNum, statIncrement) {
+				$.ajax({url: `stats_ajax?start=${statNum}&end=${statNum + statIncrement}`, success: result => {
+					// Unpack data into table
+					for ( var student in result) {
+						let studentData = result[student];
+						// Get table
+						let table = document.getElementById('statTable');
+						// Create row
+						let row = table.insertRow(-1);
+						row.style = 'cursor:pointer';
+						row.setAttribute('onclick', `location.href='/stats/${student}'`);
+						// Insert name
+						let nameCell = row.insertCell(0);
+						nameCell.innerHTML = studentData['name'];
+						nameCell.className = 'text-center';
+						nameCell.setAttribute('data-target', '#myModal');
+						// Insert GitHub username 
+						let gitCell = row.insertCell(1);
+						gitCell.innerHTML = student;
+						gitCell.className = 'text-center';
+						// Insert PRs
+						let prCell = row.insertCell(2);
+						prCell.innerHTML = `${studentData['pr_closed']}/${studentData['pr_open']}`;
+						prCell.className = 'text-center';
+						// Insert Commits
+						let commitCell = row.insertCell(3);
+						commitCell.innerHTML = studentData['no_of_commits'];
+						commitCell.className = 'text-center';
+						// Insert Lines
+						let lineCell = row.insertCell(4);
+						lineCell.innerHTML = `+${studentData['lines_added']} -${studentData['lines_removed']}`;
+						lineCell.className = 'text-center';
+					};
+				}});
+			}
+
+			// Check if the user has scrolled to (near) the bottom of the page
+			let initStat = 50; // Load from this row onwards and increment by this many rows
+			let currentStat = initStat; // currentStat
+			$(window).scroll(function() {
+				if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+					loadStatsAjax(currentStat, initStat);
+					currentStat += initStat;
+				}
+			});
         </script>
     </body>
 </html>

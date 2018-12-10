@@ -8,7 +8,7 @@ import requests
 import ast
 import datetime
 import time
-from flask import render_template, redirect, Markup, request, session,g
+from flask import render_template, redirect, Markup, request, session, g, jsonify
 import markdown
 from kwoc import config, oauth
 
@@ -51,6 +51,29 @@ for user, userdata in stats_dict.items():
 # # Final data
 # stats_dict = non_zero_contributions
 
+# Reject out of bounds indices
+def sanitizeBounds(n):
+	if n <= 0:
+		return 0
+	elif n >= len(stats_dict):
+		return len(stats_dict) - 1
+	else:
+		return n
+
+# Slice stats_dict by index
+def sliceStats(start, end):
+	# Sanitize input
+	start = sanitizeBounds(start)
+	end = sanitizeBounds(end)
+	# Sort keys
+	keysSorted = sorted( list(stats_dict.keys()) )
+	statsSlice = {}
+	# Iterate through keys in bound
+	for i in range(start, end):
+		key = keysSorted[i]
+		statsSlice[key] = stats_dict[key]
+	# Return sliced dict
+	return statsSlice
 
 # Define routes
 @app.route("/")
@@ -61,17 +84,28 @@ def main():
         g.ghname = session.get('user')
     return render_template('index.html')
 
+# Route for AJAX call to stats
+@app.route('/stats_ajax')
+def statsAjax():
+	# Get start and end indices from query strings
+	start = int( request.args.get('start') )
+	end = int( request.args.get('end') )
+	# Return slices stats
+	return jsonify( sliceStats(start, end) )
+	
 
 @app.route("/stats")
 def stats():
     # for key, value in stats_dict.items(): 
     #     print(key, value)
-    if session.get('user') is None:
-        g.ghname = "Login"
-    else:
-        g.ghname = session.get('user')
+	# Initial number of rows to load = 50
+	initRows = 50
+	if session.get('user') is None:
+		g.ghname = "Login"
+	else:
+		g.ghname = session.get('user')
 
-    return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
+	return render_template('stats.html', stats=sliceStats(0, initRows), ghname=g.ghname)
     # return render_template('coming_soon.html', ghname=g.ghname)
 
 
