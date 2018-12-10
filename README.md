@@ -75,7 +75,7 @@ python3 generate_statistics.py
 ### To add cronjob :
 ```
 crontab -e          # A file will open, type the following
-*/60 * * * * /usr/bin/python3 /path/to/kwoc/gh_scrapper/stats/generate_statistics.py
+*/60 * * * * /usr/bin/python3 /path/to/kwoc/gh_scraper/stats/generate_statistics.py
 ```
 
 
