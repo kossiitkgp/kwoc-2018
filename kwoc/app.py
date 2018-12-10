@@ -99,7 +99,7 @@ def stats():
     # for key, value in stats_dict.items(): 
     #     print(key, value)
 	# Initial number of rows to load = 50
-	initRows = 50
+	initRows = 100
 	if session.get('user') is None:
 		g.ghname = "Login"
 	else:

@@ -291,7 +291,7 @@
 			}
 
 			// Check if the user has scrolled to (near) the bottom of the page
-			let initStat = 50; // Load from this row onwards and increment by this many rows
+			let initStat = 100; // Load from this row onwards and increment by this many rows
 			let currentStat = initStat; // currentStat
 			$(window).scroll(function() {
 				if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
