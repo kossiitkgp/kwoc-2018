@@ -239,7 +239,7 @@ for project in projects:
             if author in usernames:
                 if pr['state'] == 'open':
                     stats[author]['pr_open'] += 1
-                elif pr['state'] == 'closed':
+                elif pr['state'] == 'closed' and pr['merged_at'] is not None:
                     stats[author]['pr_closed'] += 1
 
         # Update stats.json
