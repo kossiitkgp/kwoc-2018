@@ -7,8 +7,12 @@
 .clearfix:before, .clearfix:after { display: table; content: ''; }
 .clearfix:after { clear: both; }
 
+h1, h2, h3, h4, h5, h6 {
+	text-transform: none;
+}
+
 .grid .col2 {
-	width: 50%;
+	width: 40%;
 	padding: 0 10px 0 0;
 }
 .grid .col2.first {
@@ -19,19 +23,11 @@
 }
 
 .grid .col3 {
-	width: 32%;
+	width: 20%;
 	float: left;
-	margin-right: 11px;
+	/* margin-right: 11px; */
+	border: none;
 }
-.grid .col3.first {
-	margin-left: 0;
-	float: left;
-}
-.grid .col3.last {
-	margin-right: 0;
-	float: right;
-}
-
 /* profile page */
 
 
@@ -92,15 +88,14 @@
     font-size: 14px;
 }
 .section1 .col2.last .col3 h1 {
-    color: #FB4C22;
+    color: #03A9F4;
 }
 .section1 .col1{
-  width:100%;
+  width: 100%;
 }
 .section1 .col2.last .col3 {
     text-align: center;
     line-height: 30px;
-    border-right: 1px solid #ccc;
 }
 .section1 .col2.last .col3.last {
 	border-right: 0;
@@ -194,7 +189,7 @@
 	font-size: 15px;
 	background: #CCC;
 	margin: 4px 4px;
-	border-radius: 5px;
+	border-radius: 15px;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -207,13 +202,11 @@
 	.section1 .grid .col3 {
 		margin-right: 2%;
 	}
-	.section1 .col2.last .col3.last {
-		margin-right: 0;
-	}
 }
 
 	.section1 .col2 {
-		width: 100%;
+		width: 80%;
+		margin: 2% 10%;
 		border-right:0 !important;
 		padding: 0;
 	}
@@ -271,12 +264,59 @@
 	font-weight: bold;
 	text-decoration: none;
 	font-size: 20px;
-	background: #4CAF50;
+	background: #00ACC1;
 	margin: 8px;
 	border-radius: 5px;
 	text-transform: none;
 	letter-spacing: 0;
 	width: 100%;
+}
+.prjt-rel:hover{
+	background-color: #0097A7;
+}
+
+li.project-tags {
+	color: #fff;
+	background-color: #03A9F4;
+	/* width: 32% !important; */
+	padding: 8px 0;
+	font-size: 18px;
+}
+
+li.language-tags {
+	color: #fff;
+	background-color: #00BCD4;
+}
+
+span.project-name {
+	color: #573C59;	
+	font-style: italic;
+}
+
+li.commits-list {
+	color: #4e727c;
+}
+
+li.commits-list:hover {
+	color: #000;
+}
+
+.grid li {
+	width: 24%;
+}
+
+.grid li.project-tags {
+	width: 32%;
+}
+
+h2 {
+	margin-bottom: 1em;
+	color: #37474F;
+	font-weight: bolder;
+}
+
+h3 {
+	color: #fff;
 }
 
 @media only screen and (max-width: 450px) {
@@ -286,11 +326,16 @@
 	.section1 .col2.last .col3 h1 {
 		font-size: 18px;
 	}
-
-	
+	.grid .col3 {
+		width: 100% !important;
+	}
 }
+
 @media only screen and (max-width: 800px) {
 	.tag-div{
 		margin-left: 0;
+	}
+	.col3 {
+		width: 48% !important;
 	}
 }
