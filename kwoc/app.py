@@ -238,25 +238,25 @@ with open(talks_csv, 'r') as csv_file:
         }
 
 
-# @app.route("/summit")
-# def summit():
-#     return render_template('summit.html',
-#                            schedule=schedule,
-#                            talks=talks)
+@app.route("/summit")
+def summit():
+    return render_template('summit.html',
+                           schedule=schedule,
+                           talks=talks)
 
 
-# @app.route("/summit/register")
-# def summit_register():
-#     return render_template('summit_register_form.html')
+@app.route("/summit/register")
+def summit_register():
+    return render_template('summit_register_form.html')
 
 
-# @app.route("/summit/<talk_id>")
-# def summit_talkid(talk_id):
-#     if talk_id in talks:
-#         return render_template('summit_talkid.html',
-#                                talk=talks[talk_id])
-#     else:
-#         return redirect('/summit', code=302)
+@app.route("/summit/<talk_id>")
+def summit_talkid(talk_id):
+    if talk_id in talks:
+        return render_template('summit_talkid.html',
+                               talk=talks[talk_id])
+    else:
+        return redirect('/summit', code=302)
 
 
 @app.route("/dashboard")
