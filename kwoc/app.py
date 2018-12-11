@@ -27,6 +27,8 @@ with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
 
+present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+
 # Separate people with non-zero contributions
 non_zero_contributions = {}
 zero_contributions = {}
@@ -350,7 +352,7 @@ def auth():
         except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
             # print(err)
             stud_dict = dict()
-        present_flag = False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+        global present_flag
         for val in stud_dict:
             if session["dict_val"]['id'] in val:
                 present_flag=True
@@ -480,7 +482,7 @@ def token():
     except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
         # print(err)
         stud_dict = dict()
-    present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+    global present_flag
     for val in stud_dict:
     	if dict_val['id'] in val:
     		present_flag=True
