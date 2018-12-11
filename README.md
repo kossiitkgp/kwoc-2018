@@ -28,6 +28,11 @@ cd kwoc
 
 `update.sh` is a shell script (made by @thealphadollar) that shrinks the entire process to single event.
 
+The same shell script can be added to cron for automatic updates at an interval of 30 minutes via adding the following lines in crontab.
+`*/30 * * * * /home/kwoc/kwoc/update.sh > home/kwoc/auto-update.log 2>&1`
+
+The cronjob is functional at the moment and logs for latest cron job can be found at /home/kwoc/auto-update.log
+
 ## Development Workflow
 
 To launch the server locally, follow the below steps:
@@ -75,7 +80,7 @@ python3 generate_statistics.py
 ### To add cronjob :
 ```
 crontab -e          # A file will open, type the following
-*/60 * * * * /usr/bin/python3 /path/to/kwoc/gh_scraper/stats/generate_statistics.py
+*/60 * * * * /usr/bin/python3 /home/kwoc/kwoc/gh_scraper/stats/generate_statistics.py > /home/kwoc/last_gen_stats.log 2>&1
 ```
 
 
