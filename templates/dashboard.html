@@ -53,6 +53,7 @@
                         <div class="col-md-5 col-sm-8 no-padding testimonial-style2 center-col text-center margin-three no-margin-top">
                             <span class="name white-text" style="font-size:2.1em; padding:1em 0; margin:auto;">{{ name
                                 }}</span>
+                                <h2>{{ affiliation }}</h2>
                         </div>
                     </div>
                     <!-- end testimonials item -->
@@ -72,7 +73,7 @@
             <div>
                 <div class="row grid clearfix">
                     <div class="col-sm-4 first profile-intro center-block center-col" >
-                        <img src="{{ ava_id }}" style="height: 128px; width: auto; border-radius: 25%;" alt="">
+                        <img src="{{ avatar_url }}" style="height: 128px; width: auto; border-radius: 25%;" alt="">
                         <h1>{{ id }}</h1>
                         <p>{{ college }}</p>
                         <br><br><br>
@@ -117,20 +118,23 @@
 {#                        <!-- <br>#}
 {#                        <br>#}
 {#                        <br> -->#}
-                        <h3>Project(s) worked on:</h3>
-                        <ul style="text-align: center;" class="custom">
+                    </div>
+                    <div class="col2 first">
+                        <h3 >Project(s) worked on:</h3>
+                        <ul style="text-align: center;" class="tags custom center-block">
                             {% for project in projects %}
-                            <li>
+                            <li style="background:orange">
                                 <div onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;"
-                                    class="project-tag">{{ project }}</div>
+                                    class="tag">{{ project }}</div>
                             </li>
                             {% endfor %}
                         </ul>
-                        <br style="margin-bottom: 0rem;">
+                    </div>
+                    <div class="col2 first">
                         <h3>Language(s) Involved :</h3>
                         <ul class="tags custom">
                             {% for lan in languages %}
-                            <li>
+                            <li style="background:orange">
                                 <div class="tag">{{ lan }}</div>
                             </li>
                             {% endfor %}
@@ -164,11 +168,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col2 first" style="margin: 10% 0 10% 0;">
-                        <h1>Commits Summary</h1>
+                    <div class="col2 first" style="margin: 10% 0 10% 0">
+                        <h3>Commits Summary</h3>
                     </div>
                     <br>
-                    <ul style="margin: 0 20% 0 20%;">
+                    <ul style="margin-left: 20%">
                         {% for commit in commits %}
                         <li style="width: 100%">
                             <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;">{{

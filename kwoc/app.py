@@ -312,11 +312,20 @@ def dashboard():
     # stud = json.loads(string)
     # return render_template('dashboard.html', **stud['Penguinogeek'])
 
-    with open(stud_json, 'r') as f:
-        stud_dict = json.load(f)
+    # change to true when student registration open, false otherwise
+    # more changes are required in dashboard.html; the keys of the dictionary used.
+    reg_open = False
+    if reg_open:
+        with open(stud_json, 'r') as f:
+            stud_dict = json.load(f)
+    else:
+        stud_dict = {}
 
-    if git_handle is not None and git_handle in stud_dict:
-        return render_template('dashboard.html', **stud_dict[git_handle])
+    if git_handle is not None and (git_handle in stud_dict or git_handle in stats_dict):
+        if reg_open:
+            return render_template('dashboard.html', **stud_dict[git_handle])
+        else:
+            return render_template('dashboard.html', **stats_dict[git_handle])
     else:
         return redirect('/stats', code=302)
 
