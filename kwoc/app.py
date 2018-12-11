@@ -27,6 +27,8 @@ with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
 
+present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+
 # Separate people with non-zero contributions
 non_zero_contributions = {}
 zero_contributions = {}
@@ -341,7 +343,7 @@ def auth():
         except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
             # print(err)
             stud_dict = dict()
-        present_flag = False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+        global present_flag
         for val in stud_dict:
             if session["dict_val"]['id'] in val:
                 present_flag=True
@@ -417,11 +419,10 @@ def reg():
 
             return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
     else:
-        #if session.get('user') is None:
-        #    g.ghname = "Login"
-        #else:
-        #    g.ghname = session.get('user')
-        g.ghname = "Login"
+        if session.get('user') is None:
+            g.ghname = "Login"
+        else:
+            g.ghname = session.get('user')
         return render_template('reg_over.html')
 
 
@@ -472,7 +473,7 @@ def token():
     except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
         # print(err)
         stud_dict = dict()
-    present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+    global present_flag
     for val in stud_dict:
     	if dict_val['id'] in val:
     		present_flag=True
