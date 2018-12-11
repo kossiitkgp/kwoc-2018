@@ -77,6 +77,8 @@ cd gh_scraper/stats
 python3 generate_statistics.py
 ```
 
+NOTE: The below command is already added in the update.sh script
+
 ### To add cronjob :
 ```
 crontab -e          # A file will open, type the following
