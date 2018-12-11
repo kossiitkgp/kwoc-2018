@@ -417,10 +417,11 @@ def reg():
 
             return render_template('student_form.html', data=temp_dict_val, colleges=colleges)
     else:
-        if session.get('user') is None:
-            g.ghname = "Login"
-        else:
-            g.ghname = session.get('user')
+        #if session.get('user') is None:
+        #    g.ghname = "Login"
+        #else:
+        #    g.ghname = session.get('user')
+        g.ghname = "Login"
         return render_template('reg_over.html')
 
 
