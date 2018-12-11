@@ -160,7 +160,7 @@ for project in projects:
     try:
         print("Working on project : ", project)
         query = "https://api.github.com/repos/{}/commits".format(project)
-        since = '2018-11-05T00:00:00Z'
+        since = '2018-12-05T00:00:00Z'
         until = '2019-01-09T00:00:00Z'
         params = {
             'since': since,
