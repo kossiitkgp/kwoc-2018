@@ -1,5 +1,5 @@
 set git = "/usr/bin/git"
-
+cd /home/kwoc/kwoc
 $git add .
 $git stash
 $git fetch origin
