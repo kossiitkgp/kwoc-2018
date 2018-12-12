@@ -291,7 +291,9 @@ def dashboard():
 
     if git_handle is not None and (git_handle in stud_dict or git_handle in stats_dict):
         if reg_open:
-            return render_template('dashboard.html', **stud_dict[git_handle])
+            ndict = stats_dict[git_handle]
+            ndict['username'] = git_handle
+            return render_template('dashboard.html', **ndict)
         else:
             return render_template('dashboard.html', **stats_dict[git_handle])
     else:
