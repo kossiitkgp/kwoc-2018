@@ -279,10 +279,21 @@ li.project-tags {
 	color: #fff;
 	background-color: #03A9F4;
 	/* width: 32% !important; */
-	padding: 8px 0;
+	border: 2px #03A9F4 solid;
+
+	padding: 7px 0;
 	font-size: 18px;
 }
 
+li.project-tags:hover {
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+	/* background: linear-gradient(180deg, #03A9F4, rgb(2, 133, 194)); */
+	border: 2px white solid;
+}
+
+li.project-tags:focus {
+	color: #999;
+}
 li.language-tags {
 	color: #fff;
 	background-color: #00BCD4;

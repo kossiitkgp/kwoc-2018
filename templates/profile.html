@@ -77,29 +77,28 @@
                         <p>{{ affiliation }}</p>
                     </div>
                     <div class="col2 first">
-                        <h3>Project(s) worked on:</h3>
+                        <h2>Project(s) worked on</h2>
                         <ul style="text-align: center;" class="tags custom">
                             {% for project in projects %}
-                            <li style="background:orange">
-                                <div onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;"
-                                    class="tag">{{ project }}</div>
+                            <li class="project-tags"  onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;">
+                                <div class="tag">{{ project }}</div>
                             </li>
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="col2 first">
-                        <h3>Language(s) Involved :</h3>
+                        <h2>Language(s) Involved</h2>
                         <ul class="tags custom">
                             {% for lan in languages %}
-                            <li style="background:orange">
+                            <li class="language-tags">
                                 <div class="tag">{{ lan }}</div>
                             </li>
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="col2 last">
+                    <div class="col2">
                         <div class="grid clearfix">
-                            <div class="col3 first">
+                            <div class="col3">
                                 <h1>{{ no_of_commits }}</h1>
                                 <span>No of Commits</span>
                             </div>
@@ -107,15 +106,11 @@
                                 <h1>{{ pr_open }}</h1>
                                 <span>Pull Requests open</span>
                             </div>
-                            <div class="col3 last">
+                            <div class="col3">
                                 <h1>{{ pr_closed }}</h1>
                                 <span>Pull Requests closed</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col2 last" style="transform:translate(16%);">
-                        <div class="grid clearfix">
-                            <div class="col3 first">
+                            <div class="col3">
                                 <h1>{{ lines_added }}</h1>
                                 <span>Lines Added</span>
                             </div>
@@ -125,15 +120,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col2 first" style="margin: 10% 0 10% 0">
-                        <h3>Commits Summary</h3>
+                    <div class="col2 first">
+                        <h2>Commits Summary</h2>
                     </div>
                     <br>
                     <ul style="margin-left: 20%">
                         {% for commit in commits %}
-                        <li style="width: 100%">
-                            <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;">{{
-                                commit.project }} &nbsp;&nbsp;&nbsp; {{ commit.message }}
+                        <li style="width: 100%" class="commits-list">
+                                <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;"> <span class='project-name'>{{
+                                commit.project }}</span>  &nbsp;&nbsp;&nbsp; {{ commit.message }}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +{{ commit.lines_added }} -{{ commit.lines_removed
                                 }}</p>
                         </li>
