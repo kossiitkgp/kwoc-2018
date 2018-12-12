@@ -83,13 +83,20 @@ h1, h2, h3, h4, h5, h6 {
 .section1 .col2.last {
 	padding: 8px 0;
 }
-.section1 .col2.last .col3 span {
+.section1 .col2 .col3 span {
     color: #a2a2a2;
-    font-size: 14px;
+	font-size: 14px;
+	font-weight: bold;
 }
+.section1 .col2 .col3 {
+	text-align: center;
+}
+
 .section1 .col2 .col3 h1 {
+	text-align: center;
     color: #03A9F4;
 }
+
 .section1 .col1{
   width: 100%;
 }
