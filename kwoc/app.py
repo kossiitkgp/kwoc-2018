@@ -87,7 +87,10 @@ def user_stats(git_handle):
 
     git_handle = git_handle.lower()
     if git_handle in stats_dict:
-        return render_template('profile.html', **stats_dict[git_handle])
+        ndict = stats_dict[git_handle]
+        ndict['username'] = git_handle
+        # print(ndict)
+        return render_template('profile.html', **ndict)
     else:
         return redirect('/stats', code=302)
 

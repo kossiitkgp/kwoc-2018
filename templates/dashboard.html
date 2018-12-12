@@ -163,6 +163,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col2 first">
+                        <h2>Share your Progress</h2>
+                        <div class="grid clearfix">
+                            <a class='social-btn' href="https://www.facebook.com/sharer/sharer.php?u={{ url_for( 'stats' ) }}/{{ username }}" target= '_blank' style="cursor:pointer;">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class='social-btn' href="https://twitter.com/intent/tweet?text=Check out my progress at KWoC &url='{{ url_for( 'stats' ) }}/{{ username }}'" target= '_blank'>
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a class='social-btn' href="https://www.linkedin.com/shareArticle?url={{ url_for( 'stats' ) }}/{{ username }}" target= '_blank'>
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                                
+                        </div>
+                    </div>
+    
+
+
                     <div class="col2 first">
                         <h2>Commits Summary</h2>
                     </div>
