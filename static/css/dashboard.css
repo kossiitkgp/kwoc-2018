@@ -84,10 +84,12 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 8px 0;
 }
 .section1 .col2.last .col3 span {
+	font-weight: bold;
     color: #a2a2a2;
     font-size: 14px;
 }
 .section1 .col2.last .col3 h1 {
+	text-align: center;
     color: #03A9F4;
 }
 .section1 .col1{
@@ -330,6 +332,37 @@ h3 {
 	color: #fff;
 }
 
+
+.social-btn {
+	float: left;
+	width: 23%;
+	text-align: center;
+	font-size: 48px;
+	padding: 2% 0px;
+	margin: 0 5%;
+	background-color: #fff;
+	/* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
+	/* border: 2px rgba(0, 0, 0, 0) solid; */
+	transition: all 0.5s;
+	border-radius: 16px;
+}
+
+.social-btn:hover {
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+.social-btn .fa-facebook {
+	color: #3b5998;
+}
+
+.social-btn .fa-twitter {
+	color: #55acee;
+}
+
+.social-btn .fa-linkedin {
+	color: #0077B5;
+}
+
 @media only screen and (max-width: 450px) {
 	.section1 .col2.last .col3 span {
 		font-size: 10px;
@@ -339,6 +372,12 @@ h3 {
 	}
 	.grid .col3 {
 		width: 100% !important;
+	}
+	.social-btn {
+		font-size: 32px;
+		width: 60%;
+		padding: 5%;
+		margin: 5% 20%;
 	}
 }
 
