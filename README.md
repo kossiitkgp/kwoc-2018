@@ -95,3 +95,33 @@ crontab -e          # A file will open, type the following
 * Go to `/path/to/kwoc/tag_scrapper/` and run the command `python3 main.py` to generate tags
 
 * Go to `/path/to/kwoc/gh_scrapper/` and run the command `python3 project_gen.py` to generate the desired template
+
+## Sending Mass Mails
+
+We use Sendgrid to send mass mails. A script which uses the sendgrid API is present inside and following are the steps to mails to all.
+
+```
+# set environment variable SENDGRID_KEY with the secret sendgrid key
+cd /path/to/kwoc/
+```
+
+You can skip the below two steps if you have already setup the pipenv environment.
+
+```
+pipenv shell
+pipenv install --dev
+```
+
+Below steps are compulsory.
+```
+cd kwoc
+# Go into the file and follow the instructions about putting emailids in csv file,
+# setting your content, subject and from mail.
+python3 sendgrid_mail.py
+```
+
+NOTE:
+- Contact seniors to get the sendgrid key.
+- If the script gets stuck somewhere, wait for it to resume. If you decide to restart, please remove the entries till which mail has been sent, and re-run the script. It happens frequenty.
+- Sample text and csv file is provided in the folder; strictly follow them.
+- Content is to be written in HTML (again see sample content).
