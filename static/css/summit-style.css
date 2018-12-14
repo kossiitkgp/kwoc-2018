@@ -50,14 +50,17 @@ html, body, #page, .landing {
     transition: all 1s;
 }
 
-.navbar-expand-lg .navbar-collapse {
-    justify-content: end;
-}
-
 .landing .navbar {
     width: 100%;
 }
 
+.navbar-expand-lg .navbar-collapse {
+    display: block !important;
+}
+
+.navbar ul {
+    float: right;
+}
 
 .landing, .bg-dark{
     background-color: #363C4F !important;
