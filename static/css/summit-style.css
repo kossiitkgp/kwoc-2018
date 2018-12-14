@@ -41,6 +41,7 @@ html, body, #page, .landing {
 }
 
 #after-text {
+    display: none;
     opacity: 0;
     transition: all 1s;
     padding-bottom: 5rem;
@@ -53,14 +54,15 @@ html, body, #page, .landing {
 .landing .navbar {
     width: 100%;
 }
-
-.navbar-expand-lg .navbar-collapse {
-    display: block !important;
+@media (min-width: 992px) { 
+    .navbar-expand-lg .navbar-collapse {
+        display: block !important;
+    }
+    .navbar ul {
+        float: right;
+    }
 }
 
-.navbar ul {
-    float: right;
-}
 
 .landing, .bg-dark{
     background-color: #363C4F !important;

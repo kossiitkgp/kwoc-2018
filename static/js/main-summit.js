@@ -40,8 +40,8 @@ function myFunction() {
 }
 
 function afterKOSS() {
-    fadeIn(document.querySelector("#after-text"));
     document.getElementById("my-svg").style.display = "none";
     document.getElementById("after-text").style.display = "inherit";
+    fadeIn(document.querySelector("#after-text"));
 }
 
