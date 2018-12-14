@@ -40,6 +40,16 @@ html, body, #page, .landing {
     display: none;
 }
 
+#after-text {
+    opacity: 0;
+    transition: all 1s;
+    padding-bottom: 5rem;
+}
+
+#my-svg {
+    transition: all 1s;
+}
+
 .navbar-expand-lg .navbar-collapse {
     justify-content: end;
 }
@@ -70,4 +80,31 @@ html, body, #page, .landing {
 .landing-text h1 {
     font-weight: bolder;
     font-size: 6rem;
+}
+
+.landing-text .color-text{
+    color: #D2A9EC;
+}
+
+.landing-text .btn-outline-primary {
+    border-color: #D2A9EC;
+    color: #D2A9EC;
+}
+
+.landing-text .btn-outline-primary:hover {
+    color: #363C4F;
+    border-color: #D2A9EC;
+    background-color: #D2A9EC;
+}
+
+.landing-text .btn-outline-primary:active {
+    color: #363C4F;
+    border-color: #c78deb;
+    background-color: #c78deb;
+}
+
+.landing-text .btn-outline-primary:focus {
+    color: #363C4F;
+    border-color: #c78deb;
+    background-color: #c78deb;
 }
