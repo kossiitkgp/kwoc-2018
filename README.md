@@ -125,3 +125,13 @@ NOTE:
 - If the script gets stuck somewhere, wait for it to resume. If you decide to restart, please remove the entries till which mail has been sent, and re-run the script. It happens frequenty.
 - Sample text and csv file is provided in the folder; strictly follow them.
 - Content is to be written in HTML (again see sample content).
+
+
+## Server Folder Backup
+
+All github and non-github data (such as student.csv) are present in `/home/kwoc/kwoc` on server. In a case when this folder is damaged or modified in a way that it becomes futile for use, we are keeping a backup of the same in `/home/kwoc/kwoc-backup`. The former is the master folder and the latter is the slave and are kepy in sync via the below cron script.
+
+```
+25 */2 * * * /usr/bin/rsync -av --delete /home/kwoc/kwoc /home/kwoc/kwoc-backup > /home/kwoc/last-backup.log 2>&1
+```
+
