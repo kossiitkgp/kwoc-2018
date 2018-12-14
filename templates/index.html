@@ -34,13 +34,13 @@
                                             <img style="height: 30px" src="/static/images/ktj.png">
                                         </a>
                                     </span>
-                                    <div style="display: flex; flex-direction: column;">
+                                    <div>
                                       <div>
 {#                                        <a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="/summit" target="_blank">Open Source Summit</a>#}
                                           <br><br><br>
                                       </div>
                                         <h1 class="yellow-text slider-text-middle letter-spacing-3 text-uppercase margin-two no-margin-bottom display-block xs-letter-spacing-6">Coding Period Has Begun!</h1>
-                                      <div style="display: flex; justify-content: center;">
+                                      <div>
                                         {% if g.ghname != "Login" %}
                                         
                                         <span><a class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('dashboard') }}">Welcome {{g.ghname}}</a></span>
@@ -596,7 +596,7 @@
             </div>
         </section>
         <!-- end work process section -->
-
+        <hr />
         <!-- new project section -->
         <section id="new-project" class="new-project wow fadeIn">
             <div class="container">
@@ -605,8 +605,15 @@
                     <h5 class="wow fadeInDown"></h5>
                     <a style="background-color: grey" class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('projects') }}" target="_blank">View Projects</a>
                     {% else %}
+                    <!-- Registrations are closed
                     <h5 class="wow fadeInDown">REGISTRATIONS HAVE BEGUN; SIGN IN WITH YOUR GITHUB ACCOUNTS NOW!</h5>
                     <a style="background-color: grey" class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Register</a>
+                    -->
+                    <div class="content">
+                      <h2 class="deep-red-text">Registrations Are Over!<br></h2>
+                      <h3 style="color: green">You can work on a project, under the guidance of some mentor :)</h3> 
+                      <a style="background-color: grey" class="btn highlight-button-home-white-border margin-four no-margin-bottom wow fadeInUp" href="{{ url_for('auth') }}" target="_blank">Login</a>
+                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -620,18 +627,6 @@
             <!-- footer_final -->
             {{ helpers.end_footer() }}
             <!-- end footer -->
-            <!-- scroll to top -->
-            <a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up" style="font-size:20pt;"></i></a>
-            <style> 
-            .scrollToTop {
-              background-color: #333333;
-              width: 40px;
-              height: 40px;
-              background-size: 100% 100%;
-            }
-
-            </style>
-            <!-- scroll to top End... -->
         </footer>
         <!-- end footer -->
         <!-- javascript libraries -->

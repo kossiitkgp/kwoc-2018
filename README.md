@@ -28,6 +28,11 @@ cd kwoc
 
 `update.sh` is a shell script (made by @thealphadollar) that shrinks the entire process to single event.
 
+The same shell script can be added to cron for automatic updates at an interval of 30 minutes via adding the following lines in crontab.
+`*/30 * * * * /home/kwoc/kwoc/update.sh > home/kwoc/auto-update.log 2>&1`
+
+The cronjob is functional at the moment and logs for latest cron job can be found at /home/kwoc/auto-update.log
+
 ## Development Workflow
 
 To launch the server locally, follow the below steps:
@@ -72,10 +77,12 @@ cd gh_scraper/stats
 python3 generate_statistics.py
 ```
 
+NOTE: The below command is already added in the update.sh script
+
 ### To add cronjob :
 ```
 crontab -e          # A file will open, type the following
-*/60 * * * * python3 /path/to/kwoc/gh_scrapper/stats/generate_statistics.py
+*/60 * * * * /usr/bin/python3 /home/kwoc/kwoc/gh_scraper/stats/generate_statistics.py > /home/kwoc/last_gen_stats.log 2>&1
 ```
 
 
@@ -88,3 +95,43 @@ crontab -e          # A file will open, type the following
 * Go to `/path/to/kwoc/tag_scrapper/` and run the command `python3 main.py` to generate tags
 
 * Go to `/path/to/kwoc/gh_scrapper/` and run the command `python3 project_gen.py` to generate the desired template
+
+## Sending Mass Mails
+
+We use Sendgrid to send mass mails. A script which uses the sendgrid API is present inside and following are the steps to mails to all.
+
+```
+# set environment variable SENDGRID_KEY with the secret sendgrid key
+cd /path/to/kwoc/
+```
+
+You can skip the below two steps if you have already setup the pipenv environment.
+
+```
+pipenv shell
+pipenv install --dev
+```
+
+Below steps are compulsory.
+```
+cd kwoc
+# Go into the file and follow the instructions about putting emailids in csv file,
+# setting your content, subject and from mail.
+python3 sendgrid_mail.py
+```
+
+NOTE:
+- Contact seniors to get the sendgrid key.
+- If the script gets stuck somewhere, wait for it to resume. If you decide to restart, please remove the entries till which mail has been sent, and re-run the script. It happens frequenty.
+- Sample text and csv file is provided in the folder; strictly follow them.
+- Content is to be written in HTML (again see sample content).
+
+
+## Server Folder Backup
+
+All github and non-github data (such as student.csv) are present in `/home/kwoc/kwoc` on server. In a case when this folder is damaged or modified in a way that it becomes futile for use, we are keeping a backup of the same in `/home/kwoc/kwoc-backup`. The former is the master folder and the latter is the slave and are kepy in sync via the below cron script.
+
+```
+25 */2 * * * /usr/bin/rsync -av --delete /home/kwoc/kwoc /home/kwoc/kwoc-backup > /home/kwoc/last-backup.log 2>&1
+```
+

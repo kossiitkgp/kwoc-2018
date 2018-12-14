@@ -8,7 +8,7 @@ import requests
 import ast
 import datetime
 import time
-from flask import render_template, redirect, Markup, request, session,g
+from flask import render_template, redirect, Markup, request, session, g
 import markdown
 from kwoc import config, oauth
 
@@ -26,6 +26,8 @@ colleges_json = root_dir + '/gh_scraper/colleges.json'
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
+
+present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
 
 # Separate people with non-zero contributions
 non_zero_contributions = {}
@@ -61,17 +63,17 @@ def main():
         g.ghname = session.get('user')
     return render_template('index.html')
 
-
 @app.route("/stats")
 def stats():
     # for key, value in stats_dict.items(): 
     #     print(key, value)
-    if session.get('user') is None:
-        g.ghname = "Login"
-    else:
-        g.ghname = session.get('user')
+	# Initial number of rows to load = 50
+	if session.get('user') is None:
+		g.ghname = "Login"
+	else:
+		g.ghname = session.get('user')
 
-    return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
+	return render_template('stats.html', stats=stats_dict, ghname=g.ghname)
     # return render_template('coming_soon.html', ghname=g.ghname)
 
 
@@ -85,7 +87,10 @@ def user_stats(git_handle):
 
     git_handle = git_handle.lower()
     if git_handle in stats_dict:
-        return render_template('profile.html', **stats_dict[git_handle])
+        ndict = stats_dict[git_handle]
+        ndict['username'] = git_handle
+        # print(ndict)
+        return render_template('profile.html', **ndict)
     else:
         return redirect('/stats', code=302)
 
@@ -272,17 +277,25 @@ def dashboard():
     # if git_handle is not None and git_handle in stats_dict:
     #     return render_template('dashboard.html', **stats_dict[git_handle])
 
-    # NOTE: To run on local server, uncomment the lines below and comment everything after it. 
+    # NOTE: To run on local server, just give a manual git_handle
+    # git_handle = 'xypnox'
 
-    # string = """{"Penguinogeek": {"college": "Bangalore Institute of Technology", "id": "Penguinogeek", "token": "a36fa2dadd55afa0b1356fd5e4479fe69d616fd2", "ava_id": "https://avatars0.githubusercontent.com/u/8960796?v=4", "name": null, "email": "Email ID"}}"""
-    # stud = json.loads(string)
-    # return render_template('dashboard.html', **stud['Penguinogeek'])
+    # change to true when student registration open, false otherwise
+    # more changes are required in dashboard.html; the keys of the dictionary used.
+    reg_open = False
+    if reg_open:
+        with open(stud_json, 'r') as f:
+            stud_dict = json.load(f)
+    else:
+        stud_dict = {}
 
-    with open(stud_json, 'r') as f:
-        stud_dict = json.load(f)
-
-    if git_handle is not None and git_handle in stud_dict:
-        return render_template('dashboard.html', **stud_dict[git_handle])
+    if git_handle is not None and (git_handle in stud_dict or git_handle in stats_dict):
+        if reg_open:
+            ndict = stats_dict[git_handle]
+            ndict['username'] = git_handle
+            return render_template('dashboard.html', **ndict)
+        else:
+            return render_template('dashboard.html', **stats_dict[git_handle])
     else:
         return redirect('/stats', code=302)
 
@@ -307,7 +320,7 @@ def auth():
         except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
             # print(err)
             stud_dict = dict()
-        present_flag = False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+        global present_flag
         for val in stud_dict:
             if session["dict_val"]['id'] in val:
                 present_flag=True
@@ -437,7 +450,7 @@ def token():
     except (FileNotFoundError, FileExistsError, json.decoder.JSONDecodeError) as err:
         # print(err)
         stud_dict = dict()
-    present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
+    global present_flag
     for val in stud_dict:
     	if dict_val['id'] in val:
     		present_flag=True

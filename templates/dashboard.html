@@ -53,6 +53,7 @@
                         <div class="col-md-5 col-sm-8 no-padding testimonial-style2 center-col text-center margin-three no-margin-top">
                             <span class="name white-text" style="font-size:2.1em; padding:1em 0; margin:auto;">{{ name
                                 }}</span>
+                                <h3>{{ affiliation }}</h3>
                         </div>
                     </div>
                     <!-- end testimonials item -->
@@ -72,7 +73,7 @@
             <div>
                 <div class="row grid clearfix">
                     <div class="col-sm-4 first profile-intro center-block center-col" >
-                        <img src="{{ ava_id }}" style="height: 128px; width: auto; border-radius: 25%;" alt="">
+                        <img src="{{ avatar_url }}" style="height: 128px; width: auto; border-radius: 25%;" alt="">
                         <h1>{{ id }}</h1>
                         <p>{{ college }}</p>
                         <br><br><br>
@@ -117,20 +118,22 @@
 {#                        <!-- <br>#}
 {#                        <br>#}
 {#                        <br> -->#}
-                        <h3>Project(s) worked on:</h3>
-                        <ul style="text-align: center;" class="custom">
+                    </div>
+                    <div class="col2 first">
+                        <h2 >Project(s) worked on</h2>
+                        <ul style="text-align: center;" class="tags custom center-block">
                             {% for project in projects %}
-                            <li>
-                                <div onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;"
-                                    class="project-tag">{{ project }}</div>
+                            <li class="project-tags" onclick="window.open('http://github.com/{{ project }}');" style="cursor:pointer;">
+                                <div class="tag">{{ project }}</div>
                             </li>
                             {% endfor %}
                         </ul>
-                        <br style="margin-bottom: 0rem;">
-                        <h3>Language(s) Involved :</h3>
+                    </div>
+                    <div class="col2 first">
+                        <h2>Language(s) Involved</h2>
                         <ul class="tags custom">
                             {% for lan in languages %}
-                            <li>
+                            <li class="language-tags">
                                 <div class="tag">{{ lan }}</div>
                             </li>
                             {% endfor %}
@@ -138,7 +141,7 @@
                     </div>
                     <div class="col2 last">
                         <div class="grid clearfix">
-                            <div class="col3 first">
+                            <div class="col3">
                                 <h1>{{ no_of_commits }}</h1>
                                 <span>No of Commits</span>
                             </div>
@@ -146,15 +149,11 @@
                                 <h1>{{ pr_open }}</h1>
                                 <span>Pull Requests open</span>
                             </div>
-                            <div class="col3 last">
+                            <div class="col3">
                                 <h1>{{ pr_closed }}</h1>
-                                <span>Pull Requests closed</span>
+                                <span>Pull Requests Merged</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col2 last" style="transform:translate(16%);">
-                        <div class="grid clearfix">
-                            <div class="col3 first">
+                            <div class="col3">
                                 <h1>{{ lines_added }}</h1>
                                 <span>Lines Added</span>
                             </div>
@@ -164,15 +163,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col2 first" style="margin: 10% 0 10% 0;">
-                        <h1>Commits Summary</h1>
+
+                    <div class="col2 first">
+                        <h2>Share your Progress</h2>
+                        <div class="grid clearfix">
+                            <a class='social-btn' href="https://www.facebook.com/sharer/sharer.php?u=https://kwoc.kossiitkgp.org/stats/{{ username }}" target= '_blank' style="cursor:pointer;">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class='social-btn' href="https://twitter.com/intent/tweet?text=Check out my progress at KWoC &url=https://kwoc.kossiitkgp.org/stats/{{ username }}" target= '_blank'>
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a class='social-btn' href="https://www.linkedin.com/shareArticle?url=https://kwoc.kossiitkgp.org/stats/{{ username }}" target= '_blank'>
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                                
+                        </div>
+                    </div>
+    
+
+
+                    <div class="col2 first">
+                        <h2>Commits Summary</h2>
                     </div>
                     <br>
-                    <ul style="margin: 0 20% 0 20%;">
+                    <ul style="margin-left: 20%">
                         {% for commit in commits %}
-                        <li style="width: 100%">
-                            <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;">{{
-                                commit.project }} &nbsp;&nbsp;&nbsp; {{ commit.message }}
+                        <li style="width: 100%" class="commits-list">
+                            <p onclick="window.open('{{ commit.html_url }}');" style="cursor:pointer;"> <span class='project-name'>{{
+                                commit.project }}</span>  &nbsp;&nbsp;&nbsp; {{ commit.message }}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +{{ commit.lines_added }} -{{ commit.lines_removed
                                 }}</p>
                         </li>
@@ -188,9 +206,6 @@
             <!-- footer_final -->
             {{ helpers.end_footer() }}
             <!-- end footer -->
-            <!-- scroll to top -->
-            <a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
-            <!-- scroll to top End... -->
         </footer>
         <!-- end footer -->
         <!-- javascript libraries -->

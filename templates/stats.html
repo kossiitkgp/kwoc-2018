@@ -114,7 +114,7 @@
             <tr style="cursor:pointer" >
             <th class="text-center" onclick="sortTable(0)">Name</th>
             <th class="text-center" onclick="sortTable(1)">Github Username</th>
-             <th class="text-center" onclick="sortTable(2)">PRs (Closed/Open)</th>
+             <th class="text-center" onclick="sortTable(2)">PRs (Merged/Open)</th>
               <th class="text-center" onclick="sortTable(3)">Commits</th>
               <th class="text-center" onclick="sortTable(4)">Lines added/removed</th>
             </tr>
@@ -138,9 +138,6 @@
             <!-- footer_final -->
             {{ helpers.end_footer() }}
             <!-- end footer -->
-            <!-- scroll to top -->
-            <a href="javascript:;" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
-            <!-- scroll to top End... -->
         </footer>
         <!-- end footer -->
         <!-- javascript libraries -->
@@ -184,74 +181,7 @@
         <script type="text/javascript" src="/static/js/imagesloaded.pkgd.min.js"></script>
         <!-- setting -->
         <script type="text/javascript" src="/static/js/main.js"></script>
-        <!-- sorting -->
-        <script>
-            function sortTable(n) {
-              var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-              table = document.getElementById("statTable");
-              switching = true;
-              // Set the sorting direction to ascending:
-              dir = "asc";
-              /* Make a loop that will continue until
-              no switching has been done: */
-              while (switching) {
-                // Start by saying: no switching is done:
-                switching = false;
-                rows = table.rows;
-                /* Loop through all table rows (except the
-                first, which contains table headers): */
-                for (i = 1; i < (rows.length - 1); i++) {
-                  // Start by saying there should be no switching:
-                  shouldSwitch = false;
-                  /* Get the two elements you want to compare,
-                  one from current row and one from the next: */
-                  x = rows[i].getElementsByTagName("TD")[n];
-                  y = rows[i + 1].getElementsByTagName("TD")[n];
-                  /* Check if the two rows should switch place,
-                  based on the direction, asc or desc: */
-                  if (dir === "asc") {
-                    if (n <= 1 && (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())) {
-                      // If so, mark as a switch and break the loop:
-                      shouldSwitch = true;
-                      break;
-                    }
-
-                    else if (n > 1 && (parseInt(x.innerHTML) > parseInt(y.innerHTML))) {
-                      // If so, mark as a switch and break the loop:
-                      shouldSwitch = true;
-                      break;
-                    }
-                  } else if (dir === "desc") {
-                    if (n<=1 && (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())) {
-                      // If so, mark as a switch and break the loop:
-                      shouldSwitch = true;
-                      break;
-                    }
-                    else if (n>1 && (parseInt(x.innerHTML) < parseInt(y.innerHTML))) {
-                      // If so, mark as a switch and break the loop:
-                      shouldSwitch = true;
-                      break;
-                    }
-                  }
-                }
-                if (shouldSwitch) {
-                  /* If a switch has been marked, make the switch
-                  and mark that a switch has been done: */
-                  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                  switching = true;
-                  // Each time a switch is done, increase this count by 1:
-                  switchcount ++;
-                } else {
-                  /* If no switching has been done AND the direction is "asc",
-                  set the direction to "desc" and run the while loop again. */
-                  if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                  }
-                }
-              }
-            }
-            sortTable(0);
-        </script>
+        <!-- sorting & other table operations -->
+        <script type="application/javascript" src="/static/js/statTable.js"></script>
     </body>
 </html>
