@@ -4,13 +4,11 @@
   <link rel="shortcut icon" href="/static/images/kwoc_logo.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <title>Mid-Term Evaluation | Students</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/static/js/lodash.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="/static/css/mid-term-student.css">
 </head>
 <body>
-  <div class="form-wrapper">
+  <div class="form-wrapper container">
     <div class="header">
       <h1>Mid-Term Evaluation | Students</h1>
     </div>
@@ -22,7 +20,7 @@
         <li>This form is supposed to be filled by KWoC students only.</li>
         <li>You have to choose the mentor you have been working with. The mentor you choose, shall be writing feedback for you. If you are working with multiple mentors, use your discretion and choose one.</li>
         <li>You need to sign up on Kshitij website as well. If you have not already done visit : <a target="_blank" href="http://ktj.in/sign-up">ktj.in/sign-up</a> (If the name of your college does not appear on Kshitij website, choose the first option and write to admin@ktj.in about missing college name)</li>
-        <li><b>Last date to submit the evaluation is December 13, 2017 23:59 IST (GMT +5:30).</b></li>
+        <li><b>Last date to submit the evaluation is December 21, 2018 23:59 IST (GMT +5:30).</b></li>
       </ul>
     </div>
     <div class="form-class">
@@ -97,6 +95,9 @@
   </div>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/lodash.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/sha1.js"></script>
 <script type="text/javascript">
   var hashes = JSON.parse('{{ hashes|tojson }}')
@@ -149,4 +150,5 @@
     $('#warning').hide()
   }
 </script>
+
 </html>
