@@ -96,6 +96,13 @@ crontab -e          # A file will open, type the following
 
 * Go to `/path/to/kwoc/gh_scrapper/` and run the command `python3 project_gen.py` to generate the desired template
 
+## Update `/mid-term` form
+There is an option box for choosing mentor which uses `list_of_mentors.json`. To populate the JSON:
+```
+$ cd /path/to/kwoc
+$ python3 populate_mentor_list.py
+```
+
 ## Add colleges to `colleges.json`
 There is a `<datalist>` in `/student_registration` form which uses `colleges.json`. Due to the request of students, colleges need to be added manually. But, it's not recommended to edit JSON files manually as a simple syntax error will make the server down. To automate this process:
 1. Add colleges to /path/to/colleges_to_add.txt in each line.
