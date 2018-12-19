@@ -103,6 +103,13 @@ $ cd /path/to/kwoc
 $ python3 populate_mentor_list.py
 ```
 
+## Update `/students.csv` - Remove Mentors and Duplicates
+Run the following commands once, while deploying in the server to remove mentors and duplicate entries from `gh_login/student.csv` -
+```
+$ cd /path/to/kwoc
+$ python3 rm_mentors_from_students.py
+```
+
 ## Add colleges to `colleges.json`
 There is a `<datalist>` in `/student_registration` form which uses `colleges.json`. Due to the request of students, colleges need to be added manually. But, it's not recommended to edit JSON files manually as a simple syntax error will make the server down. To automate this process:
 1. Add colleges to /path/to/colleges_to_add.txt in each line.
