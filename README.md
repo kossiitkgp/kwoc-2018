@@ -103,6 +103,14 @@ $ cd /path/to/kwoc
 $ python3 populate_mentor_list.py
 ```
 
+## Add colleges to `colleges.json`
+There is a `<datalist>` in `/student_registration` form which uses `colleges.json`. Due to the request of students, colleges need to be added manually. But, it's not recommended to edit JSON files manually as a simple syntax error will make the server down. To automate this process:
+1. Add colleges to /path/to/colleges_to_add.txt in each line.
+```
+$ cd /path/to/kwoc
+$ python3 add_colleges.py
+```
+
 ## Sending Mass Mails
 
 We use Sendgrid to send mass mails. A script which uses the sendgrid API is present inside and following are the steps to mails to all.
