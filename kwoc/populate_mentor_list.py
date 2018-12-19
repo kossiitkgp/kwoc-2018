@@ -22,6 +22,7 @@ def main():
     with open(MENTORS_JSON, 'w') as f:
         mentors = mentors[1:]
         mentors = list(set(mentors))
+        mentors.sort()
         json.dump(mentors, f)
 
 if __name__ == '__main__':
