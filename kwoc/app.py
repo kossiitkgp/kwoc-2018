@@ -26,6 +26,14 @@ colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
 MIDEVAL_VALIDATION = root_dir + '/gh_scraper/midevals_validation.json'
 
+# creating MIDEVAL_VALIDATION if not present
+try:
+    f = open(MIDEVAL_VALIDATION, 'r')
+except:
+    f = open(MIDEVAL_VALIDATION, "w+")
+finally:
+    f.close()
+
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
@@ -185,12 +193,11 @@ def mid_term():
     
     if g.ghname == "Login":
         return redirect("/", code=302)
-    elif g.ghname in mideval_validation:
+    elif g.ghname in mideval_validation.keys():
         return redirect("/", code=302)
     else:
         return render_template('mid-term-student.html',
-                               list_of_mentors=list_of_mentors,
-                               hashes=midterm_hashes)
+                               list_of_mentors=list_of_mentors)
 
 @app.route("/mentor-appending", methods=['POST'])
 def men_match():
@@ -204,10 +211,13 @@ def men_match():
         ]
     to_append_to = request.form('mentor')
 
-    with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
-        mentors_studs_matches = json.load(mentor_file)
+    try:
+        with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
+            mentors_studs_matches = json.load(mentor_file)
+    except:
+        mentors_studs_matches = dict()
 
-    stud_matches = mentors_studs_matches.get(to_append_to)
+    stud_matches = mentors_studs_matches.get(to_append_to, [])
     
     # if student not already in mentor's student list
     if to_append not in stud_matches:
@@ -215,7 +225,7 @@ def men_match():
         mentors_studs_matches.update({
             to_append_to: stud_matches
         })
-        with open(MENTOR_MATCHES, "w", encoding='utf-8') as mentor_file:
+        with open(MENTOR_MATCHES, "w+", encoding='utf-8') as mentor_file:
             json.dump(mentors_studs_matches, mentor_file)
     
     
