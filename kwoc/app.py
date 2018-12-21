@@ -178,7 +178,8 @@ def mid_term():
     else:
         g.ghname = session.get('user')
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
-    g.ghname = "rapperdinesh"
+    # Testing: uncomment below
+    # g.ghname = "rapperdinesh"
     with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
         mideval_validation = json.load(mideval_validation_file)
     
@@ -332,8 +333,9 @@ def dashboard():
     # if git_handle is not None and git_handle in stats_dict:
     #     return render_template('dashboard.html', **stats_dict[git_handle])
 
-    # NOTE: To run on local server, just give a manual git_handle
-    git_handle = 'rapperdinesh'
+    # Testing: uncomment below
+    # NOTE: To run on local server, just give a manual git_handle 
+    # git_handle = 'rapperdinesh'
 
     # change to true when student registration open, false otherwise
     # more changes are required in dashboard.html; the keys of the dictionary used.
