@@ -8,7 +8,7 @@ import requests
 import ast
 import datetime
 import time
-from flask import render_template, redirect, Markup, request, session, g
+from flask import render_template, redirect, Markup, request, session, g, flash
 import markdown
 from kwoc import config, oauth
 
@@ -24,10 +24,17 @@ root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
+mid_term_stud = root_dir + '/secrets/midterm_eval_stud.txt'
 
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
+
+try:
+    open(mid_term_stud,'r')
+except:
+    open(mid_term_stud,'w').close()
+
 
 present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
 
@@ -178,6 +185,14 @@ def mid_term():
         g.ghname = session.get('user')
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
     g.ghname = "thealphadollar"
+
+    with open(mid_term_stud,"r") as check:
+        if session['user'] in check.readlines():
+            session['mid_eval'] = True
+
+    if session.get('mid_eval') is True:
+        return redirect("/",code=302)
+
     if g.ghname == "Login":
         return redirect("/", code=302)
     else: 
@@ -191,11 +206,17 @@ def men_match():
     appends a student to the mentor of his choice
     in the file MENTOR_MATCHES
     """
+    
     to_append = [
             request.form('gitlink'),
             request.form('email')
         ]
     to_append_to = request.form('mentor')
+
+    with open(mid_term_stud,"a+") as check:
+        check.write(to_append[0]+'\n')
+        session['mid_eval'] = True
+        check.close()
 
     with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
         mentors_studs_matches = json.load(mentor_file)
