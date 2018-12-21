@@ -23,6 +23,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
+MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
+
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
@@ -170,11 +172,44 @@ with open(midterm_hashes_json, 'r') as f:
 
 @app.route("/mid-term")
 def mid_term():
+    if session.get('user') is None:
+        g.ghname = "Login"
+    else:
+        g.ghname = session.get('user')
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
-    return render_template('mid-term-student.html',
-                           list_of_mentors=list_of_mentors,
-                           hashes=midterm_hashes)
+    g.ghname = "thealphadollar"
+    if g.ghname == "Login":
+        return redirect("/", code=302)
+    else: 
+        return render_template('mid-term-student.html',
+                               list_of_mentors=list_of_mentors,
+                               hashes=midterm_hashes)
 
+@app.route("/mentor-appending", methods=['POST'])
+def men_match():
+    """
+    appends a student to the mentor of his choice
+    in the file MENTOR_MATCHES
+    """
+    to_append = [
+            request.form('gitlink'),
+            request.form('email')
+        ]
+    to_append_to = request.form('mentor')
+
+    with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
+        mentors_studs_matches = json.load(mentor_file)
+    
+    stud_matches = mentors_studs_matches.get(to_append_to)
+    
+    # if student not already in mentor's student list
+    if to_append not in stud_matches:
+        stud_matches.append(to_append)
+        mentors_studs_matches.update({
+            to_append_to: stud_matches
+        })
+        with open(MENTOR_MATCHES, "w", encoding='utf-8') as mentor_file:
+            json.dump(mentors_studs_matches, mentor_file)
 
 mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
 with open(mentor_ids_json, 'r') as f:

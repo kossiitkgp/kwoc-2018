@@ -31,7 +31,7 @@
         </div>
         <div class="form-item">
           <label for="github">Github Username</label>
-          <input id="gh_username" type="text" name="gitlink" required="required" placeholder="" autocomplete="off"  onfocus="hideWarning();"></input>
+          <input id="gh_username" type="text" name="gitlink" required="required" placeholder="" value="{{ g.ghname }}" autocomplete="off" readonly="readonly" onfocus="hideWarning();"></input>
         </div>
         <div class="form-item">
           <label for="ktjemail">Email id used for Kshitij registration</label>
@@ -100,50 +100,40 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/sha1.js"></script>
 <script type="text/javascript">
-  var hashes = JSON.parse('{{ hashes|tojson }}')
   $('#warning').hide()
 
   function send(form) {
-    var email = $('#emailid');
-    var username = $('#gh_username');
-    var str1 = _.trim(_.toLower(email.val()));
-    var str2 = _.trim(_.trim(_.toLower(username.val())), '@');
-    var current_hash = CryptoJS.SHA1(str1 + str2).toString()
-    if (hashes.indexOf(current_hash) > -1) {
-
-      var request = new XMLHttpRequest();
-      var data = new FormData(form);
-      var url = "https://test-mail-dpd.herokuapp.com/update_student_feedback";
-      request.onreadystatechange = function() {
-      console.log(request.readyState);
-      console.log(request.status);
-      console.log(request.content);
-      if (request.readyState === 4) {
-            if (request.status === 200) {
-                $(".modal-title").html("Submission Successful");
-                $("#reg_msg").html("You have successfully submitted your Mid-Term evaluation.");
-                $('#myModal').modal('show');
-
-                } else {
-                  $(".modal-title").html("Submission Failed");
-                $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
-                $('#myModal').modal('show');
-                }
-            }
-        };
-      request.open("POST", url , true);
-      request.send(data);
-      $(".modal-title").html("Processing");
-      $("#reg_msg").html('<img src="/static/images/loader.gif"> </img>');
-      $('#myModal').modal('toggle');
-      form.reset()
-      return true;
-
-
-    } else {
-      $('#warning').html('The email address \'' + str1 + '\' and GitHub username \'' + str2 + '\' is not registered with KWoC. If you think this is an error, write an email to kwoc@kossiitkgp.in')
-      $('#warning').show()
-    }
+    var request = new XMLHttpRequest();
+    var data = new FormData(form);
+    var url = "https://test-mail-dpd.herokuapp.com/update_student_feedback";
+    request.onreadystatechange = function() {
+    console.log(request.readyState);
+    console.log(request.status);
+    console.log(request.content);
+    if (request.readyState === 4) {
+      console.log(request.status)
+          if (request.status === 200) {
+              $(".modal-title").html("Submission Successful");
+              $("#reg_msg").html("You have successfully submitted your Mid-Term evaluation.");
+              $('#myModal').modal('show');
+              $.post("{{url_for('men_match')}}", $("form").serialize());
+              window.setTimeout(function () {
+                    window.location.href = "/dashboard";
+                }, 5000);
+              } else {
+                $(".modal-title").html("Submission Failed");
+              $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
+              $('#myModal').modal('show');
+              }
+          }
+      };
+    request.open("POST", url , true);
+    request.send(data);
+    $(".modal-title").html("Processing");
+    $("#reg_msg").html('<img src="/static/images/loader.gif"> </img>');
+    $('#myModal').modal('toggle');
+    form.reset()
+    return true;
   }
 
   function hideWarning() {
