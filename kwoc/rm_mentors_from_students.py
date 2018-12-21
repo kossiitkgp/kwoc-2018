@@ -30,7 +30,7 @@ with open(STUDENTS_LIST, 'r', encoding='utf-8') as student_file:
                 student_mailid.append(row[1])
                 students.append(list(row))
 
-print(students)
+# print(students)
 print(len(students))
 
 with open(STUDENTS_LIST, "w") as new_file:
