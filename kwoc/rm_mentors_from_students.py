@@ -33,7 +33,7 @@ with open(STUDENTS_LIST, 'r', encoding='utf-8') as student_file:
 # print(students)
 print(len(students))
 
-with open(STUDENTS_LIST, "w") as new_file:
+with open(STUDENTS_LIST, "w", encoding='utf-8') as new_file:
 # with open(STUDENTS_LIST, "w") as new_file:
     student_writer = csv.writer(new_file, delimiter=',')
     for row in students:
