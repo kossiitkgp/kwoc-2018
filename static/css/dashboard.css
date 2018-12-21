@@ -277,7 +277,10 @@ h1, h2, h3, h4, h5, h6 {
 	background-color: #0097A7;
 }
 
-.prjt-rel-disable {
+.prjt-rel-disable,
+.prjt-rel-disable:active,
+.prjt-rel-disable:visited,
+.prjt-rel-disable:link {
 	text-align: center;
 	display: inline-block;
 	padding: 16px 20px;
