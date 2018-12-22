@@ -24,7 +24,7 @@ root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
-MIDEVAL_VALIDATION = root_dir + '/gh_scraper/midevals_validation.json'
+MIDEVAL_VALIDATION = root_dir + '/gh_login/midevals_validation.json'
 
 # creating MIDEVAL_VALIDATION if not present
 try:
@@ -187,14 +187,14 @@ def mid_term():
         g.ghname = session.get('user')
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
     # Testing: uncomment below
-    # g.ghname = "rapperdinesh"
+    # g.ghname = "kucchobhi"
     with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
         mideval_validation = json.load(mideval_validation_file)
     
     if g.ghname == "Login":
         return redirect("/", code=302)
     elif g.ghname in mideval_validation.keys():
-        return redirect("/", code=302)
+        return redirect("/dashboard", code=302)
     else:
         return render_template('mid-term-student.html',
                                list_of_mentors=list_of_mentors)
@@ -205,11 +205,12 @@ def men_match():
     appends a student to the mentor of his choice
     in the file MENTOR_MATCHES
     """
+    print(request.form)
     to_append = [
-            request.form('gitlink'),
-            request.form('email')
+            request.form['gitlink'],
+            request.form['email']
         ]
-    to_append_to = request.form('mentor')
+    to_append_to = request.form['mentor']   
 
     try:
         with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
@@ -229,7 +230,7 @@ def men_match():
             json.dump(mentors_studs_matches, mentor_file)
     
     
-    student_gitlink = request.form('gitlink')
+    student_gitlink = request.form['gitlink']
 
     with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
         mideval_validation = json.load(mideval_validation_file)
@@ -240,6 +241,8 @@ def men_match():
         })
         with open(MIDEVAL_VALIDATION, "w", encoding='utf-8') as mideval_validation_file:
             json.dump(mideval_validation, mideval_validation_file)
+    
+    return redirect("/dashboard")
 
 
 mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
@@ -275,10 +278,10 @@ with open(endterm_hashes_json, 'r') as f:
     endterm_hashes = json.load(f)
 
 
-@app.route("/end-term")
-def end_term():
-    return render_template('end-term-student.html',
-                           hashes=endterm_hashes)
+# @app.route("/end-term")
+# def end_term():
+#     return render_template('end-term-student.html',
+#                            hashes=endterm_hashes)
 
 
 schedule_csv = root_dir + '/secrets/schedule.csv'
