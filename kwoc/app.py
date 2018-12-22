@@ -24,6 +24,7 @@ root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
+MIDEVAL_VALIDATION = root_dir + '/gh_scraper/midevals_validation.json'
 
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
@@ -177,10 +178,16 @@ def mid_term():
     else:
         g.ghname = session.get('user')
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
-    g.ghname = "thealphadollar"
+    # Testing: uncomment below
+    # g.ghname = "rapperdinesh"
+    with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+        mideval_validation = json.load(mideval_validation_file)
+    
     if g.ghname == "Login":
         return redirect("/", code=302)
-    else: 
+    elif g.ghname in mideval_validation:
+        return redirect("/", code=302)
+    else:
         return render_template('mid-term-student.html',
                                list_of_mentors=list_of_mentors,
                                hashes=midterm_hashes)
@@ -199,7 +206,7 @@ def men_match():
 
     with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
         mentors_studs_matches = json.load(mentor_file)
-    
+
     stud_matches = mentors_studs_matches.get(to_append_to)
     
     # if student not already in mentor's student list
@@ -210,6 +217,20 @@ def men_match():
         })
         with open(MENTOR_MATCHES, "w", encoding='utf-8') as mentor_file:
             json.dump(mentors_studs_matches, mentor_file)
+    
+    
+    student_gitlink = request.form('gitlink')
+
+    with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+        mideval_validation = json.load(mideval_validation_file)
+
+    if student_gitlink not in mideval_validation:
+        mideval_validation.update({
+            student_gitlink: True
+        })
+        with open(MIDEVAL_VALIDATION, "w", encoding='utf-8') as mideval_validation_file:
+            json.dump(mideval_validation, mideval_validation_file)
+
 
 mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
 with open(mentor_ids_json, 'r') as f:
@@ -312,8 +333,9 @@ def dashboard():
     # if git_handle is not None and git_handle in stats_dict:
     #     return render_template('dashboard.html', **stats_dict[git_handle])
 
-    # NOTE: To run on local server, just give a manual git_handle
-    # git_handle = 'xypnox'
+    # Testing: uncomment below
+    # NOTE: To run on local server, just give a manual git_handle 
+    # git_handle = 'rapperdinesh'
 
     # change to true when student registration open, false otherwise
     # more changes are required in dashboard.html; the keys of the dictionary used.
@@ -324,13 +346,24 @@ def dashboard():
     else:
         stud_dict = {}
 
+    with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+        mideval_validation = json.load(mideval_validation_file)
+
+    if git_handle in mideval_validation:
+        mideval = True
+    else:
+        mideval = False
+
     if git_handle is not None and (git_handle in stud_dict or git_handle in stats_dict):
         if reg_open:
             ndict = stats_dict[git_handle]
             ndict['username'] = git_handle
+            ndict['mideval'] = mideval
             return render_template('dashboard.html', **ndict)
         else:
-            return render_template('dashboard.html', **stats_dict[git_handle])
+            ndict = stats_dict[git_handle]
+            ndict['mideval'] = mideval
+            return render_template('dashboard.html', **ndict)
     else:
         return redirect('/stats', code=302)
 
