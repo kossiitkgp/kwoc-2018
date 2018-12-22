@@ -17,7 +17,7 @@ from multiprocessing.dummy import Pool
 import utils
 
 # using 8 threads to send mail since these are network calls
-threads = Pool(8)
+threads = Pool(16)
 
 
 # paste your email content below, replacing the below one.
