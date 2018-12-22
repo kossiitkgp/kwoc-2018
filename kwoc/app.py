@@ -24,7 +24,15 @@ root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
-MIDEVAL_VALIDATION = root_dir + '/gh_scraper/midevals_validation.json'
+MIDEVAL_VALIDATION = root_dir + '/gh_login/midevals_validation.json'
+
+# creating MIDEVAL_VALIDATION if not present
+try:
+    f = open(MIDEVAL_VALIDATION, 'r')
+except:
+    f = open(MIDEVAL_VALIDATION, "w+")
+finally:
+    f.close()
 
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
@@ -179,18 +187,17 @@ def mid_term():
         g.ghname = session.get('user')
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
     # Testing: uncomment below
-    # g.ghname = "rapperdinesh"
+    # g.ghname = "kucchobhi"
     with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
         mideval_validation = json.load(mideval_validation_file)
     
     if g.ghname == "Login":
         return redirect("/", code=302)
-    elif g.ghname in mideval_validation:
-        return redirect("/", code=302)
+    elif g.ghname in mideval_validation.keys():
+        return redirect("/dashboard", code=302)
     else:
         return render_template('mid-term-student.html',
-                               list_of_mentors=list_of_mentors,
-                               hashes=midterm_hashes)
+                               list_of_mentors=list_of_mentors)
 
 @app.route("/mentor-appending", methods=['POST'])
 def men_match():
@@ -198,16 +205,20 @@ def men_match():
     appends a student to the mentor of his choice
     in the file MENTOR_MATCHES
     """
+    print(request.form)
     to_append = [
-            request.form('gitlink'),
-            request.form('email')
+            request.form['gitlink'],
+            request.form['email']
         ]
-    to_append_to = request.form('mentor')
+    to_append_to = request.form['mentor']   
 
-    with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
-        mentors_studs_matches = json.load(mentor_file)
+    try:
+        with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
+            mentors_studs_matches = json.load(mentor_file)
+    except:
+        mentors_studs_matches = dict()
 
-    stud_matches = mentors_studs_matches.get(to_append_to)
+    stud_matches = mentors_studs_matches.get(to_append_to, [])
     
     # if student not already in mentor's student list
     if to_append not in stud_matches:
@@ -215,11 +226,11 @@ def men_match():
         mentors_studs_matches.update({
             to_append_to: stud_matches
         })
-        with open(MENTOR_MATCHES, "w", encoding='utf-8') as mentor_file:
+        with open(MENTOR_MATCHES, "w+", encoding='utf-8') as mentor_file:
             json.dump(mentors_studs_matches, mentor_file)
     
     
-    student_gitlink = request.form('gitlink')
+    student_gitlink = request.form['gitlink']
 
     with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
         mideval_validation = json.load(mideval_validation_file)
@@ -230,6 +241,8 @@ def men_match():
         })
         with open(MIDEVAL_VALIDATION, "w", encoding='utf-8') as mideval_validation_file:
             json.dump(mideval_validation, mideval_validation_file)
+    
+    return redirect("/dashboard")
 
 
 mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
@@ -241,23 +254,23 @@ with open(mentor_student_mappings_json, 'r') as f:
     mentor_student_mappings = json.load(f)
 
 
-@app.route("/mid-term/<mentor_id>")
-def mid_term_mentor(mentor_id):
-    if mentor_id in mentor_ids:
-        mentor = mentor_ids[mentor_id]
-        students = mentor_student_mappings.get(mentor, [])
-        new_students = []
-        for i in students:
-            try:
-                new_students.append([i[0], stats_dict[i[0].lower().strip()]])
-            except KeyError:
-                pass
-        return render_template('mid-term-mentor.html',
-                               mentor_id=mentor_id,
-                               mentor=mentor,
-                               students=new_students)
-    else:
-        return redirect("/", code=302)
+# @app.route("/mid-term/<mentor_id>")
+# def mid_term_mentor(mentor_id):
+#     if mentor_id in mentor_ids:
+#         mentor = mentor_ids[mentor_id]
+#         students = mentor_student_mappings.get(mentor, [])
+#         new_students = []
+#         for i in students:
+#             try:
+#                 new_students.append([i[0], stats_dict[i[0].lower().strip()]])
+#             except KeyError:
+#                 pass
+#         return render_template('mid-term-mentor.html',
+#                                mentor_id=mentor_id,
+#                                mentor=mentor,
+#                                students=new_students)
+#     else:
+#         return redirect("/", code=302)
 
 
 endterm_hashes_json = root_dir + '/secrets/student_email_username_hashes_after_midterm.json'
@@ -265,10 +278,10 @@ with open(endterm_hashes_json, 'r') as f:
     endterm_hashes = json.load(f)
 
 
-@app.route("/end-term")
-def end_term():
-    return render_template('end-term-student.html',
-                           hashes=endterm_hashes)
+# @app.route("/end-term")
+# def end_term():
+#     return render_template('end-term-student.html',
+#                            hashes=endterm_hashes)
 
 
 schedule_csv = root_dir + '/secrets/schedule.csv'
