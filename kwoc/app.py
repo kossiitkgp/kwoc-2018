@@ -26,22 +26,6 @@ colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
 MIDEVAL_VALIDATION = root_dir + '/gh_login/midevals_validation.json'
 
-# creating MIDEVAL_VALIDATION if not present
-try:
-    f = open(MIDEVAL_VALIDATION, 'r')
-except:
-    f = open(MIDEVAL_VALIDATION, "w+")
-finally:
-    f.close()
-
-# creating MENTOR_MATCHES if not present
-try:
-    f = open(MENTOR_MATCHES, 'r')
-except:
-    f = open(MENTOR_MATCHES, "w+")
-finally:
-    f.close()
-
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
@@ -196,8 +180,11 @@ def mid_term():
     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
     # Testing: uncomment below
     # g.ghname = "kucchobhi"
-    with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-        mideval_validation = json.load(mideval_validation_file)
+    try:
+        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+            mideval_validation = json.load(mideval_validation_file)
+    except:
+        mideval_validation = dict()
     
     if g.ghname == "Login":
         return redirect("/", code=302)
@@ -240,14 +227,17 @@ def men_match():
     
     student_gitlink = request.form['gitlink']
 
-    with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-        mideval_validation = json.load(mideval_validation_file)
+    try:
+        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+            mideval_validation = json.load(mideval_validation_file)
+    except:
+        mideval_validation = dict()
 
     if student_gitlink not in mideval_validation:
         mideval_validation.update({
             student_gitlink: True
         })
-        with open(MIDEVAL_VALIDATION, "w", encoding='utf-8') as mideval_validation_file:
+        with open(MIDEVAL_VALIDATION, "w+", encoding='utf-8') as mideval_validation_file:
             json.dump(mideval_validation, mideval_validation_file)
     
     return redirect("/dashboard")
@@ -366,9 +356,11 @@ def dashboard():
             stud_dict = json.load(f)
     else:
         stud_dict = {}
-
-    with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-        mideval_validation = json.load(mideval_validation_file)
+    try:
+        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+            mideval_validation = json.load(mideval_validation_file)
+    except:
+        mideval_validation = dict()
 
     if git_handle in mideval_validation:
         mideval = True
