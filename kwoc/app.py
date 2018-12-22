@@ -34,6 +34,14 @@ except:
 finally:
     f.close()
 
+# creating MENTOR_MATCHES if not present
+try:
+    f = open(MENTOR_MATCHES, 'r')
+except:
+    f = open(MENTOR_MATCHES, "w+")
+finally:
+    f.close()
+
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
@@ -245,13 +253,13 @@ def men_match():
     return redirect("/dashboard")
 
 
-mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
-with open(mentor_ids_json, 'r') as f:
-    mentor_ids = json.load(f)
+# mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
+# with open(mentor_ids_json, 'r') as f:
+#     mentor_ids = json.load(f)
 
-mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json'
-with open(mentor_student_mappings_json, 'r') as f:
-    mentor_student_mappings = json.load(f)
+# mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json'
+# with open(mentor_student_mappings_json, 'r') as f:
+#     mentor_student_mappings = json.load(f)
 
 
 # @app.route("/mid-term/<mentor_id>")
@@ -273,9 +281,9 @@ with open(mentor_student_mappings_json, 'r') as f:
 #         return redirect("/", code=302)
 
 
-endterm_hashes_json = root_dir + '/secrets/student_email_username_hashes_after_midterm.json'
-with open(endterm_hashes_json, 'r') as f:
-    endterm_hashes = json.load(f)
+# endterm_hashes_json = root_dir + '/secrets/student_email_username_hashes_after_midterm.json'
+# with open(endterm_hashes_json, 'r') as f:
+#     endterm_hashes = json.load(f)
 
 
 # @app.route("/end-term")
@@ -284,32 +292,32 @@ with open(endterm_hashes_json, 'r') as f:
 #                            hashes=endterm_hashes)
 
 
-schedule_csv = root_dir + '/secrets/schedule.csv'
-schedule = []
-with open(schedule_csv, 'r') as csv_file:
-    raw_reader = csv.reader(csv_file)
-    for row in raw_reader:
-        if row[0] != '':
-            schedule.append([row[0], row[1], row[2], row[3]])
+# schedule_csv = root_dir + '/secrets/schedule.csv'
+# schedule = []
+# with open(schedule_csv, 'r') as csv_file:
+#     raw_reader = csv.reader(csv_file)
+#     for row in raw_reader:
+#         if row[0] != '':
+#             schedule.append([row[0], row[1], row[2], row[3]])
 
 
-talks_csv = root_dir + '/secrets/talks.csv'
-talks = {}
-with open(talks_csv, 'r') as csv_file:
-    raw_reader = csv.reader(csv_file)
-    header = next(raw_reader, None)
-    for row in raw_reader:
-        talk_id = row[10]
-        speaker_name = row[4]
-        speaker_bio = row[5]
-        talk_name = row[7]
-        talk_abstract = row[8]
-        talks[talk_id] = {
-            'speaker_name': speaker_name,
-            'speaker_bio': Markup(markdown.markdown(speaker_bio)),
-            'talk_name': talk_name,
-            'talk_abstract': Markup(markdown.markdown(talk_abstract))
-        }
+# talks_csv = root_dir + '/secrets/talks.csv'
+# talks = {}
+# with open(talks_csv, 'r') as csv_file:
+#     raw_reader = csv.reader(csv_file)
+#     header = next(raw_reader, None)
+#     for row in raw_reader:
+#         talk_id = row[10]
+#         speaker_name = row[4]
+#         speaker_bio = row[5]
+#         talk_name = row[7]
+#         talk_abstract = row[8]
+#         talks[talk_id] = {
+#             'speaker_name': speaker_name,
+#             'speaker_bio': Markup(markdown.markdown(speaker_bio)),
+#             'talk_name': talk_name,
+#             'talk_abstract': Markup(markdown.markdown(talk_abstract))
+#         }
 
 
 # @app.route("/summit")
