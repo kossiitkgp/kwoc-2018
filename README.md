@@ -103,6 +103,11 @@ $ cd /path/to/kwoc
 $ python3 populate_mentor_list.py
 ```
 
+This script also updates the `secrets/mentor_unique_ids.json` file which is used to map an encrypted url endpoint to each mentor so that they can fill in their mentor evaluations.
+
+The code at the end should be mailed to them once all students have filled in their mid-term/end-term evaluations.
+
+
 ## Update `/students.csv` - Remove Mentors and Duplicates
 Run the following commands once, while deploying in the server to remove mentors and duplicate entries from `gh_login/student.csv` -
 ```

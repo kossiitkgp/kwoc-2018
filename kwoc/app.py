@@ -243,13 +243,13 @@ def men_match():
     return redirect("/dashboard")
 
 
-# mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
-# with open(mentor_ids_json, 'r') as f:
-#     mentor_ids = json.load(f)
+mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
+with open(mentor_ids_json, 'r') as f:
+    mentor_ids = json.load(f)
 
-# mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json'
-# with open(mentor_student_mappings_json, 'r') as f:
-#     mentor_student_mappings = json.load(f)
+mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json'
+with open(mentor_student_mappings_json, 'r') as f:
+    mentor_student_mappings = json.load(f)
 
 
 @app.route("/mid-term/<mentor_id>")
