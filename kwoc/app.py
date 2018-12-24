@@ -541,7 +541,7 @@ def token():
     if present_flag is False:
         session.pop('user', None)
         g.ghname = 'Login'
-    	return redirect("/student_registration")
+        return redirect("/student_registration")
     	
     # If the user is registered
     # -------------------------
