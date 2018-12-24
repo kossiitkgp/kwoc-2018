@@ -251,6 +251,18 @@ mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json
 with open(mentor_student_mappings_json, 'r') as f:
     mentor_student_mappings = json.load(f)
 
+# the below code adds all the students of a mentor across multiple projects to a single entry
+new_mentor_student_mappings = dict()
+for key in mentor_student_mappings.keys():
+    new_key =  key.split('|')[0]
+    new_key = new_key[:-1]
+    # print(new_key)
+    if new_key not in new_mentor_student_mappings.keys():
+        new_mentor_student_mappings[new_key] = mentor_student_mappings[key]
+    else:
+        new_mentor_student_mappings[new_key].extend(mentor_student_mappings[key])
+mentor_student_mappings = new_mentor_student_mappings
+# print(mentor_student_mappings)
 
 @app.route("/mid-term/<mentor_id>")
 def mid_term_mentor(mentor_id):
