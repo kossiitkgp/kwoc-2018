@@ -437,12 +437,10 @@ def reg():
             dict_stud_csv['college'] = request.form['college']
             dict_stud_csv['year'] = request.form['year']
             dict_stud_csv['how'] = request.form['how']
-            ts = time.time()
-            dict_stud_csv['Timestamp'] = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
             dict_stud_csv_lst = [dict_stud_csv]
 
             with open(studcsv, 'a+') as file_csv:
-                fields = ['name','email','gitlink','college','year','how','Timestamp']
+                fields = ['name','email','gitlink','college','year','how']
                 writer = csv.DictWriter(file_csv, fieldnames=fields)
                 writer.writerows(dict_stud_csv_lst)
 
@@ -541,7 +539,8 @@ def token():
     # If the user is not registered
     # -----------------------------
     if present_flag is False:
-
+        session.pop('user', None)
+        g.ghname = 'Login'
     	return redirect("/student_registration")
     	
     # If the user is registered
