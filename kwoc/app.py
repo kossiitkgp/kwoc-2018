@@ -33,12 +33,6 @@ with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
 # stats_dict = {}
 
-try:
-    open(mid_term_stud,'r')
-except:
-    open(mid_term_stud,'w').close()
-
-
 present_flag=False #This flag ensures, if the id is present or not in stud_json. True refers to id present, and false otherwise
 
 # Separate people with non-zero contributions
