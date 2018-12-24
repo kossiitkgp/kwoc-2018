@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# import sys
-# from imp import reload
-# reload(sys)
-# try:
-#   sys.setdefaultencoding('utf8')
-# except Exception:
-#   pass
-# #above three lines are IMPORTANT
+import sys
+from imp import reload
+reload(sys)
+try:
+  sys.setdefaultencoding('utf8')
+except Exception:
+  pass
+# above three lines are IMPORTANT
 
 import sendgrid
 import os
@@ -15,31 +15,36 @@ import traceback
 import requests
 from multiprocessing.dummy import Pool
 import utils
+import json, csv
 
-# using 8 threads to send mail since these are network calls
-threads = Pool(16)
-
+# NOTE: Import sendgrid API key variables
 
 # paste your email content below, replacing the below one.
 # the content should be in html, so a better way it to add <br/> for each line break.
 MSG = """
-Greetings.<br/><br/>
+Dear Mentor {},</br>
+Greetings from KOSS,</br></br>
 
-We hope you are having a great time working through issues and interacting with your mentor(s).<br/><br/>
+KWoC Mid-Term evaluations are now open for mentors.</br> 
+In the students' mid-term feedback, we asked them to enlist one mentor they are working with, and few of them have nominated you as their mentor.
+We request you to be honest with the students, if you spot unsincere efforts and feel they are wasting your time, you should give them a Fail grade.
+While at the same time, if they have informed you of being busy with their exams, there is no harm in being generous towards them.
+Note that the ones which are given as fail grade, will be removed from the KWoC programme.</br></br>
 
-Due to the staggering and astonishing participation, we saw this season, our codes couldn't keep up. We deeply regret the inconvenience caused by the breaking of the statistics table and other accompanying issues. We also had reports of wrong dashboard data.<br/><br/>
+Here is your unique link for the evaluation : {} </br></br>
 
-Thanks to our amazing team and their dedicated efforts, we've managed to fix all the bugs and updated the statistics page, dashboard, and profile page; and added sharing capabilities so you can show your KWoC stats to your friends.<br/><br/>
+Please fill it positively by December 27, 23:59 IST.</br>
+We also look forward to hearing from you in the feedback.</br></br> 
 
-Please make us aware if you observe any anomaly.<br/><br/>
+We thank you for bearing with the doubts from your mentees and hope that your projects are growing.</br>
+KWoC is not possible without dedicated efforts from mentors like you.</br></br>
 
-Thank you.<br/>
-Kharagpur Open Source Society<br/>
-IIT Kharagpur
+Regards,
+Kharagpur Open Source Society 
 """
 
 # paste your subject below, replacing the below one.
-SUB = "KWoC '19 Important Website Updates"
+SUB = "KWoC '19 Mentor Mid-Term Evaluations"
 
 # paste email from which the message should look coming from, replacing the below one.
 FROM = "kossiitkgp@gmail.com"
@@ -60,71 +65,53 @@ def send_mail(to_email, mail_subject=SUB, mail_body=MSG, from_email=FROM):
         return False
 
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+root_dir = '/'.join(dir_path.split('/')[:-1])
+HASH_FILE = root_dir + '/secrets/mentor_unique_ids.json'
+PROJECT_FILE = root_dir + '/gh_scraper/projects.csv'
 
-'''Not used, for gmail smtp server
-# import gmail
-import smtplib
-import json
-from email.mime.text import MIMEText
-import os
-import requests
-import traceback
-import time
+URL = 'https://kwoc.kossiitkgp.org/mid-term/'
 
-def send_mail(mail_subject, mail_body, to_email):
-    # credentials = json.load(open('CONFIG', 'r'))
-    msg = MIMEText(mail_body)
-    msg.set_type("text/html")
-    msg['Subject'] = mail_subject
-    # print (msg)
-    # sending mail
-    flag =0
-    while True :
-        try:
-            server = smtplib.SMTP('smtp.gmail.com:587')
-            server.starttls()
-            server.login(os.environ["EMAIL"],os.environ["PASSWORD"])
-            server.sendmail(os.environ["EMAIL"], to_email, msg.as_string())
-            server.quit()
-            return True
-        except :
-            flag+=1
-            if flag >= 5 :
-                utils.slack_notification("Got following error while sending email : \n{}".format(traceback.format_exc()))
-                return False
-            time.sleep(1)
-            # return False
-'''
+name_email_map = {}
+
+with open(HASH_FILE, "r") as k:
+    mentor_ids = json.load(k)
+
+with open(PROJECT_FILE,"r") as k:
+    projects = csv.DictReader(k)
+    for project in projects:
+        name_email_map[project['name']] = project['email'] 
+
 
 # driving function
+def send_sendgrid_mail(hash):
 
+    body = MSG.format(mentor_ids[hash],URL + hash)
+    id = name_email_map[mentor_ids[hash]]
 
-def send_sendgrid_mail(id):
-    if send_mail(id):
-        print("sending mail to {}...".format(id), flush=True)
+    if send_mail(id, mail_body=body):
+        print("sending mail to id = {}, name = {}".format(id,mentor_ids[hash]), flush=True)
         print("mail successfully sent to {}".format(id), flush=True)
+    
     else:
         print("failed to send to {}".format(id), flush=True)
 
-# export SENDGRID_KEY before running the script with sendgrid key
-# place a csv file with just emails to sendto, named "mail_ids.csv"
-# DO NOT HAVE ANY HEADER OR ANY OTHER DATA, JUST MAILIDs
-# Example CSV file is provided in the directory
 
+if __name__ == '__main__':
 
-FILE_NAME = "mail_ids.csv"
-with open(FILE_NAME, "r+") as file:
-    ids = file.read()
+    hashes = [id for id in mentor_ids]
+    
+    # print(name_email_map)
+    # print(mentor_ids)
+    # print(hashes)
 
-ids = ids.split("\n")
+    # threading code
+    # using 16 threads to send mail since these are network calls
+    threads = Pool(16)
+    threads.map(send_sendgrid_mail, hashes)
 
-# threading code
-# if for some reason the script stops in-between, please restart the script after
-# removing the mails till which it has been sent.
-threads.map(send_sendgrid_mail, ids)
+    # # close threading and run threads
+    threads.close()
+    threads.join()
 
-# close threading and run threads
-threads.close()
-threads.join()
-
-print("\n\nYayyy! Successfully sent to all :)", flush=True)
+    print("\n\nYayyy! Successfully sent to all :)", flush=True)
