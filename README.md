@@ -107,6 +107,16 @@ This script also updates the `secrets/mentor_unique_ids.json` file which is used
 
 The code at the end should be mailed to them once all students have filled in their mid-term/end-term evaluations.
 
+### After mentor fills the form
+
+Once the mentor has filled the form, firstly we take a note of it and block the particular id so that the mentor cannot fill the form again.
+
+We store the list of students he passes and fails in `secrets/pass.txt` and `secrets/fail.txt` in the following format:
+
+`github_username PASS/FAIL`
+
+We also store his elaborate response in a google sheet.
+
 
 ## Update `/students.csv` - Remove Mentors and Duplicates
 Run the following commands once, while deploying in the server to remove mentors and duplicate entries from `gh_login/student.csv` -
