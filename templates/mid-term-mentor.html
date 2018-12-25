@@ -28,7 +28,7 @@
       <form id="form" onsubmit="event.preventDefault(); send(form);">
         <div class="form-item">
           <label class=".normal-label" for="name">Name</label>
-          <input id="name" type="name" name="name" required="required" placeholder="{{ mentor }}" autocomplete="off" readonly onfocus="hideWarning();"></input>
+          <input id="name" type="name" name="name" required="required" value="{{ mentor }}" placeholder="{{ mentor }}" autocomplete="off" readonly onfocus="hideWarning();"></input>
         </div>
         <div class="form-item">
           <div style="display: flex; justify-content: space-between; padding-right: 5%">
@@ -144,7 +144,22 @@
           $(".modal-title").html("Submission Successful");
           $("#reg_msg").html("You have successfully submitted your Mid-Term evaluation.");
           $('#myModal').modal('show');
-
+          $.ajax({
+            type: "POST",
+            url: "{{url_for('save_mentor_resp')}}",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+              console.log(response);
+              },
+            error: function(errResponse) {
+              console.log(errResponse);
+            }
+          });
+          window.setTimeout(function () {
+                window.location.href = "/";
+            }, 5000);
           } else {
             $(".modal-title").html("Submission Failed");
           $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
