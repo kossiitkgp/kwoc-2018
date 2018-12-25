@@ -176,6 +176,11 @@ with open(midterm_hashes_json, 'r') as f:
 
 @app.route("/mid-term")
 def mid_term():
+    mid_evals_open = False
+
+    if not mid_evals_open:
+        return make_response("MidTerm evaluations are over for participants!", 400)
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
