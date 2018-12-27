@@ -1,4 +1,3 @@
-
 Hello <student_name> !
 You have been successfully registered for Kharagpur Winter of Code. 
 
@@ -10,3 +9,6 @@ Join the facebook group and interact with the community.
 Read the student manual.
 Read this blog to get a larger picture of the program.
 Go ahead with choosing your projects here.
+
+Regards,
+Kharagpur Open Source Society
