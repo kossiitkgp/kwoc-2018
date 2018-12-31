@@ -28,3 +28,6 @@ Types of common problems(what to fill in <issues>):
         if(Absence of <Tags/Description/both> on the issues of the project):
     	      Presence of <Tags/Description/both> of the project detailing certain things for the mentees will
     	      be helpful for them to apply for specific issues
+
+Regards,
+Kharagpur Open Source Society
