@@ -77,13 +77,16 @@
                         <h1>{{ id }}</h1>
                         <p>{{ college }}</p>
                         <br><br><br>
-                        {% if mideval %}
+                        
+                        <!-- {% if mideval %}
                             <p class="panel-heading"><a class="btn btn-success prjt-rel-disable" href="#"> &#10003; Midevals Submitted Successfully</a><br>You have submitted the form successfully.</p>
                         {% else %}
                             <p class="panel-heading"><a class="btn btn-success prjt-rel" href="{{ url_for('mid_term') }}">Mid-Evals Over!!</a><br>Please contact KOSS if you missed it for a genuine reason.</p>
-                        {% endif %}
+                        {% endif %} -->
 
-{#                        <p class="panel-heading"><a class="btn btn-success prjt-rel" href="{{ url_for('projects') }}">Projects Released!</a><br>Go through the details and start contacting respective mentors.<br><br><span class="alert-success">We've updated the projects. Go check 'em out.</span></p>#}
+                        <p class="panel-heading"><a class="btn btn-success prjt-rel" href="{{ url_for('summit') }}">Register for OSS</a><br>
+                            Register for the Open Source Summit
+                        </p>
 
 {#                        <p>Overwhelmed by jargons ? Think you are not good enough for the program? Check out these:</p>#}
                     </div>

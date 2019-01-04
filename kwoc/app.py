@@ -381,9 +381,10 @@ def save_mentor_resp():
 
 @app.route("/summit")
 def summit():
-    return render_template('summit.html',
-                           schedule=schedule,
-                           talks=talks)
+    return render_template('summit.html'#,
+                        #    schedule=schedule,
+                        #    talks=talks
+                           )
 
 
 @app.route("/summit/register")
