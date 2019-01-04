@@ -96,6 +96,43 @@ crontab -e          # A file will open, type the following
 
 * Go to `/path/to/kwoc/gh_scrapper/` and run the command `python3 project_gen.py` to generate the desired template
 
+## Update `/mid-term` form
+There is an option box for choosing mentor which uses `list_of_mentors.json`. To populate the JSON:
+```
+$ cd /path/to/kwoc
+$ python3 populate_mentor_list.py
+```
+
+This script also updates the `secrets/mentor_unique_ids.json` file which is used to map an encrypted url endpoint to each mentor so that they can fill in their mentor evaluations.
+
+The code at the end should be mailed to them once all students have filled in their mid-term/end-term evaluations.
+
+### After mentor fills the form
+
+Once the mentor has filled the form, firstly we take a note of it and block the particular id so that the mentor cannot fill the form again.
+
+We store the list of students he passes and fails in `secrets/pass.txt` and `secrets/fail.txt` in the following format:
+
+`github_username PASS/FAIL`
+
+We also store his elaborate response in a google sheet.
+
+
+## Update `/students.csv` - Remove Mentors and Duplicates
+Run the following commands once, while deploying in the server to remove mentors and duplicate entries from `gh_login/student.csv` -
+```
+$ cd /path/to/kwoc
+$ python3 rm_mentors_from_students.py
+```
+
+## Add colleges to `colleges.json`
+There is a `<datalist>` in `/student_registration` form which uses `colleges.json`. Due to the request of students, colleges need to be added manually. But, it's not recommended to edit JSON files manually as a simple syntax error will make the server down. To automate this process:
+1. Add colleges to /path/to/colleges_to_add.txt in each line.
+```
+$ cd /path/to/kwoc
+$ python3 add_colleges.py
+```
+
 ## Sending Mass Mails
 
 We use Sendgrid to send mass mails. A script which uses the sendgrid API is present inside and following are the steps to mails to all.
