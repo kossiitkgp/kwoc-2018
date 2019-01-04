@@ -32,8 +32,8 @@
     <div id="loader"></div>
 
     <div id="page">
-        <div class="container-fluid bg-dark landing">
-            <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid bg-dark landing" id='landing'>
+            <nav class="navbar navbar-expand-lg navbar-dark">
                 <a class="navbar-brand" href="#">
                     <img src="/static/images/kwoc_logo.png" width="60" height="60" alt="">
                 </a>
@@ -56,11 +56,12 @@
                             <a class="nav-link" href="/summit/register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="#contacts">Contact</a>
                         </li>
                     </ul>
                 </div>
             </nav>
+            <!-- <div id="nav-space"></div> -->
             <div class="landing-text">
                 <svg id="my-svg" xmlns="http://www.w3.org/2000/svg" width="256" height="256"><defs><linearGradient id="a"><stop offset="0" stop-color="#b64bff"/><stop offset=".24" stop-color="#4e91f5"/><stop offset="1" stop-color="#5affd6"/></linearGradient></defs><g stroke="#000" fill="none"><g stroke="#d2a9ec" stroke-width=".36" stroke-miterlimit="5.27"><path d="M123.47 202.32l42.85-23.28 40.47-22 3.82 32.03-40.24 23.68zM126.91 160.64l-3.94-32.08 41.34-24.35c1.25-.67 45.2 10 45.62 10.42l-40.74 22.58z" stroke-width="2.90979"/><path d="M175.75 140.4l31.04 16.64L166.38 179zM126.91 160.64l42.28-23.43-12.14 40.1zM30.5 199.02l42.86-23.28 40.47-22 3.81 32.03-40.23 23.68zM33.95 157.34L30 125.26l41.35-24.35c1.24-.67 45.2 10 45.61 10.42l-40.74 22.58z" stroke-width="2.90979"/><path d="M82.79 137.1l31.04 16.64-40.41 21.96zM33.95 157.34l42.27-23.43-12.14 40.1z" stroke-width="2.90979"/><path d="M197.5 23.74c-7.83-9.8-19.72-15.91-33.96-15.91a46.82 46.82 0 0 0-46.89 46.74c0 25.81 21.09 45.6 46.98 45.6 13.83-.96 24.77-6.83 32.28-15.3m-30.69-11.25a22.36 22.36 0 0 1-11.8 3.35 22.7 22.7 0 0 1-22.6-22.8 22.7 22.7 0 0 1 22.6-22.79c4.37 0 8.45 1.25 11.9 3.42" stroke-linecap="round" paint-order="stroke fill markers" stroke-width="2.90979"/><path d="M190.04 22.9a31.6 31.32 0 0 0-24.75 11.92 22.6 22.8 0 0 1 10.73 19.36 22.6 22.8 0 0 1-10.8 19.41 31.6 31.32 0 0 0 24.82 11.96 31.6 31.32 0 0 0 31.6-31.33 31.6 31.32 0 0 0-31.6-31.32z" stroke-linecap="round" paint-order="stroke fill markers" stroke-width="2.90979"/><path d="M57.93 67.38c.02 9.8.12 16.1 0 26.75h-25.5V14.54h25.5v24.7m6.87-10.48l7.43-11.32 38.52-13.02-29.45 48.9" stroke-width="2.90979"/><path d="M75.7 91.85L48.44 53.7 64.7 28.92l48.33 70.5z" stroke-width="2.90979"/></g><g aria-label="presents" style="line-height:1.25;-inkscape-font-specification:'Fira Code'" fill="none" stroke="#a075bc" stroke-width=".37" font-weight="400" font-size="4.95" font-family="Fira Code" letter-spacing="0" word-spacing="0"><path d="M57.75 223.19s.44.5.37 1.69c-.06 1.18.2 27.8.2 27.8" stroke-width="2.9906175000000004"/><path d="M58.15 233.06c.03-4.5 3.17-9.56 8.09-9.47 4.51.08 8.31 3.97 8.48 8.8.22 6.26-3.45 10.03-8.25 9.99-4.8-.05-8.36-3.67-8.32-9.32zM81.36 223.12s.36.44.44 1.28c.1.84-.17 23.73-.17 23.73M88.74 223.47s-6.58 2.08-6.85 7.91M110.8 235c-.85 7.69-13.01 10.5-16.87.39-3.92-10.27 10.69-17.1 15.52-6.23l-14.3 5.59M126.28 229.22c-1.87-2.24-6.82-3.18-8.16.06-1.1 2.67.52 4.92 4.22 5.82 5.37 1.3 5.77 4.76 5.28 6.9-.43 1.85-1.33 4.4-5.61 4.06-3.3-.25-4.91-3.84-5.23-5.7M156.96 222.5s.76 1.19.84 2.03c.1.84.18 18.51.18 18.51M157.94 232.16c1.5-7.54 11.64-13.65 12.5-1.29l-.1 19.41M178.85 218.48v24.44M176.16 224.1l7.87-1.04 2.98 1.54M194.53 230.1c-1.87-2.24-6.82-3.19-8.16.06-1.1 2.67.52 4.91 4.22 5.81 5.37 1.31 5.77 4.77 5.28 6.9-.43 1.85-1.33 4.4-5.61 4.07-3.3-.25-4.91-3.85-5.23-5.71M151.56 235.5c-.86 7.69-13.02 10.5-16.88.39-3.92-10.27 10.69-17.1 15.52-6.23l-14.3 5.59" stroke-width="2.9906175000000004"/></g></g></svg>
 
@@ -89,23 +90,23 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 row offset-md-1">
-                        <div class="feature col-md-6">
+                <div class="col-md-6 row offset-md-1 features">
+                        <div class="feature col-sm-6">
                             <span class="icon-mic"></span>
                             <h2>Talks</h2>
                             <p>Featured talks from Kharagpur Winter of Code 2017 mentors</p>
                         </div>
-                        <div class="feature col-md-6">
+                        <div class="feature col-sm-6">
                             <span class="icon-profile-male"></span>
                             <h2>Keynote</h2>
                             <p>Keynote by an expert Guest Speaker about topics relating to Open Source</p>
                         </div>
-                        <div class="feature col-md-6">
+                        <div class="feature col-sm-6">
                             <span class="icon-chat"></span>
                             <h2>Panel Discussions</h2>
                             <p>Ask questions from the panelists and get to know their answers</p>
                         </div>
-                        <div class="feature col-md-6">
+                        <div class="feature col-sm-6">
                             <span class="icon-wine"></span>
                             <h2>Party After Events</h2>
                             <p>Jump around, make some friends and party hard at Kshtij 2018!</p>
@@ -113,8 +114,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="container" id="contacts">
+            <h1>Contact</h1>
+            <div class="row">
+                <div class="col-sm-4 contact">
+                    <span class="icon-envelope"></span>
+                    <h2>General Enquiries</h2>
+                    <p>contact@kossiitkgp.ac.in</p>
+                </div>
+                <div class="col-sm-4 contact">
+                    <span class="icon-phone"></span>
+                    <h2>Call: Pranit Bauva</h2>
+                    <p>+91 xxxxx-xxxxx</p>
+                </div>
+                <div class="col-sm-4 contact">
+                    <span class="icon-phone"></span>
+                    <h2>Call: Himanshu Mishra</h2>
+                    <p>+91 xxxxx-xxxxx</p>
+                </div>
+            </div>
+        </div>
+
         <footer>
-            Organinsed by KOSS
+            Organinsed by KOSS <br> with <i class="icon-heart"></i>
         </footer>
     </div>
 
