@@ -389,7 +389,10 @@ def summit():
 
 @app.route("/summit/register")
 def summit_register():
-    return render_template('summit_register_form.html')
+    with open(colleges_json, 'r') as f:
+                data = json.load(f)
+                colleges = list(data.values())
+    return render_template('summit_register_form.html', colleges=colleges)
 
 
 # @app.route("/summit/<talk_id>")

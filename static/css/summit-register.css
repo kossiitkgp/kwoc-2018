@@ -12,8 +12,8 @@
 body {
     background: url('/static/images/background-oss-min.jpg');
     background-size: cover;
-    color: #555;
-    font: 87.5%/1.5em 'Roboto', sans-serif;
+    color: var(--text-color);
+    font: 1.3em 'Roboto', sans-serif;
     line-height: 1.5;
 }
 
@@ -24,21 +24,22 @@ body {
     margin: 10vh auto;
     padding: 10vh 5vw;
     padding-bottom: 6vh;
-    max-width: 1000px;
+    max-width: 800px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     min-height: 100vh;
-    border-top: 8px solid rgb(0, 131, 245);
+    border-top: 8px solid var(--main-color);
 }
 
-.header {
-    display: flex;
-    justify-content: center;
-}
 
 .header h1 {
     font-size: 4rem;
     font-weight: bolder;
+    padding-bottom: 1rem;
+}
+
+.header h2 {
+    font-size: 3rem;
     padding-bottom: 2rem;
 }
 
@@ -46,7 +47,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin: 2rem 1rem;
     padding: 2.5rem 1rem;
     background-color: #eee;
@@ -61,53 +62,56 @@ p {
 }
 
 ul {
-    line-height: 1.4em;
+    line-height: 1.25em;
     margin-left: -1rem;
 }
 
 .form-class {
     display: flex;
     flex-direction: column;
-    /* padding-left: 4vh; */
-    /* padding-right: 4vh; */
 }
 
 
 .form-item input {
+    color: var(--text-color);
     background: #fafafa;
     border: none;
-    border-bottom: 2px solid #c0c0c0;
+    border-bottom: 4px solid #c0c0c0;
     font-family: 'Open Sans', sans-serif;
-    font-size: 2rem;
     height: 50px;
     transition: border-color 0.3s;
     width: 100%;
 }
 
 .form-item select {
+    color: var(--text-color);
     background: #fafafa;
     border: none;
-    border-bottom: 2px solid #c0c0c0;
+    border-bottom: 4px solid #c0c0c0;
     font-family: 'Open Sans', sans-serif;
-    font-size: 2rem;
+    /* font-size: 2rem; */
     height: 50px;
     transition: border-color 0.3s;
     width: 100%;
 }
 
 .form-item input:focus {
-    border-bottom: 2px solid rgb(0, 131, 245);
+    border-bottom: 4px solid var(--main-color);
     outline: none;
 }
 
 .form-item select:focus {
-    border-bottom: 2px solid rgb(0, 131, 245);
+    border-bottom: 4px solid var(--main-color);
     outline: none;
 }
 
+.form-item input:invalid {
+    border-color: red;
+    box-shadow: none;
+}
 
 .form-item {
-    margin-top: 8rem;
+    margin-top: 4rem;
     /* margin-bottom: 4rem; */
 }
 
@@ -117,14 +121,15 @@ ul {
 }
 
 .form-item label {
-    font-size: 2em;
+    color: var(--text-color);
+    font-size: 0.9em;
     font-weight: bolder;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
     line-height: 1.25;
 }
 
 .labelfocus {
-    color: rgb(0, 131, 245);
+    color: var(--main-color);
 }
 
 
@@ -142,17 +147,17 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(53, 107, 255);
+    background-color: var(--main-color);
     border: none;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 	padding: 0.5rem;
 
     letter-spacing: 0.05em;
     text-align: center;
     transition: background 0.3s ease-in-out;
-    min-width: 40%;
+    min-width: 25%;
     cursor: pointer;
     border-radius: 6px;
     line-height: 1.5;
@@ -160,24 +165,24 @@ ul {
 
 
 .button:hover {
-	background-color: rgb(0, 64, 121);
+	background-color: var(--dark-main-color);
 }
 
 textarea {
     width: 100%;
     min-height: 10em;
-    font-size: 2em;
+    font-size: 1em;
     line-height: 1.5;
     background: #fafafa;
     border: none;
-    border-bottom: 2px solid #c0c0c0;
+    border-bottom: 4px solid #c0c0c0;
     font-family: 'Open Sans', sans-serif;
     padding: 5%;
 }
 
 textarea:focus {
-    /* border: 2px solid #c0c0c0; */
-    border-bottom: 2px solid rgb(0, 131, 245);
+    /* border: 4px solid #c0c0c0; */
+    border-bottom: 4px solid var(--main-color);
     box-shadow: 0 5px 7px rgba(0, 131, 245, 0.25);
     outline: none;
 }
@@ -189,27 +194,27 @@ textarea:focus {
 }
 
 @media (min-width: 400px) { 
-    .instructions {
-        font-size: 1.7rem;
-    }
+    /* .instructions {
+        font-size: 1.5rem;
+    } */
 
-    .form-item label {
+    /* .form-item label {
         font-size: 2rem;
-    }
+    } */
     
-    .form-item input,
+    /* .form-item input,
     .form-item select,
     .form-item textarea {
         font-size: 3rem;
     }
-    
+     */
     textarea {
         margin-left: -10%;
         width: 120%;
     }
 
-    .form-class {
-        padding: 0 10%;
+    .form-wrapper {
+        padding: 15vh 5vw;
     }
 
 }

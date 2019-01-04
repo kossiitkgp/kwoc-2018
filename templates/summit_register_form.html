@@ -12,9 +12,10 @@
 <body>
   <div class="form-wrapper container">
     <div class="header">
-      <h1>Mid-Term Evaluation | Students</h1>
+      <h1>Register </h1>
+      <h2>Open Source Summit</h2>
     </div>
-    <div class="instructions">
+    <!-- <div class="instructions">
       <p><b>Please read the instructions before you proceed :</b></p>
       <br>
       <ul>
@@ -24,7 +25,7 @@
         <li>You need to sign up on Kshitij website as well. If you have not already done visit : <a target="_blank" href="http://ktj.in/sign-up">ktj.in/sign-up</a> (If the name of your college does not appear on Kshitij website, choose the first option and write to admin@ktj.in about missing college name)</li>
         <li><b>Last date to submit the evaluation is December 24, 2018 23:59 IST (GMT +5:30).</b></li>
       </ul>
-    </div>
+    </div> -->
     <div class="form-class">
       <form id="form" onsubmit="event.preventDefault(); send(form);">
         <div class="form-item">
@@ -37,39 +38,20 @@
         </div>
         <div class="form-item">
           <label for="github">Github Username</label>
-          <input id="gh_username" type="text" name="gitlink" required="required" placeholder="" value="{{ g.ghname }}" autocomplete="off" readonly="readonly" onfocus="hideWarning();"></input>
+          <input id="gh_username" type="text" name="gitlink" required="required" placeholder="" value="{{ g.ghname }}" autocomplete="off" onfocus="hideWarning();"></input>
         </div>
         <div class="form-item">
           <label for="ktjemail">Email id used for Kshitij registration</label>
           <input type="email" name="ktjmail" required="required" placeholder="Your KTJ Email ID" autocomplete="on"></input>
         </div>
         <div class="form-item">
-          <label>Who is your mentor?</label>
-          <select name="mentor" required="required">
-            <option value="" disabled="disabled" selected="selected"></option>
-            {% for mentor in list_of_mentors %}
-            <option value="{{ mentor }}">{{ mentor }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="form-item">
-          <div>
-            <label>Feedback for mentor (Will not be shared with the mentor)</label>
-          </div>
-          <div>
-            <textarea name="mentor_feedback" required="required" placeholder="If you are working with multiple mentors, write feedback for every mentor separately indicating their names."></textarea>
-          </div>
-        </div>
-        <div class="form-item">
-          <div>
-            <label>Feedback for KWoC</label>
-          </div>
-          <div>
-            <textarea name="kwoc_feedback" required="required"></textarea>
-          </div>
-        </div>
-        <div>
-          <p id="warning"></p>
+          <label for="college">College</label>
+          <input list="college" name="college" required="required" placeholder="College">
+          <datalist id="college">
+          {% for college in colleges %}
+            <option value="{{ college }}">
+          {% endfor %}
+          </datalist>
         </div>
         <div class="button-container">
           <div class="button-panel">
@@ -112,7 +94,7 @@
   function send(form) {
     var request = new XMLHttpRequest();
     var data = new FormData(form);
-    var url = "https://script.google.com/macros/s/AKfycbxCKiEb9O4N5mhg7rTwGaCpZsmgqgZa8iNveWH342RvGevG4LEK/exec";
+    // var url = "https://script.google.com/macros/s/AKfycbxCKiEb9O4N5mhg7rTwGaCpZsmgqgZa8iNveWH342RvGevG4LEK/exec";
     request.onreadystatechange = function() {
     console.log(request.readyState);
     console.log(request.status);
@@ -125,11 +107,11 @@
               $('#myModal').modal('show');
               $.post("{{url_for('men_match')}}", $("form").serialize());
               window.setTimeout(function () {
-                    window.location.href = "/dashboard";
+                    window.location.href = "/summit";
                 }, 5000);
               } else {
                 $(".modal-title").html("Submission Failed");
-              $("#reg_msg").html("Please contact us at kwoc@kossiitkgp.in regarding the same. We will resolve it ASAP");
+              $("#reg_msg").html("Please contact us at contact@kossiitkgp.in regarding the same. We will resolve it ASAP");
               $('#myModal').modal('show');
               }
           }
