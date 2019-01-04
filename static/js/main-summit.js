@@ -1,16 +1,3 @@
-
-// function fadeOut(el){
-//     el.style.opacity = 1;
-  
-//     (function fade() {
-//         if ((el.style.opacity -= .1) < 0) {
-//             el.style.display = "none";
-//         } else {
-//             requestAnimationFrame(fade);
-//         }
-//     })();
-// }
-  
 // fade in
   
 function fadeIn(el, display){
@@ -28,7 +15,8 @@ function fadeIn(el, display){
   
 
 function myFunction() {
-    // setTimeout(continueExecution, 1000);
+    //Uncomment setimeout and function for a delay to test the loader
+    // setTimeout(continueExecution, 500);
     // function continueExecution(){
         document.getElementById("loader").style.display = "none";
         document.getElementById("page").style.display = "inherit";
@@ -38,8 +26,6 @@ function myFunction() {
 }
 
 function afterKOSS() {
-    // fadeOutEffect(document.getElementById('my-svg'));
-    // document.getElementById("my-svg").style.display = "none";
     
     const fadeOutKoss = new Promise(
         function fadeOutEffect(resolve, reject) {
@@ -52,22 +38,19 @@ function afterKOSS() {
                 if (!((val -= .1) < 0)) {
                     el.style.opacity = val;
                     requestAnimationFrame(fadeOut);
-                    console.log("Opacify");
+                    // console.log("Opacify");
                     
                 } else {
-                    console.log("Returning");
-                    // el.style.display = 'none';
+                    // console.log("Returning");
                     resolve();
                 }
             })();
-
-            console.log("Yay Outside");
         }
     );
 
     fadeOutKoss.then(
         function FadeInOSS() {
-            console.log("This gets executed");
+            // console.log("This gets executed");
             document.getElementById("my-svg").style.display = "none";
             document.getElementById("after-text").style.display = "inherit";
             fadeIn(document.querySelector("#after-text"));
