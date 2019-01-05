@@ -16,13 +16,13 @@ function fadeIn(el, display){
 
 function myFunction() {
     //Uncomment setimeout and function for a delay to test the loader
-    setTimeout(continueExecution, 1000);
-    function continueExecution(){
+    // setTimeout(continueExecution, 1000);
+    // function continueExecution(){
         document.getElementById("loader").style.display = "none";
         document.getElementById("page").style.display = "inherit";
         new Vivus('my-svg', {duration: 200, type: 'sync'}, afterKOSS);
         document.body.style.background = '#fff';
-    }
+    // }
 }
 
 function afterKOSS() {
