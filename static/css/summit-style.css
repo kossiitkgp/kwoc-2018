@@ -1,6 +1,7 @@
 
 
 /* THEMING */
+@import url('https://fonts.googleapis.com/css?family=Baumans');
 
 :root {
     --main-color: #60418C;
@@ -72,6 +73,11 @@ html, body, #page, .landing {
     height: 100%;
 }
 
+h1, h2, h3, .navbar {
+    font-family: 'Baumans', monospace;
+    /* font-weight: 700; */
+}
+
 #page {
     display: none;
 }
@@ -99,6 +105,7 @@ html, body, #page, .landing {
     /* position: fixed; */
     width: 100%;
     /* top: 0; */
+    /* font-family: "Space Mono", monospace; */
 }
 .navbar-dark .navbar-toggler {
 	color: var(--light-main-color);
@@ -211,7 +218,6 @@ html, body, #page, .landing {
     padding-top: 1rem;
 }
 .about-event h2 {
-    font-weight: normal;
     font-size: 1.5rem;
 }
 
@@ -251,7 +257,6 @@ html, body, #page, .landing {
     padding: 2rem;
 }
 #contacts .contact h2 {
-    font-weight: normal;
     font-size: 1.5rem;
 }
 
