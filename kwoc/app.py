@@ -253,94 +253,94 @@ def men_match():
     return redirect("/dashboard")
 
 
-mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
-with open(mentor_ids_json, 'r') as f:
-    mentor_ids = json.load(f)
+# mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
+# with open(mentor_ids_json, 'r') as f:
+#     mentor_ids = json.load(f)
 
-mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json'
-with open(mentor_student_mappings_json, 'r') as f:
-    mentor_student_mappings = json.load(f)
+# mentor_student_mappings_json = root_dir + '/secrets/mentor_student_mappings.json'
+# with open(mentor_student_mappings_json, 'r') as f:
+#     mentor_student_mappings = json.load(f)
 
-# the below code adds all the students of a mentor across multiple projects to a single entry
-new_mentor_student_mappings = dict()
-for key in mentor_student_mappings.keys():
-    new_key =  key.split('|')[0]
-    new_key = new_key[:-1]
-    # print(new_key)
-    if new_key not in new_mentor_student_mappings.keys():
-        new_mentor_student_mappings[new_key] = mentor_student_mappings[key]
-    else:
-        new_mentor_student_mappings[new_key].extend(mentor_student_mappings[key])
-mentor_student_mappings = new_mentor_student_mappings
-# print(mentor_student_mappings)
+# # the below code adds all the students of a mentor across multiple projects to a single entry
+# new_mentor_student_mappings = dict()
+# for key in mentor_student_mappings.keys():
+#     new_key =  key.split('|')[0]
+#     new_key = new_key[:-1]
+#     # print(new_key)
+#     if new_key not in new_mentor_student_mappings.keys():
+#         new_mentor_student_mappings[new_key] = mentor_student_mappings[key]
+#     else:
+#         new_mentor_student_mappings[new_key].extend(mentor_student_mappings[key])
+# mentor_student_mappings = new_mentor_student_mappings
+# # print(mentor_student_mappings)
 
-@app.route("/mid-term/<mentor_id>")
-def mid_term_mentor(mentor_id):
-    try:
-        with open(MENTOR_FILLED, "r", encoding='utf-8') as mf:
-            already_filled = json.load(mf)
-    except:
-        already_filled = []
+# @app.route("/mid-term/<mentor_id>")
+# def mid_term_mentor(mentor_id):
+#     try:
+#         with open(MENTOR_FILLED, "r", encoding='utf-8') as mf:
+#             already_filled = json.load(mf)
+#     except:
+#         already_filled = []
 
-    if mentor_id in mentor_ids and mentor_id not in already_filled:
-        mentor = mentor_ids[mentor_id]
-        students = mentor_student_mappings.get(mentor, [])
-        new_students = []
-        for i in students:
-            try:
-                new_students.append([i[0], stats_dict[i[0].lower().strip()]])
-            except KeyError:
-                pass
-        return render_template('mid-term-mentor.html',
-                               mentor_id=mentor_id,
-                               mentor=mentor,
-                               students=new_students)
-    elif mentor_id in already_filled:
-        return make_response("You have already filled the mid-evals!", 400)
-    else:
-        return make_response("Wrong hash code! Please check if the entered key is correct", 400)
+#     if mentor_id in mentor_ids and mentor_id not in already_filled:
+#         mentor = mentor_ids[mentor_id]
+#         students = mentor_student_mappings.get(mentor, [])
+#         new_students = []
+#         for i in students:
+#             try:
+#                 new_students.append([i[0], stats_dict[i[0].lower().strip()]])
+#             except KeyError:
+#                 pass
+#         return render_template('mid-term-mentor.html',
+#                                mentor_id=mentor_id,
+#                                mentor=mentor,
+#                                students=new_students)
+#     elif mentor_id in already_filled:
+#         return make_response("You have already filled the mid-evals!", 400)
+#     else:
+#         return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
 
-@app.route("/mid-term-mentor", methods=['POST'])
-def save_mentor_resp():
-    """
-    Takes the response from mentor, adds passed students to secrets/pass.txt and failed students
-    to secrets/fail.txt
+# @app.route("/mid-term-mentor", methods=['POST'])
+# def save_mentor_resp():
+#     """
+#     Takes the response from mentor, adds passed students to secrets/pass.txt and failed students
+#     to secrets/fail.txt
 
-    Also adds the mentor id to a file secrets/mentor_filled.json which checks if the mentor has already 
-    filled the mid-evals
-    """
-    # print(request.form)
-    data = request.form
-    
-    # adding mentor_id to json file
-    mentor_id = data.get('mentor_id', -1)
-    if mentor_id!= -1:
-        try:
-            with open(MENTOR_FILLED, "r", encoding='utf-8') as mf:
-                already_filled = json.load(mf)
-        except:
-            already_filled = []
-        already_filled.append(mentor_id)
+#     Also adds the mentor id to a file secrets/mentor_filled.json which checks if the mentor has already 
+#     filled the mid-evals
+#     """
+#     # print(request.form)
+#     data = request.form
+
+#     # adding mentor_id to json file
+#     mentor_id = data.get('mentor_id', -1)
+#     if mentor_id!= -1:
+#         try:
+#             with open(MENTOR_FILLED, "r", encoding='utf-8') as mf:
+#                 already_filled = json.load(mf)
+#         except:
+#             already_filled = []
+#         already_filled.append(mentor_id)
         
-        with open(MENTOR_FILLED, "w+", encoding='utf-8') as mf:
-            json.dump(already_filled, mf)
+#         with open(MENTOR_FILLED, "w+", encoding='utf-8') as mf:
+#             json.dump(already_filled, mf)
     
-    # storing pass and fail students
-    students = data.get('evaluation', "none").split("\r\n")
-    students = students[:-1]
-    # print(students)
-    for student in students:
-        stud_data = student.split(" ")
-        to_append = str(stud_data[0]) + " " + str(stud_data[len(stud_data)-1]) + "\n"
-        if stud_data[len(stud_data)-1] == "PASS":
-            with open(PASS_FILE, "a+", encoding='utf-8') as pf:
-                pf.write(to_append)
-        else:
-            with open(FAIL_FILE, "a+", encoding='utf-8') as ff:
-                ff.write(to_append)
+#     # storing pass and fail students
+#     students = data.get('evaluation', "none").split("\r\n")
+#     students = students[:-1]
+#     # print(students)
+#     for student in students:
+#         stud_data = student.split(" ")
+#         to_append = str(stud_data[0]) + " " + str(stud_data[len(stud_data)-1]) + "\n"
+#         if stud_data[len(stud_data)-1] == "PASS":
+#             with open(PASS_FILE, "a+", encoding='utf-8') as pf:
+#                 pf.write(to_append)
+#         else:
+#             with open(FAIL_FILE, "a+", encoding='utf-8') as ff:
+#                 ff.write(to_append)
 
-    return redirect("/")
+#     return redirect("/")
 
 # endterm_hashes_json = root_dir + '/secrets/student_email_username_hashes_after_midterm.json'
 # with open(endterm_hashes_json, 'r') as f:
