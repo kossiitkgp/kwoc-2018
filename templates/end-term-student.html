@@ -126,7 +126,7 @@
               $(".modal-title").html("Submission Successful");
               $("#reg_msg").html("You have successfully submitted your End-Term evaluation.");
               $('#myModal').modal('show');
-              $.post("{{url_for('end_eval_submit_local')}}", $("form").serialize());
+
               window.setTimeout(function () {
                     window.location.href = "/dashboard";
                 }, 5000);

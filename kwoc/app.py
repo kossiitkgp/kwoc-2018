@@ -362,43 +362,16 @@ def end_term():
 
     # Testing: uncomment below
     # g.ghname = "kucchobhi"
-    try:
-        with open(ENDEVAL_VALIDATION, "r", encoding='utf-8') as endeval_validation_file:
-            endeval_validation = json.load(endeval_validation_file)
-    except:
-        endeval_validation = dict()
+
 
     if g.ghname == "Login":
         return redirect("/", code=302)
-    elif g.ghname in endeval_validation.keys():
-        return redirect("/dashboard", code=302)
     else:
         return render_template('end-term-student.html')
 
     return render_template('end-term-student.html')
 
-@app.route("/end_eval_submit_local", methods=['POST'])
-def end_eval_submit_local():
-    """
-    Keep track on number of submissions to 1 by storing the name.
-    """
-    print(request.form)
-    student_gitlink = request.form['gitlink']
 
-    try:
-        with open(ENDEVAL_VALIDATION, "r", encoding='utf-8') as endeval_validation_file:
-            endeval_validation = json.load(endeval_validation_file)
-    except:
-        endeval_validation = dict()
-
-    if student_gitlink not in endeval_validation:
-        endeval_validation.update({
-            student_gitlink: True
-        })
-        with open(ENDEVAL_VALIDATION, "w+", encoding='utf-8') as endeval_validation_file:
-            json.dump(endeval_validation, endeval_validation_file)
-
-    return redirect("/dashboard")
 
 # schedule_csv = root_dir + '/secrets/schedule.csv'
 # schedule = []
