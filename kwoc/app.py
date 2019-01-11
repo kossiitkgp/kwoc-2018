@@ -361,7 +361,7 @@ def end_term():
         g.ghname = session.get('user')
 
     # Testing: uncomment below
-    g.ghname = "kucchobhi"
+    # g.ghname = "kucchobhi"
     try:
         with open(ENDEVAL_VALIDATION, "r", encoding='utf-8') as endeval_validation_file:
             endeval_validation = json.load(endeval_validation_file)
