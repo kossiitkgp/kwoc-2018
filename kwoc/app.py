@@ -215,7 +215,7 @@ def men_match():
             request.form['gitlink'],
             request.form['email']
         ]
-    to_append_to = request.form['mentor']
+    to_append_to = request.form['mentor']   
 
     try:
         with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
@@ -312,7 +312,7 @@ def save_mentor_resp():
     """
     # print(request.form)
     data = request.form
-
+    
     # adding mentor_id to json file
     mentor_id = data.get('mentor_id', -1)
     if mentor_id!= -1:
@@ -325,7 +325,7 @@ def save_mentor_resp():
         
         with open(MENTOR_FILLED, "w+", encoding='utf-8') as mf:
             json.dump(already_filled, mf)
-
+    
     # storing pass and fail students
     students = data.get('evaluation', "none").split("\r\n")
     students = students[:-1]
