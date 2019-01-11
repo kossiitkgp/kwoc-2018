@@ -25,6 +25,7 @@ stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
 MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
 MIDEVAL_VALIDATION = root_dir + '/gh_login/midevals_validation.json'
+ENDEVAL_VALIDATION = root_dir + '/gh_login/endevals_validation.json'
 PASS_FILE = root_dir + '/secrets/pass.txt'
 FAIL_FILE = root_dir + '/secrets/fail.txt'
 MENTOR_FILLED = root_dir + '/secrets/mentor_filled.json'
@@ -202,6 +203,7 @@ def mid_term():
         return render_template('mid-term-student.html',
                                list_of_mentors=list_of_mentors)
 
+
 @app.route("/mentor-appending", methods=['POST'])
 def men_match():
     """
@@ -213,7 +215,7 @@ def men_match():
             request.form['gitlink'],
             request.form['email']
         ]
-    to_append_to = request.form['mentor']   
+    to_append_to = request.form['mentor']
 
     try:
         with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
@@ -310,7 +312,7 @@ def save_mentor_resp():
     """
     # print(request.form)
     data = request.form
-    
+
     # adding mentor_id to json file
     mentor_id = data.get('mentor_id', -1)
     if mentor_id!= -1:
@@ -323,7 +325,7 @@ def save_mentor_resp():
         
         with open(MENTOR_FILLED, "w+", encoding='utf-8') as mf:
             json.dump(already_filled, mf)
-    
+
     # storing pass and fail students
     students = data.get('evaluation', "none").split("\r\n")
     students = students[:-1]
@@ -345,11 +347,58 @@ def save_mentor_resp():
 #     endterm_hashes = json.load(f)
 
 
-# @app.route("/end-term")
-# def end_term():
-#     return render_template('end-term-student.html',
-#                            hashes=endterm_hashes)
+@app.route("/end-term")
+def end_term():
 
+    end_evals_open = True
+
+    if not end_evals_open:
+        return make_response("End Term evaluations are over for participants!", 400)
+
+    if session.get('user') is None:
+        g.ghname = "Login"
+    else:
+        g.ghname = session.get('user')
+
+    # Testing: uncomment below
+    g.ghname = "kucchobhi"
+    try:
+        with open(ENDEVAL_VALIDATION, "r", encoding='utf-8') as endeval_validation_file:
+            endeval_validation = json.load(endeval_validation_file)
+    except:
+        endeval_validation = dict()
+
+    if g.ghname == "Login":
+        return redirect("/", code=302)
+    elif g.ghname in endeval_validation.keys():
+        return redirect("/dashboard", code=302)
+    else:
+        return render_template('end-term-student.html')
+
+    return render_template('end-term-student.html')
+
+@app.route("/end_eval_submit_local", methods=['POST'])
+def end_eval_submit_local():
+    """
+    Keep track on number of submissions to 1 by storing the name.
+    """
+    print(request.form)
+    student_gitlink = request.form['gitlink']
+
+    try:
+        with open(ENDEVAL_VALIDATION, "r", encoding='utf-8') as endeval_validation_file:
+            endeval_validation = json.load(endeval_validation_file)
+    except:
+        endeval_validation = dict()
+
+    if student_gitlink not in endeval_validation:
+        endeval_validation.update({
+            student_gitlink: True
+        })
+        with open(ENDEVAL_VALIDATION, "w+", encoding='utf-8') as endeval_validation_file:
+            json.dump(endeval_validation, endeval_validation_file)
+
+    return redirect("/dashboard")
 
 # schedule_csv = root_dir + '/secrets/schedule.csv'
 # schedule = []
