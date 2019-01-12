@@ -178,33 +178,33 @@ with open(midterm_hashes_json, 'r') as f:
     midterm_hashes = json.load(f)
 
 
-# @app.route("/mid-term")
-# def mid_term():
-#     mid_evals_open = False
+@app.route("/mid-term")
+def mid_term():
+    mid_evals_open = False
 
-#     if not mid_evals_open:
-#         return make_response("MidTerm evaluations are over for participants!", 400)
+    if not mid_evals_open:
+        return make_response("MidTerm evaluations are over for participants!", 400)
 
-#     if session.get('user') is None:
-#         g.ghname = "Login"
-#     else:
-#         g.ghname = session.get('user')
-#     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
-#     # Testing: uncomment below
-#     # g.ghname = "kucchobhi"
-#     try:
-#         with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-#             mideval_validation = json.load(mideval_validation_file)
-#     except:
-#         mideval_validation = dict()
+    if session.get('user') is None:
+        g.ghname = "Login"
+    else:
+        g.ghname = session.get('user')
+    # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
+    # Testing: uncomment below
+    # g.ghname = "kucchobhi"
+    try:
+        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+            mideval_validation = json.load(mideval_validation_file)
+    except:
+        mideval_validation = dict()
     
-#     if g.ghname == "Login":
-#         return redirect("/", code=302)
-#     elif g.ghname in mideval_validation.keys():
-#         return redirect("/dashboard", code=302)
-#     else:
-#         return render_template('mid-term-student.html',
-#                                list_of_mentors=list_of_mentors)
+    if g.ghname == "Login":
+        return redirect("/", code=302)
+    elif g.ghname in mideval_validation.keys():
+        return redirect("/dashboard", code=302)
+    else:
+        return render_template('mid-term-student.html',
+                               list_of_mentors=list_of_mentors)
 
 
 # @app.route("/mentor-appending", methods=['POST'])
@@ -276,6 +276,7 @@ with open(midterm_hashes_json, 'r') as f:
 #         new_mentor_student_mappings[new_key].extend(mentor_student_mappings[key])
 # mentor_student_mappings = new_mentor_student_mappings
 # # print(mentor_student_mappings)
+
 
 @app.route("/end-term/<student_hashkey>")
 def end_term(student_hashkey):
@@ -398,7 +399,31 @@ def end_term(student_hashkey):
 
 @app.route("/dashboard")
 def dashboard():
-    return redirect('/stats', code=302)
+    if session.get('user') is None:
+        g.ghname = "Login"
+    else:
+        g.ghname = session.get('user')
+    # print('HI')
+    git_handle = session.get('user')
+
+    # if git_handle is not None and git_handle in stats_dict:
+    #     return render_template('dashboard.html', **stats_dict[git_handle])
+
+    # Testing: uncomment below
+    # NOTE: To run on local server, just give a manual git_handle 
+    # git_handle = 'rapperdinesh'
+
+    # change to true when student registration open, false otherwise
+    # more changes are required in dashboard.html; the keys of the dictionary used.
+
+    # git_handle = 'berserker1'
+    if git_handle is not None:
+            ndict = stats_dict[git_handle]
+            ndict['username'] = git_handle
+            return render_template('dashboard.html', **ndict)
+    else:
+        return redirect('/stats', code=302)
+
 
 
 @app.route("/auth/")
