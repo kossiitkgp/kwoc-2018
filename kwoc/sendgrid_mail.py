@@ -23,23 +23,41 @@ threads = Pool(16)
 # paste your email content below, replacing the below one.
 # the content should be in html, so a better way it to add <br/> for each line break.
 MSG = """
-Greetings.<br/><br/>
+Mid-eval passed
+```Dear Student,<br/><br/>
 
-We hope you are having a great time working through issues and interacting with your mentor(s).<br/><br/>
+Congratulations! You have passed the midterm evaluation. You may continue working in KWoC. <br/><br/>
 
-Due to the staggering and astonishing participation, we saw this season, our codes couldn't keep up. We deeply regret the inconvenience caused by the breaking of the statistics table and other accompanying issues. We also had reports of wrong dashboard data.<br/><br/>
+You may choose a same or a different project for your end-eval, whichever suits you. You are requested to fill the form similar to what you did for the mid-evals by this weekend.<br/><br/>
 
-Thanks to our amazing team and their dedicated efforts, we've managed to fix all the bugs and updated the statistics page, dashboard, and profile page; and added sharing capabilities so you can show your KWoC stats to your friends.<br/><br/>
+Upcoming Deadlines are :<br/><br/>
 
-Please make us aware if you observe any anomaly.<br/><br/>
+(Extended to January 13th): Pencils down date- You should start wrapping up the project you have been working on and send your last Pull Requests by this date. You are not expected to code beyond this date.<br/><br/>
 
-Thank you.<br/>
-Kharagpur Open Source Society<br/>
-IIT Kharagpur
+(Extended to January 16th): Endterm evaluation Report - You have to submit the end-term report by this date. The instructions are written below. You are also encouraged to spend this week writing documentation and tests for your work and the project(s). Both are as important as writing code for Open Source software.<br/><br/>
+
+Important instructions about the final report :<br/><br/>
+ - You will have to submit a report of your work at the end-term evaluation. Failing to do so will not result in successful participation.<br/><br/>
+ - You have to submit the LINK TO YOUR REPORT in the form of a blog post. You can choose any blogging medium you want. Few examples are Medium, GitHub static pages, WordPress and Blogspot.<br/><br/>
+ - The report can be as descriptive as you want, but must contain the following points :<br/><br/>
+   - List of projects you worked on<br/><br/>
+   - List of Pull Requests you created<br/><br/>
+   - Summary of your work<br/><br/>
+
+To Sum up -<br/><br/>
+1. Fill the end-eval form mentioning the project for your evaluation.<br/><br/>
+2. Send your last PRs by 12th <br/><br/>
+3. Send your documentation by 15th January.<br/><br/>
+
+
+Happy New Year and keep the Pull Requests coming!<br/><br/>
+
+Regards,<br/><br/>
+Kharagpur Open Source Society```
 """
 
 # paste your subject below, replacing the below one.
-SUB = "KWoC '19 Important Website Updates"
+SUB = "KWoC '18 End Term Evaluation"
 
 # paste email from which the message should look coming from, replacing the below one.
 FROM = "kossiitkgp@gmail.com"
