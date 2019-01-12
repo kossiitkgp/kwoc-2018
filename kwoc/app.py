@@ -23,12 +23,12 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 root_dir = '/'.join(dir_path.split('/')[:-1])
 stats_json = root_dir + '/gh_scraper/stats/stats.json'
 colleges_json = root_dir + '/gh_scraper/colleges.json'
-MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
-MIDEVAL_VALIDATION = root_dir + '/gh_login/midevals_validation.json'
-ENDEVAL_VALIDATION = root_dir + '/gh_login/endevals_validation.json'
-PASS_FILE = root_dir + '/secrets/pass.txt'
-FAIL_FILE = root_dir + '/secrets/fail.txt'
-MENTOR_FILLED = root_dir + '/secrets/mentor_filled.json'
+# MENTOR_MATCHES = root_dir + '/secrets/mentor_student_mappings.json'
+# MIDEVAL_VALIDATION = root_dir + '/gh_login/midevals_validation.json'
+# ENDEVAL_VALIDATION = root_dir + '/gh_login/endevals_validation.json'
+# PASS_FILE = root_dir + '/secrets/pass.txt'
+# FAIL_FILE = root_dir + '/secrets/fail.txt'
+# MENTOR_FILLED = root_dir + '/secrets/mentor_filled.json'
 
 with open(stats_json, 'r') as f:
     stats_dict = json.load(f)
@@ -64,10 +64,13 @@ for user, userdata in stats_dict.items():
 # Define routes
 @app.route("/")
 def main():
+
+
     if session.get('user') is None:
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
+    # g.ghname = "berserker1"
     return render_template('index.html')
 
 @app.route("/stats")
@@ -175,82 +178,82 @@ with open(midterm_hashes_json, 'r') as f:
     midterm_hashes = json.load(f)
 
 
-@app.route("/mid-term")
-def mid_term():
-    mid_evals_open = False
+# @app.route("/mid-term")
+# def mid_term():
+#     mid_evals_open = False
 
-    if not mid_evals_open:
-        return make_response("MidTerm evaluations are over for participants!", 400)
+#     if not mid_evals_open:
+#         return make_response("MidTerm evaluations are over for participants!", 400)
 
-    if session.get('user') is None:
-        g.ghname = "Login"
-    else:
-        g.ghname = session.get('user')
-    # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
-    # Testing: uncomment below
-    # g.ghname = "kucchobhi"
-    try:
-        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-            mideval_validation = json.load(mideval_validation_file)
-    except:
-        mideval_validation = dict()
+#     if session.get('user') is None:
+#         g.ghname = "Login"
+#     else:
+#         g.ghname = session.get('user')
+#     # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
+#     # Testing: uncomment below
+#     # g.ghname = "kucchobhi"
+#     try:
+#         with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+#             mideval_validation = json.load(mideval_validation_file)
+#     except:
+#         mideval_validation = dict()
     
-    if g.ghname == "Login":
-        return redirect("/", code=302)
-    elif g.ghname in mideval_validation.keys():
-        return redirect("/dashboard", code=302)
-    else:
-        return render_template('mid-term-student.html',
-                               list_of_mentors=list_of_mentors)
+#     if g.ghname == "Login":
+#         return redirect("/", code=302)
+#     elif g.ghname in mideval_validation.keys():
+#         return redirect("/dashboard", code=302)
+#     else:
+#         return render_template('mid-term-student.html',
+#                                list_of_mentors=list_of_mentors)
 
 
-@app.route("/mentor-appending", methods=['POST'])
-def men_match():
-    """
-    appends a student to the mentor of his choice
-    in the file MENTOR_MATCHES
-    """
-    print(request.form)
-    to_append = [
-            request.form['gitlink'],
-            request.form['email']
-        ]
-    to_append_to = request.form['mentor']   
+# @app.route("/mentor-appending", methods=['POST'])
+# def men_match():
+#     """
+#     appends a student to the mentor of his choice
+#     in the file MENTOR_MATCHES
+#     """
+#     print(request.form)
+#     to_append = [
+#             request.form['gitlink'],
+#             request.form['email']
+#         ]
+#     to_append_to = request.form['mentor']   
 
-    try:
-        with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
-            mentors_studs_matches = json.load(mentor_file)
-    except:
-        mentors_studs_matches = dict()
+#     try:
+#         with open(MENTOR_MATCHES, "r", encoding='utf-8') as mentor_file:
+#             mentors_studs_matches = json.load(mentor_file)
+#     except:
+#         mentors_studs_matches = dict()
 
-    stud_matches = mentors_studs_matches.get(to_append_to, [])
+#     stud_matches = mentors_studs_matches.get(to_append_to, [])
     
-    # if student not already in mentor's student list
-    if to_append not in stud_matches:
-        stud_matches.append(to_append)
-        mentors_studs_matches.update({
-            to_append_to: stud_matches
-        })
-        with open(MENTOR_MATCHES, "w+", encoding='utf-8') as mentor_file:
-            json.dump(mentors_studs_matches, mentor_file)
+#     # if student not already in mentor's student list
+#     if to_append not in stud_matches:
+#         stud_matches.append(to_append)
+#         mentors_studs_matches.update({
+#             to_append_to: stud_matches
+#         })
+#         with open(MENTOR_MATCHES, "w+", encoding='utf-8') as mentor_file:
+#             json.dump(mentors_studs_matches, mentor_file)
     
     
-    student_gitlink = request.form['gitlink']
+#     student_gitlink = request.form['gitlink']
 
-    try:
-        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-            mideval_validation = json.load(mideval_validation_file)
-    except:
-        mideval_validation = dict()
+#     try:
+#         with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
+#             mideval_validation = json.load(mideval_validation_file)
+#     except:
+#         mideval_validation = dict()
 
-    if student_gitlink not in mideval_validation:
-        mideval_validation.update({
-            student_gitlink: True
-        })
-        with open(MIDEVAL_VALIDATION, "w+", encoding='utf-8') as mideval_validation_file:
-            json.dump(mideval_validation, mideval_validation_file)
+#     if student_gitlink not in mideval_validation:
+#         mideval_validation.update({
+#             student_gitlink: True
+#         })
+#         with open(MIDEVAL_VALIDATION, "w+", encoding='utf-8') as mideval_validation_file:
+#             json.dump(mideval_validation, mideval_validation_file)
     
-    return redirect("/dashboard")
+#     return redirect("/dashboard")
 
 
 # mentor_ids_json = root_dir + '/secrets/mentor_unique_ids.json'
@@ -274,31 +277,27 @@ def men_match():
 # mentor_student_mappings = new_mentor_student_mappings
 # # print(mentor_student_mappings)
 
-# @app.route("/mid-term/<mentor_id>")
-# def mid_term_mentor(mentor_id):
-#     try:
-#         with open(MENTOR_FILLED, "r", encoding='utf-8') as mf:
-#             already_filled = json.load(mf)
-#     except:
-#         already_filled = []
+@app.route("/end-term/<student_hashkey>")
+def end_term(student_hashkey):
 
-#     if mentor_id in mentor_ids and mentor_id not in already_filled:
-#         mentor = mentor_ids[mentor_id]
-#         students = mentor_student_mappings.get(mentor, [])
-#         new_students = []
-#         for i in students:
-#             try:
-#                 new_students.append([i[0], stats_dict[i[0].lower().strip()]])
-#             except KeyError:
-#                 pass
-#         return render_template('mid-term-mentor.html',
-#                                mentor_id=mentor_id,
-#                                mentor=mentor,
-#                                students=new_students)
-#     elif mentor_id in already_filled:
-#         return make_response("You have already filled the mid-evals!", 400)
-#     else:
-#         return make_response("Wrong hash code! Please check if the entered key is correct", 400)
+    hashkey_to_gitlink = {}
+    with open("secrets/hashkey_to_gitlink.json") as infile:
+        hashkey_to_gitlink = json.load(infile)
+
+    gitlink_to_mail_ids = {}
+    with open("secrets/gitlink_to_mail_ids.json") as infile:
+        gitlink_to_mail_ids = json.load(infile)
+
+    if student_hashkey in hashkey_to_gitlink:
+
+        github_handle = hashkey_to_gitlink[student_hashkey]
+        email_student = gitlink_to_mail_ids[github_handle]
+
+        return render_template('end-term-student.html',
+                                gitlink=github_handle,
+                                email=email_student)
+    else:
+        return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
 
 # @app.route("/mid-term-mentor", methods=['POST'])
@@ -345,31 +344,6 @@ def men_match():
 # endterm_hashes_json = root_dir + '/secrets/student_email_username_hashes_after_midterm.json'
 # with open(endterm_hashes_json, 'r') as f:
 #     endterm_hashes = json.load(f)
-
-
-@app.route("/end-term")
-def end_term():
-
-    end_evals_open = True
-
-    if not end_evals_open:
-        return make_response("End Term evaluations are over for participants!", 400)
-
-    if session.get('user') is None:
-        g.ghname = "Login"
-    else:
-        g.ghname = session.get('user')
-
-    # Testing: uncomment below
-    # g.ghname = "kucchobhi"
-
-
-    if g.ghname == "Login":
-        return redirect("/", code=302)
-    else:
-        return render_template('end-term-student.html')
-
-    return render_template('end-term-student.html')
 
 
 
@@ -424,52 +398,7 @@ def end_term():
 
 @app.route("/dashboard")
 def dashboard():
-
-    if session.get('user') is None:
-        g.ghname = "Login"
-    else:
-        g.ghname = session.get('user')
-    # print('HI')
-    git_handle = session.get('user')
-
-    # if git_handle is not None and git_handle in stats_dict:
-    #     return render_template('dashboard.html', **stats_dict[git_handle])
-
-    # Testing: uncomment below
-    # NOTE: To run on local server, just give a manual git_handle 
-    # git_handle = 'rapperdinesh'
-
-    # change to true when student registration open, false otherwise
-    # more changes are required in dashboard.html; the keys of the dictionary used.
-    reg_open = False
-    if reg_open:
-        with open(stud_json, 'r') as f:
-            stud_dict = json.load(f)
-    else:
-        stud_dict = {}
-    try:
-        with open(MIDEVAL_VALIDATION, "r", encoding='utf-8') as mideval_validation_file:
-            mideval_validation = json.load(mideval_validation_file)
-    except:
-        mideval_validation = dict()
-
-    if git_handle in mideval_validation:
-        mideval = True
-    else:
-        mideval = False
-
-    if git_handle is not None and (git_handle in stud_dict or git_handle in stats_dict):
-        if reg_open:
-            ndict = stats_dict[git_handle]
-            ndict['username'] = git_handle
-            ndict['mideval'] = mideval
-            return render_template('dashboard.html', **ndict)
-        else:
-            ndict = stats_dict[git_handle]
-            ndict['mideval'] = mideval
-            return render_template('dashboard.html', **ndict)
-    else:
-        return redirect('/stats', code=302)
+    return redirect('/stats', code=302)
 
 
 @app.route("/auth/")
@@ -480,12 +409,12 @@ def auth():
 
     if session.get('user') is None:
         return redirect(oauth.ret_auth_url())
-   
+
     else:
 
         # Check if the id is registered or not
         #-------------------------------------
-        
+             
         try:
             with open(stud_json, "r") as stud_file:
                 stud_dict = json.load(stud_file)
