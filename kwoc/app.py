@@ -70,7 +70,7 @@ def main():
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
-    # g.ghname = "berserker1"
+    g.ghname = "berserker1"
     return render_template('index.html')
 
 @app.route("/stats")
@@ -290,13 +290,16 @@ def end_term(student_hashkey):
         gitlink_to_mail_ids = json.load(infile)
 
     if student_hashkey in hashkey_to_gitlink:
+        try:
+            github_handle = hashkey_to_gitlink[student_hashkey]
+            email_student = gitlink_to_mail_ids[github_handle]
 
-        github_handle = hashkey_to_gitlink[student_hashkey]
-        email_student = gitlink_to_mail_ids[github_handle]
+            return render_template('end-term-student.html',
+                                    gitlink=github_handle,
+                                    email=email_student)
+        except:
+            return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
-        return render_template('end-term-student.html',
-                                gitlink=github_handle,
-                                email=email_student)
     else:
         return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
@@ -416,7 +419,7 @@ def dashboard():
     # change to true when student registration open, false otherwise
     # more changes are required in dashboard.html; the keys of the dictionary used.
 
-    # git_handle = 'berserker1'
+    git_handle = 'berserker1'
     if git_handle is not None:
             ndict = stats_dict[git_handle]
             ndict['username'] = git_handle
