@@ -6,7 +6,7 @@ mail_ids = []
 mail_ids_to_gitlink = {}
 dict_gitlink_to_hash = {}
 hash_to_gitlink = {}
-
+gitlink_to_mail_ids = {}
 
 with open("../kwoc/mail_ids.csv") as f:
     csv_reader = csv.reader(f,delimiter=",")
@@ -29,6 +29,7 @@ with open("students.csv") as f:
             mail_ids_to_gitlink[mail] = gitlink
             dict_gitlink_to_hash[gitlink] = hashed_key
             hash_to_gitlink[hashed_key] = gitlink
+            gitlink_to_mail_ids[gitlink] = mail
 
 with open("hashkey_to_gitlink.json","w") as f:
     json.dump(hash_to_gitlink,f,indent=4)
@@ -38,3 +39,7 @@ with open("gitlink_to_hashkey.json","w") as f:
 
 with open("mail_ids_to_gitlink.json","w") as f:
     json.dump(mail_ids_to_gitlink,f,indent=4)
+
+with open("gitlink_to_mail_ids.json","w") as f:
+    json.dump(gitlink_to_mail_ids,f,indent=4)
+    
