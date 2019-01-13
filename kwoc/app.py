@@ -424,7 +424,6 @@ def dashboard():
             stud_dict = json.load(stud_file)
     except :
         stud_dict = dict()
-        print("Yo!")
 
     # git_handle = 'berserker1'
     if git_handle is not None and git_handle in stud_dict:
