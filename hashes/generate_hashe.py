@@ -16,7 +16,7 @@ with open("../kwoc/mail_ids.csv") as f:
 
 # print(mail_ids)
 
-with open("students.csv") as f:
+with open("../gh_login/student.csv") as f:
     csv_reader = csv.reader(f,delimiter=",")
 
     for row in csv_reader:
@@ -42,4 +42,9 @@ with open("mail_ids_to_gitlink.json","w") as f:
 
 with open("gitlink_to_mail_ids.json","w") as f:
     json.dump(gitlink_to_mail_ids,f,indent=4)
-    
+
+# print(len(mail_ids_to_gitlink))
+# print(len(mail_ids))
+# for i in mail_ids:
+#     if i not in mail_ids_to_gitlink.keys():
+#         print(i)
