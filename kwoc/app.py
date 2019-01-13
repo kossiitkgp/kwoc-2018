@@ -70,7 +70,7 @@ def main():
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
-    g.ghname = "berserker1"
+    # g.ghname = "berserker1"
     return render_template('index.html')
 
 @app.route("/stats")
@@ -282,11 +282,11 @@ def mid_term():
 def end_term(student_hashkey):
 
     hashkey_to_gitlink = {}
-    with open("secrets/hashkey_to_gitlink.json") as infile:
+    with open("hashes/hashkey_to_gitlink.json") as infile:
         hashkey_to_gitlink = json.load(infile)
 
     gitlink_to_mail_ids = {}
-    with open("secrets/gitlink_to_mail_ids.json") as infile:
+    with open("hashes/gitlink_to_mail_ids.json") as infile:
         gitlink_to_mail_ids = json.load(infile)
 
     if student_hashkey in hashkey_to_gitlink:
@@ -419,7 +419,7 @@ def dashboard():
     # change to true when student registration open, false otherwise
     # more changes are required in dashboard.html; the keys of the dictionary used.
 
-    git_handle = 'berserker1'
+    # git_handle = 'berserker1'
     if git_handle is not None:
             ndict = stats_dict[git_handle]
             ndict['username'] = git_handle
