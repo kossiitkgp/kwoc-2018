@@ -419,8 +419,15 @@ def dashboard():
     # change to true when student registration open, false otherwise
     # more changes are required in dashboard.html; the keys of the dictionary used.
 
+    try:
+        with open(stud_json, "r") as stud_file:
+            stud_dict = json.load(stud_file)
+    except :
+        stud_dict = dict()
+        print("Yo!")
+
     # git_handle = 'berserker1'
-    if git_handle is not None:
+    if git_handle is not None and git_handle in stud_dict:
             ndict = stats_dict[git_handle]
             ndict['username'] = git_handle
             return render_template('dashboard.html', **ndict)
