@@ -1,7 +1,7 @@
 
 
 /* THEMING */
-@import url('https://fonts.googleapis.com/css?family=Baumans|Lato:700,900');
+/* @import url('https://fonts.googleapis.com/css?family=Baumans|Lato:700,900'); */
 
 :root {
     --main-color: #60418C;
@@ -75,11 +75,12 @@ html, body, #page, .landing {
 
 h1, h2, h3, .navbar {
     font-family: 'Lato', monospace;
-    /* font-weight: 700; */
+    font-weight: 700;
 }
 
 .fancy-text {
     font-family: "Baumans", monospace;
+    font-weight: normal;
 }
 
 #page {
@@ -204,7 +205,6 @@ h1, h2, h3, .navbar {
 
 .about-event h1 {
     color: var(--light-main-color);
-    font-weight: normal;
     font-size: 4rem;
     padding: 2rem 0 1rem;
 }
@@ -249,16 +249,50 @@ h1, h2, h3, .navbar {
 
 .schedule h1 {
     color: var(--light-main-color);
-    font-weight: normal;
     font-size: 4rem;
     padding: 2rem 0 1rem;
 }
 
 .schedule h2 {
     color: var(--light-main-color);
-    font-weight: normal;
-    font-size: 4rem;
-    padding: 2rem 0 1rem;
+    font-size: 3rem;
+    font-weight: 900;
+    padding: 2rem 0 0rem;
+    margin-bottom: 0;
+}
+
+.date {
+    font-size: 2rem;
+    font-family: "Lato", sans-serif;
+    font-weight: bold; 
+}
+
+.time {
+    padding: 2rem 0 0;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.event {
+    padding: 2rem 0;
+}
+
+.event img {
+    float: left;
+    margin: 2rem;
+    height: 128px;
+    width: 128px;
+}
+
+.event h1 {
+    font-size: 2rem;
+    /* padding-top: none; */
+    padding: 1.5rem 0 0;
+}
+
+.event h2 {
+    font-size: 1.5rem;
+    padding: 0; 
 }
 
 /* CONTACT */
