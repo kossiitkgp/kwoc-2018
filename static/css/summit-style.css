@@ -285,8 +285,8 @@ h1, h2, h3, .navbar {
 }
 
 .event h1 {
+    display: float;
     font-size: 2rem;
-    /* padding-top: none; */
     padding: 1.5rem 0 0;
 }
 
@@ -294,6 +294,22 @@ h1, h2, h3, .navbar {
     font-size: 1.5rem;
     padding: 0; 
 }
+@media (max-width: 600px) { 
+    .event h1 {
+        padding-top: 0;
+    }
+    .event img {
+        display: initial;
+        margin: 2rem 4rem 2rem 3rem;
+        /* height: 100px; */
+        /* width: 100px; */
+        /* margin: 1rem 0.5rem 1.5rem; */
+    }
+    .event h1{
+        width: 100%;
+    }
+}
+
 
 /* CONTACT */
 
