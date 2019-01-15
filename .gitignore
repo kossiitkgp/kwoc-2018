@@ -106,7 +106,6 @@ gh_scraper/stats/*
 !gh_scraper/stats/languages.json
 !gh_scraper/stats/projects.csv
 !gh_scraper/stats/repos.txt
-!gh_scraper/stats/stats.json
 
 secrets/*
 
@@ -117,5 +116,3 @@ tag_scrapper/topic_dict.json
 gh_login/gh_login_student.json
 gh_login/*.*
 gh_login/midevals_validation.json
-./gh_scraper/stats/stats.json
-gh_scraper/stats/stats.json
