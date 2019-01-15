@@ -1,103 +1,133 @@
 <!doctype html>
 <html lang="en">
 <head>
-
   <link rel="shortcut icon" href="/static/images/kwoc_logo.png">
-  <title>Register for Open Source Summit (KWoC 2017)</title>
-  <style type="text/css">
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #E5F3F5;
-    }
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    .header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 1em;
-      padding-bottom: 0.1em;
-    }
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Register | Open Source Summit</title>
 
-    .header p {
-      font-family: verdana;
-    }
-
-    .spinner {
-      width: 60px;
-      height: 60px;
-
-      position: relative;
-      margin: 100px auto;
-    }
-
-    .double-bounce1, .double-bounce2 {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background-color: #239ace;
-      opacity: 0.2;
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-      animation: sk-bounce 2.0s infinite ease-in-out;
-    }
-
-    .double-bounce2 {
-      -webkit-animation-delay: -1.0s;
-      animation-delay: -1.0s;
-    }
-
-    @-webkit-keyframes sk-bounce {
-      0%, 100% { -webkit-transform: scale(0.0) }
-      50% { -webkit-transform: scale(1.0) }
-    }
-
-    @keyframes sk-bounce {
-      0%, 100% {
-        transform: scale(0.0);
-        -webkit-transform: scale(0.0);
-      } 50% {
-        transform: scale(1.0);
-        -webkit-transform: scale(1.0);
-      }
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/static/css/summit-register.css">
 </head>
 <body>
-
-  <div class="header">
-    <p style="font-size: 2em">Register for Open Source Summit (KWoC 2017)</p>
-    <p>Check Schedule: <a href="/summit">https://kwoc.kossiitkgp.in/summit</a></p>
-    <p>Note: You also have to register on Kshitij (<a target="_blank" href="http://ktj.in">http://ktj.in</a>) to complete the registration</p>
+  <div class="form-wrapper container">
+    <div class="header">
+      <h1>Register </h1>
+      <h2>Open Source Summit</h2>
+    </div>
+    <!-- <div class="instructions">
+      <p><b>Please read the instructions before you proceed :</b></p>
+      <br>
+      <ul>
+        <li><b>If you do not submit this evaluation, you shall not be allowed to continue in the program.</b></li>
+        <li>This form is supposed to be filled by KWoC students only.</li>
+        <li>You have to choose the mentor you have been working with. The mentor you choose, shall be writing feedback for you. If you are working with multiple mentors, use your discretion and choose one.</li>
+        <li>You need to sign up on Kshitij website as well. If you have not already done visit : <a target="_blank" href="http://ktj.in/sign-up">ktj.in/sign-up</a> (If the name of your college does not appear on Kshitij website, choose the first option and write to admin@ktj.in about missing college name)</li>
+        <li><b>Last date to submit the evaluation is December 24, 2018 23:59 IST (GMT +5:30).</b></li>
+      </ul>
+    </div> -->
+    <div class="form-class">
+      <form id="form" onsubmit="event.preventDefault(); send(form);">
+        <div class="form-item">
+          <label for="name">Name</label>
+          <input id="name" type="name" name="name" required="required" placeholder="Your Name" autocomplete="on"  onfocus="hideWarning();"></input>
+        </div>
+        <div class="form-item">
+          <label for="email">Email Address</label>
+          <input id="emailid" type="email" name="email" required="required" placeholder="Your Email Address" autocomplete="on"  onfocus="hideWarning();"></input>
+        </div>
+        <div class="form-item">
+          <label for="github">Github Username</label>
+          <input id="gh_username" type="text" name="gitlink" required="required" placeholder="" value="{{ g.ghname }}" autocomplete="off" onfocus="hideWarning();"></input>
+        </div>
+        <div class="form-item">
+          <label for="ktjemail">Email id used for Kshitij registration</label>
+          <input type="email" name="ktjmail" required="required" placeholder="Your KTJ Email ID" autocomplete="on"></input>
+        </div>
+        <div class="form-item">
+          <label for="college">College</label>
+          <input list="college" name="college" required="required" placeholder="College">
+          <datalist id="college">
+          {% for college in colleges %}
+            <option value="{{ college }}">
+          {% endfor %}
+          </datalist>
+        </div>
+        <div class="button-container">
+          <div class="button-panel">
+            <input class="button" type="submit" value="Submit" title="Submit"></input>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 
-<div class="spinner">
-  <div class="double-bounce1"></div>
-  <div class="double-bounce2"></div>
-</div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-  <iframe allowtransparency="true" id="tellform" src="https://kossiitkgp.tellform.com/#!/forms/5a5ae7536960d9c00145db04" style="width:100%; height:80vh; border: none; background: #E5F3F5; color: #E5F3F5;"></iframe>
-
+        <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" id="reg_title"></h4>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:15px;" id="reg_msg"></p>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">You are successfully registered as a student.</button> -->
+          <!-- <button type="button" class="btn btn-default" onclick="window.close();">Close Tab</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
-<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/js/lodash.min.js"></script>
+<script type="text/javascript" src="/static/js/sha1.js"></script>
 <script type="text/javascript">
-  $("#tellform").hide();
+  $('#warning').hide()
 
-  $(document).ready(function () {
-   $('iframe#tellform').load(function () { //The function below executes once the iframe has finished loading
-       $('.spinner').hide();
-       $("#tellform").show();
-     });
-  });
+  function send(form) {
+    var request = new XMLHttpRequest();
+    var data = new FormData(form);
+    // var url = "https://script.google.com/macros/s/AKfycbxCKiEb9O4N5mhg7rTwGaCpZsmgqgZa8iNveWH342RvGevG4LEK/exec";
+    request.onreadystatechange = function() {
+    console.log(request.readyState);
+    console.log(request.status);
+    console.log(request.content);
+    if (request.readyState === 4) {
+      console.log(request.status)
+          if (request.status === 200) {
+              $(".modal-title").html("Submission Successful");
+              $("#reg_msg").html("You have successfully submitted your Mid-Term evaluation.");
+              $('#myModal').modal('show');
+              $.post("{{url_for('men_match')}}", $("form").serialize());
+              window.setTimeout(function () {
+                    window.location.href = "/summit";
+                }, 5000);
+              } else {
+                $(".modal-title").html("Submission Failed");
+              $("#reg_msg").html("Please contact us at contact@kossiitkgp.in regarding the same. We will resolve it ASAP");
+              $('#myModal').modal('show');
+              }
+          }
+      };
+    request.open("POST", url , true);
+    request.send(data);
+    $(".modal-title").html("Processing");
+    $("#reg_msg").html('<img src="/static/images/loader.gif"> </img>');
+    $('#myModal').modal('toggle');
+    // form.reset()
+    return true;
+  }
+
+  function hideWarning() {
+    $('#warning').hide()
+  }
 </script>
+
 </html>

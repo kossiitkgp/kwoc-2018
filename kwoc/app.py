@@ -379,16 +379,20 @@ def end_term(student_hashkey):
 #         }
 
 
-# @app.route("/summit")
-# def summit():
-#     return render_template('summit.html',
-#                            schedule=schedule,
-#                            talks=talks)
+@app.route("/summit")
+def summit():
+    return render_template('summit.html'#,
+                        #    schedule=schedule,
+                        #    talks=talks
+                           )
 
 
-# @app.route("/summit/register")
-# def summit_register():
-#     return render_template('summit_register_form.html')
+@app.route("/summit/register")
+def summit_register():
+    with open(colleges_json, 'r') as f:
+                data = json.load(f)
+                colleges = list(data.values())
+    return render_template('summit_register_form.html', colleges=colleges)
 
 
 # @app.route("/summit/<talk_id>")
