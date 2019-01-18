@@ -132,6 +132,13 @@ h1, h2, h3, .navbar {
     transform: scale(1.2);
 }
 
+@media (max-width: 992px) {
+    .navbar-dark .navbar-nav .nav-link {
+        text-align: center;
+        font-size: 2rem;
+    }
+}
+
 @media (min-width: 992px) { 
     .navbar-expand-lg .navbar-collapse {
         display: block !important;
