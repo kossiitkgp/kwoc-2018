@@ -296,13 +296,13 @@ def end_term(student_hashkey):
             github_handle = hashkey_to_gitlink[student_hashkey]
             email_student = gitlink_to_mail_ids[github_handle]
 
-        if not mid_evals_open:
-            return make_response("MidTerm evaluations are over for participants!", 400)
+            if not mid_evals_open:
+                return make_response("MidTerm evaluations are over for participants!", 400)
 
-        else:
-            return render_template('end-term-student.html',
-                                    gitlink=github_handle,
-                                    email=email_student)
+            else:
+                return render_template('end-term-student.html',
+                                        gitlink=github_handle,
+                                        email=email_student)
         except:
             return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
