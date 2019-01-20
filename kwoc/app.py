@@ -297,7 +297,11 @@ def end_term(student_hashkey):
             email_student = gitlink_to_mail_ids[github_handle]
 
             if not end_evals_open:
-                return make_response("MidTerm evaluations are over for participants!", 400)
+                end_term_response = """
+                    The endterm submission deadline is over.
+                    Please contact KOSS in case you missed the submision or resubmit for a genuine reason
+                """
+                return make_response(end_term_response, 400)
 
             else:
                 return render_template('end-term-student.html',
