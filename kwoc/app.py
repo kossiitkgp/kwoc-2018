@@ -278,8 +278,10 @@ def mid_term():
 # # print(mentor_student_mappings)
 
 
-# @app.route("/end-term/<student_hashkey>")
-# def end_term(student_hashkey):
+@app.route("/end-term/<student_hashkey>")
+def end_term(student_hashkey):
+
+    return make_response("EndTerm evaluations are over for participants! Please contact us if you missed it for a genuine reason", 400)
 
     # hashkey_to_gitlink = {}
     # with open("hashes/hashkey_to_gitlink.json") as infile:
