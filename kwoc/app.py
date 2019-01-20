@@ -296,7 +296,7 @@ def end_term(student_hashkey):
             github_handle = hashkey_to_gitlink[student_hashkey]
             email_student = gitlink_to_mail_ids[github_handle]
 
-            if not mid_evals_open:
+            if not end_evals_open:
                 return make_response("MidTerm evaluations are over for participants!", 400)
 
             else:
