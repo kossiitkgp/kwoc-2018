@@ -278,30 +278,30 @@ def mid_term():
 # # print(mentor_student_mappings)
 
 
-@app.route("/end-term/<student_hashkey>")
-def end_term(student_hashkey):
+# @app.route("/end-term/<student_hashkey>")
+# def end_term(student_hashkey):
 
-    hashkey_to_gitlink = {}
-    with open("hashes/hashkey_to_gitlink.json") as infile:
-        hashkey_to_gitlink = json.load(infile)
+    # hashkey_to_gitlink = {}
+    # with open("hashes/hashkey_to_gitlink.json") as infile:
+    #     hashkey_to_gitlink = json.load(infile)
 
-    gitlink_to_mail_ids = {}
-    with open("hashes/gitlink_to_mail_ids.json") as infile:
-        gitlink_to_mail_ids = json.load(infile)
+    # gitlink_to_mail_ids = {}
+    # with open("hashes/gitlink_to_mail_ids.json") as infile:
+    #     gitlink_to_mail_ids = json.load(infile)
 
-    if student_hashkey in hashkey_to_gitlink:
-        try:
-            github_handle = hashkey_to_gitlink[student_hashkey]
-            email_student = gitlink_to_mail_ids[github_handle]
+    # if student_hashkey in hashkey_to_gitlink:
+    #     try:
+    #         github_handle = hashkey_to_gitlink[student_hashkey]
+    #         email_student = gitlink_to_mail_ids[github_handle]
 
-            return render_template('end-term-student.html',
-                                    gitlink=github_handle,
-                                    email=email_student)
-        except:
-            return make_response("Wrong hash code! Please check if the entered key is correct", 400)
+    #         return render_template('end-term-student.html',
+    #                                 gitlink=github_handle,
+    #                                 email=email_student)
+    #     except:
+    #         return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
-    else:
-        return make_response("Wrong hash code! Please check if the entered key is correct", 400)
+    # else:
+    #     return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
 
 # @app.route("/mid-term-mentor", methods=['POST'])
