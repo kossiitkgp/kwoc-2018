@@ -281,6 +281,8 @@ def mid_term():
 @app.route("/end-term/<student_hashkey>")
 def end_term(student_hashkey):
 
+    end_evals_open = False
+
     hashkey_to_gitlink = {}
     with open("hashes/hashkey_to_gitlink.json") as infile:
         hashkey_to_gitlink = json.load(infile)
@@ -294,9 +296,17 @@ def end_term(student_hashkey):
             github_handle = hashkey_to_gitlink[student_hashkey]
             email_student = gitlink_to_mail_ids[github_handle]
 
-            return render_template('end-term-student.html',
-                                    gitlink=github_handle,
-                                    email=email_student)
+            if not end_evals_open:
+                end_term_response = """
+                    The endterm submission deadline is over.
+                    Please contact KOSS in case you missed the submision or resubmit for a genuine reason
+                """
+                return make_response(end_term_response, 400)
+
+            else:
+                return render_template('end-term-student.html',
+                                        gitlink=github_handle,
+                                        email=email_student)
         except:
             return make_response("Wrong hash code! Please check if the entered key is correct", 400)
 
