@@ -1,7 +1,7 @@
                     <table align="center" border="1" cellpadding="0" cellspacing="0" width="600">
                             <tr>
                             <td bgcolor="#00081F" align="center" style="padding: 40px 0 30px 0;">
-                                    <img src="http://kwoc.kossiitkgp.in/static/img/kwoc_logo.png" width="300" height=auto style="display: block;" />
+                                    <img src="http://kwoc.kossiitkgp.org/static/img/kwoc_logo.png" width="300" height=auto style="display: block;" />
                             </td>
                             </tr>
                             <tr>
@@ -31,20 +31,20 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                      <tr>
                                         <td width="260" valign="top">
-                                         <div style="border:1px solid #353535; border-radius:5px;""><a href="kwoc.kossiitkgp.in" target="_blank">Visit Website</a></div>
+                                         <div style="border:1px solid #353535; border-radius:5px;""><a href="kwoc.kossiitkgp.org" target="_blank">Visit Website</a></div>
                                         </td>
                                         <td style="font-size: 0; line-height: 0;" width="20">
                                          &nbsp;
                                         </td>
                                         <td width="260" valign="top">
-                                         <a href="kwoc.kossiitkgp.in/resources" target="_blank"><div style="border:1px solid #353535; border-radius:5px; color:white; background-color: #008080"">See Resources</div></a>
+                                         <a href="kwoc.kossiitkgp.org/resources" target="_blank"><div style="border:1px solid #353535; border-radius:5px; color:white; background-color: #008080"">See Resources</div></a>
                                         </td>
                                      </tr>
                                     </table>
                                     <div style="text-align: left">
                                     <ul>
-                                        <li> <a href="http://kwoc.kossiitkgp.in/resources/social" target="blank">Join the social groups</a>
-                                        <li> Read the <a href="http://kwoc.kossiitkgp.in/resources/manuals" target="_blank">mentor manual</a>
+                                        <li> <a href="http://kwoc.kossiitkgp.org/resources/social" target="blank">Join the social groups</a>
+                                        <li> Read the <a href="http://kwoc.kossiitkgp.org/resources/manuals" target="_blank">mentor manual</a>
                                         <li> Selected projects will be released on December 1st !
                                     </ul
                                     </div>

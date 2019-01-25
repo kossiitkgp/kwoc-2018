@@ -189,7 +189,7 @@ def mid_term():
         g.ghname = "Login"
     else:
         g.ghname = session.get('user')
-    # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.in"
+    # return "Mid-term evaluations have now been closed. You can write to us at kwoc@kossiitkgp.org"
     # Testing: uncomment below
     # g.ghname = "kucchobhi"
     try:
