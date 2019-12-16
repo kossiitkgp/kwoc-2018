@@ -3,34 +3,51 @@ import csv
 import os
 import json
 import requests
+import sys 
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-root_dir = '/'.join(dir_path.split('/')[:-2])
-PROJECT_CSV = os.path.join(root_dir,"gh_scraper/projects.csv")
-GITLINK_INDEX = 4
+# dir_path = os.path.dirname(os.path.realpath(__file__))
+# root_dir = '/'.join(dir_path.split('/')[:-2])
+# PROJECT_CSV = os.path.join(root_dir,"gh_scraper/projects.csv")
+# GITLINK_INDEX = 4
 
 """
 Taking in repo urls from ../projects.csv
 """
 projects = []
-with open(PROJECT_CSV, 'r', encoding='utf-8') as project_file:
-    raw_header = csv.reader(project_file)
-    header = next(raw_header, None)
-    for row in raw_header:
-        repo_name = row[GITLINK_INDEX].replace("https://github.com/", "").replace("/issues", "")
+''' write its alternative for json'''
+# with open(PROJECT_CSV, 'r', encoding='utf-8') as project_file:
+#     raw_header = csv.reader(project_file)
+#     header = next(raw_header, None)
+#     for row in raw_header:
+#         repo_name = row[GITLINK_INDEX].replace("https://github.com/", "").replace("/issues", "")
+#         repo_splits = repo_name.split('/')
+#         repo_name = repo_splits[0] + '/' + repo_splits[1]
+#         projects.append(repo_name)
+#         print(repo_name)
+    # print(projects[0])
+
+with open('projects.json') as f:
+    data = json.load(f)
+    # print(data['projects'][0])
+    for proj in data['projects']:
+        repo_name = proj['link'].replace("https://github.com/", "").replace("/issues", "")
         repo_splits = repo_name.split('/')
         repo_name = repo_splits[0] + '/' + repo_splits[1]
         projects.append(repo_name)
-        print(repo_name)
-    # print(projects[0])
+        
+print(projects[0])
 
-token = open(root_dir + '/secrets/token.txt', 'r').read().split('\n')[0]
+# successful in generating the project names 
+
+
+
+# token = open(root_dir + '/secrets/token.txt', 'r').read().split('\n')[0]
 
 headers = {
-    'Authorization': 'token ' + token
+    'Authorization': 'token ' + 'f129c658346a9fa637f9e34cffc2c0681626b7ef'
 }
 
-languages_json = json.load(open(dir_path + "/languages.json", 'r'))
+languages_json = json.load(open("languages.json", 'r'))
 
 stats = {}
 """
