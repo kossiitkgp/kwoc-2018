@@ -128,7 +128,7 @@ with open("students_.csv", "r", encoding='utf-8') as csv_file:  # This csv is ge
 
 
 print(usernames)
-sys.exit()
+
 # Students' data based on commits merged
 def fetch_all_pages(query, params=None, headers=None):
     """
@@ -179,8 +179,8 @@ for project in projects:
     try:
         print("Working on project : ", project)
         query = "https://api.github.com/repos/{}/commits".format(project)
-        since = '2018-12-05T00:00:00Z'
-        until = '2019-01-12T00:00:00Z'
+        since = '2019-12-07T00:00:00Z'
+        until = '2019-12-15T00:00:00Z'
         params = {
             'since': since,
             'until': until
@@ -268,7 +268,7 @@ for project in projects:
             copy_stats[user]['projects'] = list(copy_stats[user]['projects'])
             copy_stats[user]['languages'] = list(copy_stats[user]['languages'])
 
-        with open(dir_path + '/stats.json', 'w') as f:
+        with open('stats.json', 'w') as f:
             f.write(json.dumps(copy_stats))
         print("Done.")
     except Exception as e:
