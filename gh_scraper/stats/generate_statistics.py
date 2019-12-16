@@ -105,13 +105,13 @@ value : dict
 
 # Generate empty statistics
 usernames = set()
-with open(root_dir + '/gh_login/student.csv', "r", encoding='utf-8') as csv_file:  # This csv is generated from the sanitized sheet
+with open("students_.csv", "r", encoding='utf-8') as csv_file:  # This csv is generated from the sanitized sheet
     raw_reader = csv.reader(csv_file)
     header = next(raw_reader, None)
     for row in raw_reader:
         if len(row) == 0:
             continue
-        user = row[2].lower()
+        user = row[1].lower()
         usernames.add(user)
         stats[user] = dict()
         stats[user]['avatar_url'] = ''
@@ -127,6 +127,8 @@ with open(root_dir + '/gh_login/student.csv', "r", encoding='utf-8') as csv_file
         stats[user]['commits'] = list()
 
 
+print(usernames)
+sys.exit()
 # Students' data based on commits merged
 def fetch_all_pages(query, params=None, headers=None):
     """
