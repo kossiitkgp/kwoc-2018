@@ -36,8 +36,21 @@ The cronjob is functional at the moment and logs for latest cron job can be foun
 ## Development Workflow
 
 To launch the server locally, follow the below steps:
+### Run inside a virtual environment:
 
 ### For the first time
+```
+$ pip install pipenv
+$ cd /path/to/project
+$ pipenv shell --three
+$ pipenv install --dev
+$ gunicorn kwoc.app:app
+```
+
+### Run inside a Docker container
+```
+$ sudo docker build -t kwoc-app .
+$ sudo docker run -p 8000:8000 kwoc-app
 ```
 # Run these commands in the root folder of the project
 pip install pipenv
